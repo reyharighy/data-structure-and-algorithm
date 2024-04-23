@@ -7,10 +7,8 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                // "${fileDirname}\\tester.cpp",
                 "${fileDirname}\\taskCompilation.cpp",
                 "${fileDirname}\\Custom Utility Files\\customutils.cpp",
-                // "${fileDirname}\\Queue Chapter Files\\.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I/source/includes"
