@@ -11,7 +11,7 @@
 #include <sstream>
 #include <charconv>
 
-// Deklarasi awal untuk fungsi-fungsi dari source file customUtility.cpp
+// Deklarasi awal untuk berbagai fungsi dari file "customUtility.cpp"
 
 std::string normalizeInput();
 long inputIntValidator(std::string*);
