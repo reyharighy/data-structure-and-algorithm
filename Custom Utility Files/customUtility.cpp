@@ -1,3 +1,7 @@
+/*
+    File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "customUtility.hpp"
+*/
+
 #include "customUtility.hpp"
 
 /*---------------------------------------------------------------------------------------------------------------------------------*/
