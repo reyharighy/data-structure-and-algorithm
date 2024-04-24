@@ -115,8 +115,8 @@ std::string titleCase() {
 
 /*
     Fungsi "setCapacityValue" digunakan pada beberapa program yang berurusan dengan tipe data collections dengan kapasitas terbatas atau 
-    ditentukan nilainya. Proses abstraksi perlu dilakukan untuk memudahkan tahap pengembangan selanjutnya. Selain itu, dicantumkan pula
-    beberapa skenario untuk pencegahan error ketika pengguna ingin melakukan konfigurasi terhadap kapasitas dari data collections.  
+    ditentukan nilainya. Selain itu, dicantumkan pula beberapa skenario untuk pencegahan error ketika pengguna ingin melakukan konfigurasi 
+    terhadap kapasitas dari data collections.  
 */
 
 void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* filledCapacityPointer, std::string* invalidIntInputPointer, std::string** collectionPointer) {
