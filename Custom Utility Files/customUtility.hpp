@@ -1,6 +1,6 @@
 /*
     File ini digunakan sebagai antarmuka untuk menyimpan berbagai fungsi dasar
-    yang berkaitan dengan error handling saat pengguna melakukan input terhadap sistem 
+    yang berkaitan dengan standard input dari pengguna 
 */
 
 #ifndef CUSTOM_UTILITY_H
