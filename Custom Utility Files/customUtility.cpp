@@ -1,8 +1,11 @@
-#include "customutils.hpp"
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <charconv>
+#include "customUtility.hpp"
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "normalizeInput" membaca standard input dari pengguna, menggabungkan tiap kata yang terpisah oleh whitespace menjadi 
+    sebuah string dengan sebuah spasi di antara tiap kata, dan mengembalikan hasilnya dalam bentuk string terstruktur tanpa trailing space.
+*/
 
 std::string normalizeInput() {
     std::string input;
@@ -18,6 +21,13 @@ std::string normalizeInput() {
 
     return normalInput.substr(0, normalInput.length() - 1);
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "inputIntValidator" memvalidasi output dari fungsi "normalizedInput" yang bernilai karakter numerik. Digunakan untuk proses 
+    pemilihan menu saat pengguna menjalankan sebuah program.
+*/
 
 long inputIntValidator(std::string* invalidIntInputPointer) {
     long inputInt;
@@ -39,6 +49,14 @@ long inputIntValidator(std::string* invalidIntInputPointer) {
     return false;
 }
 
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "outputBuffer" memberikan jeda dari eksekusi program setelah pengguna memasukkan input  ke dalam standard input. Tujuannya 
+    adalah untuk memberikan informasi terkait eksekusi yang baru saja dijalankan oleh program sebelum menuju tahapan selanjutnya, seperti 
+    input tidak valid, penambahan data, pengurangan data, penampilan data, dan lain-lain.
+*/
+
 void outputBuffer() {
     std::cout << "\nTekan Enter untuk melanjutkan => ";
 
@@ -46,6 +64,13 @@ void outputBuffer() {
     std::getline(std::cin, buffer);
     std::cin.clear();
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "invalidMenuChosen" menginformasikan kepada pengguna terkait input yang tidak valid ketika mengoperasikan program. Berisi 
+    serangkaian skenario yang mungkin saja terjadi ketika standard input menerima input yang salah baik secara sengaja maupun tidak disengaja.
+*/
 
 void invalidMenuChosen(short* menuChosenPointer, std::string* invalidIntInputPointer) {
     std::string_view invalidInput {*invalidIntInputPointer};
@@ -58,6 +83,13 @@ void invalidMenuChosen(short* menuChosenPointer, std::string* invalidIntInputPoi
         std::cout << "<Input " << '"' << invalidInput << '"' << " di luar pilihan menu>";
     }
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "titleCase" bertujuan untuk mengubah output dari fungsi "normalizedInput" dengan mengikuti struktur atau format Title. 
+    Digunakan untuk membuat tiap kata diawali huruf kapital.
+*/
 
 std::string titleCase() {
     std::string theData {normalizeInput()};
@@ -74,6 +106,14 @@ std::string titleCase() {
 
     return theData;
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "setCapacityValue" digunakan pada beberapa program yang berurusan dengan tipe data collections dengan kapasitas terbatas atau 
+    ditentukan nilainya. Proses abstraksi perlu dilakukan untuk memudahkan tahap pengembangan selanjutnya. Selain itu, dicantumkan pula
+    beberapa skenario untuk pencegahan error ketika pengguna ingin melakukan konfigurasi terhadap kapasitas dari data collections.  
+*/
 
 void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* filledCapacityPointer, std::string* invalidIntInputPointer, std::string** collectionPointer) {
     std::cout << "Silakan masukan jumlah kapasitas => ";
@@ -104,3 +144,9 @@ void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* fil
         std::cout << "<Kapasitas tidak dapat ditentukan sebanyak " << '"' << *invalidIntInputPointer << '"' << ">";
     }
 }
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    INTENDED USAGE FOR THE NEXT METHODS.
+*/
