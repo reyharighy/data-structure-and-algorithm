@@ -1,6 +1,6 @@
 /*
     File ini digunakan sebagai antarmuka untuk memudahkan proses penjelajahan ke berbagai
-    subprogram dari seluruh chapter yang ditugaskan pada mata pelajaran ini.
+    subprogram dari seluruh chapter yang ditugaskan pada mata pelajaran ini
 */
 
 #ifndef PROGRAM_INTERFACE_H
@@ -10,12 +10,14 @@
 #include <string>
 #include <map>
 
-// Deklarasi awal dari objek Program dalam menjalankan setiap subprogram pada tiap chapter
+/*
+    Deklarasi awal dari objek Program dalam menjalankan setiap subprogram pada tiap chapter.
+*/
 
 class Program {
 public:
-    virtual void start() = 0;
-    short taskList(const short);
+    virtual void start() = 0; // Metode abstraksi untuk memulai tiap chapter atau subprogram
+    short taskList(const short*); // Memberikan daftar subprogram di dalam suatu chapter
 };
 
 #endif
