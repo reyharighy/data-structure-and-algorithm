@@ -1,5 +1,5 @@
 /*
-    File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "customUtility.hpp"
+    File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "customUtility.hpp".
 */
 
 #include "customUtility.hpp"
@@ -91,7 +91,7 @@ void invalidMenuChosen(short* menuChosenPointer, std::string* invalidIntInputPoi
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 
 /*
-    Fungsi "titleCase" bertujuan untuk mengubah output dari fungsi "normalizedInput" dengan mengikuti struktur atau format Title. 
+    Fungsi "titleCase" bertujuan untuk mengubah output dari fungsi "normalizedInput" dengan mengikuti struktur atau format Title.
     Digunakan untuk membuat tiap kata diawali huruf kapital.
 */
 
