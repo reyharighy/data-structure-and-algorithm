@@ -8,7 +8,8 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${fileDirname}\\taskCompilation.cpp",
-                "${fileDirname}\\Custom Utility Files\\customutils.cpp",
+                "${fileDirname}\\Custom Utility Files\\customUtility.cpp",
+                "${fileDirname}\\Program Interface Files\\programInterface.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I/source/includes"
