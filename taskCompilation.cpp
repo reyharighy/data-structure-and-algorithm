@@ -1,5 +1,10 @@
-#include "mainProgram.hpp"
-#include "Custom Utility Files/customutils.hpp"
+/*
+    File ini berguna sebagai API untuk tiap subprogram yang ada di tiap chapter sehingga memudahkan
+    proses penjelajahan dalam melakukan pengoperasian baik di dalam subprogram maupun antarmuka chapter.
+*/
+
+#include "Program Interface Files/programInterface.hpp"
+#include "Custom Utility Files/customUtility.hpp"
 #include "Stack Chapter Files/stackOneOne.hpp"
 #include "Stack Chapter Files/stackOneTwo.hpp"
 #include "Stack Chapter Files/stackOneThree.hpp"
@@ -8,44 +13,51 @@
 #include "Queue Chapter Files/queueTwoTwo.hpp"
 #include "Queue Chapter Files/queueTwoThree.hpp"
 
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Objek "StackChapter" berperan sebagai derived class dari base "Program" dan menjalankan program khusus
+    yang ada di Chapter Tumpukan (Stack).
+*/
+
 class StackChapter: public Program {
 private:
+    const short chapterID {1};
     std::string invalidIntInput;
-    short taskID {1};
+    std::map<const short, Program*> stackProgramDictionary { // Seluruh subprogram dari Chapter Tumpukan (Stack)
+        {1, new StackOneOne},
+        {2, new StackOneTwo},
+        {3, new StackOneThree},
+        {4, new StackOneFour}
+    };
 
 public:
     void start() override {
         while (true) {
-            std::cout << "\nKompilasi Tugas Struktur Data Stack (Tumpukan):";
-            short indexList {Program::taskList(taskID, 1, 4)};
-            short programChosen {short(inputIntValidator(&invalidIntInput))};
-            std::map<short, Program*> stackProgramDictionary {
-                {1, new StackOneOne()},
-                {2, new StackOneTwo()},
-                {3, new StackOneThree()},
-                {4, new StackOneFour()}
-            };
+            bool flag {subProgramSelection(&chapterID, &invalidIntInput, &stackProgramDictionary)}; // Mengacu ke "programInterface.hpp"
+            if (flag) {break;}
+        }
+    }
 
-            if (programChosen >= 1 && programChosen <= indexList) {
-                Program* subProgram = nullptr;
-                subProgram = stackProgramDictionary[programChosen];
-                subProgram->start();
-                delete subProgram;
-            } else if (programChosen == (indexList + 1)) {
-                break;
-            } else {
-                invalidMenuChosen(&programChosen, &invalidIntInput);
-                outputBuffer();
-            }
+    ~StackChapter() { // desctructor untuk mencegah memory leaks
+        for (std::pair<const short, Program*>& pair : stackProgramDictionary) {
+            delete pair.second;
         }
     }
 };
 
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Objek "QueueChapter" berperan sebagai derived class dari base "Program" dan menjalankan program khusus
+    yang ada di Chapter Antrian (Queue).
+*/
+
 class QueueChapter: public Program {
 private:
+    const short chapterID {2};
     std::string invalidIntInput;
-    short taskID {2};
-    std::map<short, Program*> queueProgramDictionary {
+    std::map<const short, Program*> queueProgramDictionary { // Seluruh subprogram dari Chapter Antrian (Queue)
         {1, new QueueTwoOne()},
         {2, new QueueTwoTwo()},
         {3, new QueueTwoThree()}
@@ -54,51 +66,55 @@ private:
 public:
     void start() override {
         while (true) {
-            std::cout << "\nKompilasi Tugas Struktur Data Queue (Antrian):";
-            short indexList {Program::taskList(taskID, 1, 3)};
-            short programChosen {short(inputIntValidator(&invalidIntInput))};
+            bool flag {subProgramSelection(&chapterID, &invalidIntInput, &queueProgramDictionary)}; // Mengacu ke "programInterface.hpp"
+            if (flag) {break;}
+        }
+    }
 
-            if (programChosen >= 1 && programChosen <= indexList) {
-                Program* subProgram = nullptr;
-                subProgram = queueProgramDictionary[programChosen];
-                subProgram->start();
-                delete subProgram;
-            } else if (programChosen == (indexList + 1)) {
-                break;
-            } else {
-                invalidMenuChosen(&programChosen, &invalidIntInput);
-                outputBuffer();
-            }
+    ~QueueChapter() { // desctructor untuk mencegah memory leaks
+        for (std::pair<const short, Program*>& pair : queueProgramDictionary) {
+            delete pair.second;
         }
     }
 };
 
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Objek "LinkedListChapter" berperan sebagai derived class dari base "Program" dan menjalankan program khusus
+    yang ada di Chapter Senarai Berantai (Linked List).
+*/
+
 class LinkedListChapter: public Program {
 private:
+    const short chapterID {3};
     std::string invalidIntInput;
-    short taskID {2};
-    short anotherTaskID {3};
+    std::map<const short, Program*> linkedListProgramDictionary { // Seluruh subprogram dari Chapter Senarai Berantai (Linked List)
+
+    };
 
 public:
     void start() override {
         while (true) {
-            std::cout << "\nKompilasi Tugas Struktur Data Linked List (Senarai Berantai):";
-            short indexList {Program::taskList(taskID, 4, 4, anotherTaskID, 1, 6)};
-            short programChosen {short(inputIntValidator(&invalidIntInput))};
+            bool flag {subProgramSelection(&chapterID, &invalidIntInput, &linkedListProgramDictionary)}; // Mengacu ke "programInterface.hpp"
+            if (flag) {break;}
+        }
+    }
 
-            if (programChosen >= 1 && programChosen <= indexList) {
-                break;
-            } else if (programChosen == (indexList + 1)) {
-                break;
-            } else {
-                invalidMenuChosen(&programChosen, &invalidIntInput);
-                outputBuffer();
-            }
+    ~LinkedListChapter() { // desctructor untuk mencegah memory leaks
+        for (std::pair<const short, Program*>& pair : linkedListProgramDictionary) {
+            delete pair.second;
         }
     }
 };
 
-void selectedChapter(short menuChosen) {
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*
+    Fungsi "chapterSelection" menjadi gerbang untuk melihat seluruh subprogram yang ada di dalam tiap chapter.
+*/
+
+void chapterSelection(short menuChosen) {
     Program* chapter = nullptr;
     
     if (menuChosen == 1) {
@@ -113,20 +129,28 @@ void selectedChapter(short menuChosen) {
     delete chapter;
 }
 
-int main() {
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*
+    INTENDED USAGE FOR THE NEXT METHODS.
+*/
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+int main() { // Eksekusi "taskCompilation.cpp"
     std::string invalidIntInput;
 
     while (true) {
         std::cout << "\nProgram Dinamis Struktur Data dan Algoritma"
-                  << "\n  1. Stack (Tumpukan)"
-                  << "\n  2. Queue (Antrian)"
-                  << "\n  3. Linked List (Senarai Berantai)"
+                  << "\n  1. Tumpukan (Stack)"
+                  << "\n  2. Antrian (Queue)"
+                  << "\n  3. Senarai Berantai (Linked List)"
                   << "\n  4. Selesai\n\nSilahkan masukan angka pilihan menu => ";
         
         short menuChosen {short(inputIntValidator(&invalidIntInput))};
 
         if (menuChosen >= 1 && menuChosen <= 3) {
-            selectedChapter(menuChosen);
+            chapterSelection(menuChosen);
         } else if (menuChosen == 4) {
             std::cout << "*** SELESAI ***";
             break;
