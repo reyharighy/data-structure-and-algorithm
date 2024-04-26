@@ -121,7 +121,7 @@ std::string titleCase() {
 
 void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* filledCapacityPointer, std::string* invalidIntInputPointer, std::string** collectionPointer) {
     std::cout << "Silakan masukan jumlah kapasitas => ";
-    int newCapacity {inputIntValidator(invalidIntInputPointer)};
+    int newCapacity {inputIntValidator(&*invalidIntInputPointer)};
 
     if ((newCapacity || (*invalidIntInputPointer == "0" ? true : false)) && (newCapacity >= *filledCapacityPointer)) {
         std::string* preservedStack = new std::string[newCapacity];
