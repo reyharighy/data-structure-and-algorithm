@@ -3,6 +3,9 @@
 */
 
 #include "programInterface.hpp"
+#include "../Custom Utility Files/customUtility.hpp"
+
+/*-------------------------------------------------------------------------------------------------------------------------*/
 
 /*
     Fungsi "taskList" dari objek Program bertujuan untuk memberikan daftar subprogram kepada pengguna di tiap chapter.
@@ -17,6 +20,8 @@ short Program::taskList(const short* chapterID) {
     /*
         Prompt collections pada standard output untuk tiap chapter.
     */
+
+    std::cout << "\nKompilasi Tugas Struktur Data ";
 
     if (*chapterID == 1) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Tumpukan (Stack)
@@ -47,10 +52,8 @@ short Program::taskList(const short* chapterID) {
     /*----------------------------------------------------------------------------------------------------*/
 
     /*
-        Menampilkan daftar seluruh subprogram dari chapter yang dijelajahi 
+        Menampilkan daftar seluruh subprogram dari chapter yang dijelajahi.
     */
-
-    std::cout << "\nKompilasi Tugas Struktur Data ";
     
     for (size_t i = 0; i <= taskCount; i++) {
         if (i == 0) {
@@ -70,3 +73,32 @@ short Program::taskList(const short* chapterID) {
 
     return taskCount;
 }
+
+/*-------------------------------------------------------------------------------------------------------------------------*/
+/*
+    Fungsi "subProgramSelection" dari objek Program bertujuan untuk menjalankan salah satu program yang tersedia di suatu chapter.
+    Disertai dengan error handling untuk standard input pengguna yang tidak valid. Dengan kata lain, bagian ini sebagai implementasi
+    dari apa yang ditampilkan pada standard output fungsi "taskList" dari objek Program.
+*/
+
+bool Program::subProgramSelection(const short* chapterID, std::string* invalidIntInput, std::map<const short, Program*>* subProgramDictionary) {
+    short taskCount {taskList(&*chapterID)};
+    short programChosen {short(inputIntValidator(&*invalidIntInput))}; // Mengacu ke "customUtility.hpp"
+    
+    if (programChosen >= 1 && programChosen <= taskCount) {
+        ((*subProgramDictionary)[programChosen])->start(); // Mengacu ke implementasi masing-masing subProgram
+    } else if (programChosen == (taskCount + 1)) {
+        return true;
+    } else {
+        invalidMenuChosen(&programChosen, &*invalidIntInput); // Mengacu ke "customUtility.hpp"
+        outputBuffer(); // Mengacu ke "customUtility.hpp"
+    }
+
+    return false;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+
+/*
+    INTENDED USAGE FOR THE NEXT METHODS.
+*/
