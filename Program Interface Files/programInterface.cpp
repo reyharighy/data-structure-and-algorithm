@@ -18,8 +18,6 @@ short Program::taskList(const short* chapterID) {
         Prompt collections pada standard output untuk tiap chapter.
     */
 
-    std::cout << "\nKompilasi Tugas Struktur Data ";
-
     if (*chapterID == 1) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Tumpukan (Stack)
             {0, "Tumpukan (Stack):"},
@@ -51,6 +49,8 @@ short Program::taskList(const short* chapterID) {
     /*
         Menampilkan daftar seluruh subprogram dari chapter yang dijelajahi 
     */
+
+    std::cout << "\nKompilasi Tugas Struktur Data ";
     
     for (size_t i = 0; i <= taskCount; i++) {
         if (i == 0) {
