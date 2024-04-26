@@ -1,8 +1,11 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 #include <string>
+#include <stdexcept>
 
-namespace LinkedListChapter {
+// for Linked List, Doubly Linked List, and its implementations.
+
+namespace LinkedList {
     template <typename T>
     struct Node {
         T data;
@@ -130,6 +133,7 @@ namespace LinkedListChapter {
                 removeAll();
             };
     };
+
 }
 
 #endif
