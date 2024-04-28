@@ -13,9 +13,9 @@
 #include <map>
 #include <memory>
 
-/*
-    Deklarasi awal dari objek Program dalam menjalankan setiap subprogram pada tiap chapter.
-*/
+/*----------------------------------------------------------------------------------------------------------------------------------
+    PART 1: Deklarasi awal dari objek Program dalam menjalankan setiap subprogram pada tiap chapter.
+----------------------------------------------------------------------------------------------------------------------------------*/
 
 class Program { 
 public:
@@ -23,5 +23,9 @@ public:
     short taskList(const short*); // Memberikan daftar subprogram di dalam suatu chapter
     bool subProgramSelection(const short*, std::string*, std::map<const short, Program*>*); // Menjalankan subprogram yang dipilih
 };
+
+/*----------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 1.
+----------------------------------------------------------------------------------------------------------------------------------*/
 
 #endif
