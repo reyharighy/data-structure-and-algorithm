@@ -19,7 +19,7 @@
 
 class Program { 
 public:
-    virtual void start() = 0; // Metode polymorphism untuk tiap derived class
+    virtual void start() = 0; // Metode polymorphism untuk menjalankan tiap program derived class
     short taskList(const short*); // Memberikan daftar subprogram di dalam suatu chapter
     bool subProgramSelection(const short*, std::string*, std::map<const short, Program*>*); // Menjalankan subprogram yang dipilih
 };
