@@ -75,6 +75,7 @@ short Program::taskList(const short* chapterID) {
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------*/
+
 /*
     Fungsi "subProgramSelection" dari objek Program bertujuan untuk menjalankan salah satu program yang tersedia di suatu chapter.
     Disertai dengan error handling untuk standard input pengguna yang tidak valid. Dengan kata lain, bagian ini sebagai implementasi
