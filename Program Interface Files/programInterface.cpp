@@ -5,21 +5,17 @@
 #include "programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
 
-/*-------------------------------------------------------------------------------------------------------------------------*/
-
-/*
-    Fungsi "taskList" dari objek Program bertujuan untuk memberikan daftar subprogram kepada pengguna di tiap chapter.
-*/
+/*----------------------------------------------------------------------------------------------------------------------------------
+    PART 1: Fungsi "taskList" dari objek Program bertujuan untuk memberikan daftar subprogram kepada pengguna di tiap chapter.
+------------------------------------------------------------------------------------------------------------------------------------*/
 
 short Program::taskList(const short* chapterID) {
     short taskCount;
     std::map<short, std::string>* taskNameSelected {nullptr};
 
-    /*----------------------------------------------------------------------------------------------------*/
-
-    /*
-        Prompt collections pada standard output untuk tiap chapter.
-    */
+    /*----------------------------------------------------------------------------------------------------
+        PART 1.1: Prompt collections pada standard output untuk tiap chapter.
+    ----------------------------------------------------------------------------------------------------*/
 
     std::cout << "\nKompilasi Tugas Struktur Data ";
 
@@ -45,15 +41,15 @@ short Program::taskList(const short* chapterID) {
         };
     }
 
-    /*----------------------------------------------------------------------------------------------------*/
+    /*----------------------------------------------------------------------------------------------------
+        END OF SCOPE FOR PART 1.1.
+    ----------------------------------------------------------------------------------------------------*/
 
-    taskCount = taskNameSelected->size() - 1;
+    taskCount = taskNameSelected->size() - 1; // Menghitung jumlah tugas di dalam suatu chapter
 
-    /*----------------------------------------------------------------------------------------------------*/
-
-    /*
-        Menampilkan daftar seluruh subprogram dari chapter yang dijelajahi.
-    */
+    /*----------------------------------------------------------------------------------------------------
+        PART 1.2: Menampilkan daftar seluruh subprogram dari chapter yang dijelajahi.
+    ----------------------------------------------------------------------------------------------------*/
     
     for (size_t i = 0; i <= taskCount; i++) {
         if (i == 0) {
@@ -67,30 +63,34 @@ short Program::taskList(const short* chapterID) {
                 << ". Lihat Program-program pada Bab lain"
                 << "\n\nSilahkan masukan angka pilihan menu => ";
 
-    /*----------------------------------------------------------------------------------------------------*/
+    /*----------------------------------------------------------------------------------------------------
+        END OF SCOPE FOR PART 1.2.
+    ----------------------------------------------------------------------------------------------------*/
 
     delete taskNameSelected; // Mencegah memory leaks
 
     return taskCount;
 }
 
-/*-------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 1.
+------------------------------------------------------------------------------------------------------------------------------------*/
 
-/*
-    Fungsi "subProgramSelection" dari objek Program bertujuan untuk menjalankan salah satu program yang tersedia di suatu chapter.
-    Disertai dengan error handling untuk standard input pengguna yang tidak valid. Dengan kata lain, bagian ini sebagai implementasi
-    dari apa yang ditampilkan pada standard output fungsi "taskList" dari objek Program.
-*/
+/*----------------------------------------------------------------------------------------------------------------------------------
+    PART 2: Fungsi "subProgramSelection" dari objek Program bertujuan untuk menjalankan salah satu program yang tersedia di suatu 
+            chapter. Disertai dengan error handling untuk standard input pengguna yang tidak valid. Dengan kata lain, bagian ini 
+            sebagai implementasi dari apa yang ditampilkan pada standard output fungsi "taskList" dari objek Program.
+----------------------------------------------------------------------------------------------------------------------------------*/
 
 bool Program::subProgramSelection(const short* chapterID, std::string* invalidIntInput, std::map<const short, Program*>* subProgramDictionary) {
     short taskCount {taskList(&*chapterID)};
     short programChosen {short(inputIntValidator(&*invalidIntInput))}; // Mengacu ke "customUtility.hpp"
     
-    if (programChosen >= 1 && programChosen <= taskCount) {
+    if (programChosen >= 1 && programChosen <= taskCount) { // Pilihan standard input subProgram di dalam suatu chapter
         ((*subProgramDictionary)[programChosen])->start(); // Mengacu ke implementasi masing-masing subProgram
-    } else if (programChosen == (taskCount + 1)) {
+    } else if (programChosen == (taskCount + 1)) { // Keluar dari suatu chapter
         return true;
-    } else {
+    } else { // Standard input tidak valid
         invalidMenuChosen(&programChosen, &*invalidIntInput); // Mengacu ke "customUtility.hpp"
         outputBuffer(); // Mengacu ke "customUtility.hpp"
     }
@@ -98,8 +98,6 @@ bool Program::subProgramSelection(const short* chapterID, std::string* invalidIn
     return false;
 }
 
-/*---------------------------------------------------------------------------------------------------------------------------------*/
-
-/*
-    INTENDED USAGE FOR THE NEXT METHODS.
-*/
+/*----------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 2.
+------------------------------------------------------------------------------------------------------------------------------------*/
