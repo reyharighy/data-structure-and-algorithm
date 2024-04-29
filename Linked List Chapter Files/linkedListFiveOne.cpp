@@ -19,7 +19,7 @@ namespace LinkedListChapter {
         };
 
         void demo() {
-            std::cout << "===Pembalikkan String===" << "\n";
+            std::cout << "===Pembalikan String===" << "\n";
             std::string input;
             std::cout << "Masukkan data: ";
             std::getline(std::cin, input);
