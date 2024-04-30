@@ -1,1 +1,1 @@
-![ERD & STD](photoArtboard.jpg).
+![ERD & STD](photoArtboard.jpg)
