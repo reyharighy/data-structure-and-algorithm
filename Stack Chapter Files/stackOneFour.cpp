@@ -12,7 +12,7 @@
 
 void StackOneFour::menuInterface() {
     std::cout << "\nPilih menu untuk pengoperasian tumpukan:\n  1. Masukkan string baru"
-                << "\n  2. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
+              << "\n  2. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
