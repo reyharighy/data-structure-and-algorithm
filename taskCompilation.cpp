@@ -89,7 +89,7 @@ private:
     const short chapterID {3};
     std::string invalidIntInput;
     std::map<const short, Program*> linkedListProgramDictionary { // Seluruh objek subProgram dari Chapter Senarai Berantai (Linked List)
-
+        // Future Notes: Belum terdefinisikan
     };
 
 public:
