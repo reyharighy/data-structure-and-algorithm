@@ -12,8 +12,8 @@
 
 void StackOneThree::menuInterface() {
     std::cout << "\nJumlah data di dalam tumpukan = " << (filledNumber ? std::to_string(filledNumber) : "0")
-                << "\n\nPilih menu untuk pengoperasian tumpukan:\n  1. Penambahan data baru pada tumpukan"
-                << "\n  2. Pengosongan isi tumpukan\n  3. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
+              << "\n\nPilih menu untuk pengoperasian tumpukan:\n  1. Penambahan data baru pada tumpukan"
+              << "\n  2. Pengosongan isi tumpukan\n  3. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
