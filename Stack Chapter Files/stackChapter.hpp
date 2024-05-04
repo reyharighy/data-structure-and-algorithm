@@ -9,10 +9,7 @@
 
 #include "../Program Interface Files/programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
-#include <iostream>
 #include <vector>
-#include <charconv>
-#include <map>
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Deklarasi awal untuk objek kelas dengan nama tugas Konversi Bilangan Biner Bilangan Basis Lain.
@@ -49,8 +46,8 @@ private:
     std::string invalidIntInput;
     std::string* stackPointer = nullptr;
     void menuInterface();
-    bool push(bool);
-    bool flush(bool);
+    void push();
+    void flush();
 
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
