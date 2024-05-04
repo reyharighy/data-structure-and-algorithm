@@ -44,7 +44,7 @@ std::string normalizeInput() {
 
 long inputIntValidator(std::string* invalidIntInputPointer) {
     long inputInt;
-    std::string inputString {normalizeInput()}; // Mengambil hasil konversi dari fungsi PART 1, yaitu "normalizeInput"
+    std::string inputString {normalizeInput()};
     
     /*------------------------------------------------------------------------------------------------------------------------------------
         PART 2.1: Mengonversi tiap karakter di dalam standard input secara berurut.
@@ -93,7 +93,7 @@ long inputIntValidator(std::string* invalidIntInputPointer) {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 3: Fungsi "outputBuffer" memberikan jeda dari eksekusi program setelah pengguna memasukkan input  ke dalam standard input. 
+    PART 3: Fungsi "outputBuffer" memberikan jeda dari eksekusi program setelah pengguna memasukkan input ke dalam standard input. 
     Tujuannya adalah untuk memberikan informasi terkait eksekusi yang baru saja dijalankan oleh program sebelum menuju tahapan selanjutnya, 
     seperti input tidak valid, penambahan data, pengurangan data, penampilan data, dan lain-lain.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
@@ -121,8 +121,8 @@ void invalidMenuChosen(short* menuChosenPointer, std::string* invalidIntInputPoi
 
     if (*menuChosenPointer == false && invalidInput != "0" && !invalidInput.empty()) {
         std::cout << "<Input " << '"' << invalidInput << '"' << " tidak valid>";
-    } else if (invalidInput.empty()) {
-        std::cout << "<Tidak ada input menu yang dimasukan>";
+    } else if (invalidInput.empty()) { // Input yang dimasukkan tidak boleh kosong
+        std::cout << "<Input menu yang diminta tidak boleh kosong>";
     } else { // Error handling khusus untuk input numerik di luar dari jangkauan yang diminta
         std::cout << "<Input " << '"' << invalidInput << '"' << " di luar pilihan menu>";
     }
@@ -134,16 +134,16 @@ void invalidMenuChosen(short* menuChosenPointer, std::string* invalidIntInputPoi
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 5: Fungsi "titleCase" bertujuan untuk mengubah output dari fungsi "normalizedInput" dengan mengikuti struktur atau format Title.
-    Digunakan untuk membuat tiap kata diawali huruf kapital.
+    Digunakan untuk membuat tiap kata diawali huruf kapital dan selain daripada itu akan menjadi huruf kecil.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 std::string titleCase() {
-    std::string theData {normalizeInput()}; // Mengambil hasil konversi dari fungsi PART 1, yaitu "normalizeInput"
+    std::string theData {normalizeInput()};
 
-    theData[0] = std::toupper(theData[0]); // Mengubah hurup pertama menjadi kapital
+    theData[0] = std::toupper(theData[0]); // Mengubah hurup pertama dari standard input menjadi kapital
 
-    for (size_t i = 1; i < theData.length(); ++i) { // Mengubah tiap huruf pertama setelah spasi menjadi kapital
-        theData[i] = (std::isspace(theData[i - 1]) && std::isalpha(theData[i])) ? std::toupper(theData[i]) : theData[i];
+    for (size_t i = 1; i < theData.length(); ++i) {
+        theData[i] = (std::isspace(theData[i - 1]) && std::isalpha(theData[i])) ? std::toupper(theData[i]) : std::tolower(theData[i]);
     }
 
     return theData;
@@ -161,7 +161,7 @@ std::string titleCase() {
 
 void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* filledCapacityPointer, std::string* invalidIntInputPointer, std::string** collectionPointer) {
     std::cout << "Silakan masukan jumlah kapasitas => ";
-    int newCapacity {inputIntValidator(&*invalidIntInputPointer)}; // Mengambil hasil validasi dari fungsi PART 2, yaitu "inputIntValidator"
+    int newCapacity {inputIntValidator(&*invalidIntInputPointer)};
 
     /*------------------------------------------------------------------------------------------------------------------------------------
         PART 6.1: Jika data pembalikan dari fungsi PART 2 ("inputIntValidator") bernilai valid, maka data tersebut akan digunakan untuk
@@ -194,7 +194,7 @@ void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* fil
     ------------------------------------------------------------------------------------------------------------------------------------*/
 
     } else if (invalidIntInputPointer->empty()) {
-        std::cout << "<Tidak ada jumlah kapasitas yang dimasukan>";
+        std::cout << "<Jumlah kapasitas yang diminta tidak boleh kosong>";
     } else if (newCapacity < 0) {
         std::cout << "<Kapasitas baru tidak dapat bernilai negatif>";
     } else if ((newCapacity - *filledCapacityPointer) < 0) {
