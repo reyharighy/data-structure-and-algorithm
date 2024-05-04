@@ -6,9 +6,7 @@
 #include "Program Interface Files/programInterface.hpp"
 #include "Custom Utility Files/customUtility.hpp"
 #include "Stack Chapter Files/stackChapter.hpp"
-#include "Queue Chapter Files/queueTwoOne.hpp"
-#include "Queue Chapter Files/queueTwoTwo.hpp"
-#include "Queue Chapter Files/queueTwoThree.hpp"
+#include "Queue Chapter Files/queueChapter.hpp"
 
 /*--------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Objek "StackChapter" berperan sebagai derived class dari base "Program" dan menjalankan program khusus yang ada di Chapter 
@@ -55,9 +53,9 @@ private:
     const short chapterID {2};
     std::string invalidIntInput;
     std::map<const short, Program*> queueProgramDictionary { // Seluruh objek subProgram dari Chapter Antrian (Queue)
-        {1, new QueueTwoOne()},
-        {2, new QueueTwoTwo()},
-        {3, new QueueTwoThree()}
+        {1, new QueueTwoOne},
+        {2, new QueueTwoTwo},
+        {3, new QueueTwoThree}
     };
 
 public:
@@ -89,7 +87,7 @@ private:
     const short chapterID {3};
     std::string invalidIntInput;
     std::map<const short, Program*> linkedListProgramDictionary { // Seluruh objek subProgram dari Chapter Senarai Berantai (Linked List)
-        // Future Notes: Belum terdefinisikan
+
     };
 
 public:
