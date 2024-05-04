@@ -26,7 +26,7 @@ void StackOneTwo::menuInterface() {
     handling sesuai dengan prasyarat yang ditentukan di dalam program.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-bool StackOneTwo::push(bool flag = false) {
+void StackOneTwo::push() {
     if (isCapacitySet) {
         std::cout << "Masukan data baru pada tumpukan => ";
         std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
@@ -40,11 +40,7 @@ bool StackOneTwo::push(bool flag = false) {
             filledCapacity++;
             std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
         }
-
-        flag = true;
     }
-
-    return flag;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -56,7 +52,7 @@ bool StackOneTwo::push(bool flag = false) {
     ditentukan di dalam program.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-bool StackOneTwo::flush(bool flag = false) {
+void StackOneTwo::flush() {
     if (isCapacitySet) { // Kapasitas harus ditentukan sebelum melakukan proses pengeluaran
         if (filledCapacity) {
             std::cout << "\nIsi tumpukan:\n";
@@ -70,11 +66,7 @@ bool StackOneTwo::flush(bool flag = false) {
         } else {
             std::cout << "<Tumpukan tidak menyimpan data>";
         }
-
-        flag = true;
     }
-
-    return flag;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +80,6 @@ bool StackOneTwo::flush(bool flag = false) {
 
 void StackOneTwo::start() {
     while (true) {
-        bool isSet {true};
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
@@ -96,14 +87,14 @@ void StackOneTwo::start() {
             if (menuChosen == 1) {
                 setCapacityValue(&isCapacitySet, &capacity, &filledCapacity, &invalidIntInput, &stackPointer); // Akses ke fungsi PART 6 dari "customUtility.hpp" 
             } else if (menuChosen == 2) {
-                isSet = push();
+                push();
             } else if (menuChosen == 3) {
-                isSet = flush();
+                flush();
             } else {
                 break;
             }
 
-            std::cout << (isSet ? "" : "<Kapasitas tumpukan belum ditentukan>");
+            std::cout << (isCapacitySet ? "" : "<Kapasitas tumpukan belum ditentukan>");
         } else {
             invalidMenuChosen(&menuChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
         }
