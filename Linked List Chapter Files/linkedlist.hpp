@@ -3,7 +3,7 @@
 #include <string>
 #include <stdexcept>
 
-// for Linked List, Doubly Linked List, and its implementations.
+// for Linked List Doubly Linked List
 
 namespace LinkedList {
     template <typename T>

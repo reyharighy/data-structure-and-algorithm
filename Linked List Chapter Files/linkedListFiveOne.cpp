@@ -26,9 +26,9 @@ namespace LinkedListChapter {
             std::getline(std::cin, input);
 
             std::cout << "Input: " << input << "\n";
-            std::cout << "Data yang dibalik: " << "\n";
-            std::cout << "===";
+            std::cout << "Data yang dibalik: ";
             reverseString(input);
+            std::cout << "===" << "\n";
         }; 
     }
 }

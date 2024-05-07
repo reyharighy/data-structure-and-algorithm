@@ -6,4 +6,7 @@ namespace LinkedListChapter {
         void reverseString(std::string str);
         void demo();
     }
+    namespace StackDemo {
+        void demo();
+    }
 }

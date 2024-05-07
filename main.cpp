@@ -19,6 +19,7 @@ int main() {
                 break;
             case 2:
             // call stack implementation function.
+                LinkedListChapter::StackDemo::demo();
                 break;
             case 3:
             // call queue implementation function.
