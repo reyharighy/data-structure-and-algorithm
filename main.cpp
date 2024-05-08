@@ -23,6 +23,7 @@ int main() {
                 break;
             case 3:
             // call queue implementation function.
+                LinkedListChapter::QueueDemo::demo();
                 break;
             case 4:
             // call ordered data input function.

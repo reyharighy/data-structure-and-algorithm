@@ -19,8 +19,7 @@ namespace LinkedListChapter {
                 std::getline(std::cin, input);
                 stack.push(input);
             }
-            std::cout << "======";
-            std::cout << "Tampilan data (atas-ke-bawah): " << "\n";
+            std::cout << "======Tampilan data (atas-ke-bawah)======" << "\n";
             while(!stack.isEmpty()) {
                 std::cout << stack.pop() << "\n"; 
             }

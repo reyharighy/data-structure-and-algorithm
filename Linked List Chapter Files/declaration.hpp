@@ -9,4 +9,7 @@ namespace LinkedListChapter {
     namespace StackDemo {
         void demo();
     }
+    namespace QueueDemo {
+        void demo();
+    }
 }
