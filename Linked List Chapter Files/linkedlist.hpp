@@ -2,6 +2,7 @@
 #define LINKEDLIST_H
 #include <string>
 #include <stdexcept>
+#include <iostream>
 
 // for Linked List Doubly Linked List
 
@@ -29,6 +30,22 @@ namespace LinkedList {
             int size{0};
             int maxsize{-1};
         public:
+            LinkedList() {}
+            LinkedList(const LinkedList& other) {
+                std::cout << "hewwo there :3 \ncopy constructor run uwu\n";
+                Node<T>* prevNode{nullptr};
+                for (Node<T>* otherNode{other.head}; otherNode != nullptr; otherNode = otherNode->next) {
+                    auto* node = new Node<T>{*otherNode};
+
+                    if (head == nullptr) {
+                        head = node;
+                    }
+                    if (prevNode != nullptr) {
+                        prevNode->next = node;
+                    }
+                    prevNode = node;
+                }
+            }
             void add(T value) { // appends node to the linkedlist.
                 Node<T>* node = new Node<T>;
                 node->data = value;

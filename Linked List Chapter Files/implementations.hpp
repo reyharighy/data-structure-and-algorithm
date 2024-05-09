@@ -39,12 +39,12 @@ namespace Implementations {
     template <typename T>
     class Queue {
         private:
-            LinkedList::LinkedList<T> queue = LinkedList::LinkedList<T>();
             int size{};
             int front{-1};
             int rear{-1};
+            LinkedList::LinkedList<T> queue = LinkedList::LinkedList<T>();
         public:
-            Queue(int size) {
+            Queue(int size = 0) {
                 this->size = size;
             }
             bool isEmpty() {
