@@ -39,12 +39,12 @@ namespace Implementations {
     template <typename T>
     class Queue {
         private:
-            int size{};
             int front{-1};
             int rear{-1};
             LinkedList::LinkedList<T> queue = LinkedList::LinkedList<T>();
         public:
-            Queue(int size = 0) {
+            size_t size{};
+            Queue(size_t size = 0) {
                 this->size = size;
             }
             bool isEmpty() {
@@ -73,6 +73,12 @@ namespace Implementations {
                         front = -1;
                     }
                     return data;
+                }
+                throw std::out_of_range("Queue is empty.");
+            }
+            T peek() {
+                if (!isEmpty()) {
+                    return queue.get(front);
                 }
                 throw std::out_of_range("Queue is empty.");
             }

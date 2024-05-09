@@ -32,7 +32,6 @@ namespace LinkedList {
         public:
             LinkedList() {}
             LinkedList(const LinkedList& other) {
-                std::cout << "hewwo there :3 \ncopy constructor run uwu\n";
                 Node<T>* prevNode{nullptr};
                 for (Node<T>* otherNode{other.head}; otherNode != nullptr; otherNode = otherNode->next) {
                     auto* node = new Node<T>{*otherNode};
