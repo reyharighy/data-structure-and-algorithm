@@ -15,4 +15,7 @@ namespace LinkedListChapter {
     namespace QueueDemo {
         int demo();
     }
+    namespace OrderedListDemo {
+        void demo();
+    }
 }

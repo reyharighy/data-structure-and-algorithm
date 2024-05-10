@@ -27,6 +27,7 @@ int main() {
                 break;
             case 4:
             // call ordered data input function.
+                LinkedListChapter::OrderedListDemo::demo();
                 break;
             case 5:
             // call doubly linked list function.

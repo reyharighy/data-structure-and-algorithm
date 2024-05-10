@@ -15,7 +15,7 @@ namespace LinkedList {
 
     template <typename T>
     class LinkedList {
-        private:
+        protected:
             Node<T>* getNodePointer(size_t index) { // returns a pointer to a node at a given index
                 Node<T>* currentNode = head;
                 for (int i{0}; i < index; ++i) {
@@ -150,6 +150,47 @@ namespace LinkedList {
             };
     };
 
+    template <typename T>
+    class OrderedLinkedList : public LinkedList<T> {
+        public:
+            void add(std::string value) {
+                Node<std::string>* newNode = new Node<std::string>;
+                newNode->data = value;
+
+                if (this->head == nullptr) {
+                    std::cout << "first \n";
+                    this->head = newNode;
+                }
+                else {
+                    // code's shitty but it seems to work best
+                    Node<std::string>* currentNode{this->head};
+                    Node<std::string>* prevNode{nullptr};
+                    std::cout << newNode->data.compare(currentNode->data) << "\n";
+                    while (value.compare(currentNode->data) > 0 && currentNode->next != nullptr) {
+                        prevNode = currentNode;
+                        currentNode = currentNode->next;
+                    }
+                    if (prevNode != nullptr) {
+                        prevNode->next = newNode;
+                    }
+                    else {
+                        this->head = newNode;
+                    }
+                    if (currentNode->next == nullptr && value.compare(currentNode->data) > 0) {
+                        currentNode->next = newNode;
+                    }
+                    else {
+                        newNode->next = currentNode;
+                    }
+                }
+            }
+            virtual T get(size_t index) {
+                return LinkedList<T>::get(index);
+            }
+            virtual size_t length() {
+                return LinkedList<T>::length();
+            }
+    };
 }
 
 #endif
