@@ -158,14 +158,12 @@ namespace LinkedList {
                 newNode->data = value;
 
                 if (this->head == nullptr) {
-                    std::cout << "first \n";
                     this->head = newNode;
                 }
                 else {
                     // code's shitty but it seems to work best
                     Node<std::string>* currentNode{this->head};
                     Node<std::string>* prevNode{nullptr};
-                    std::cout << newNode->data.compare(currentNode->data) << "\n";
                     while (value.compare(currentNode->data) > 0 && currentNode->next != nullptr) {
                         prevNode = currentNode;
                         currentNode = currentNode->next;

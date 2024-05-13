@@ -10,9 +10,10 @@ namespace LinkedListChapter {
             orderedList.add("d");
             orderedList.add("c");
             orderedList.add("b");
-            orderedList.add("z");
             orderedList.add("a");
+            orderedList.add("z");
             orderedList.add("e");
+            orderedList.add("h");
 
             for (int i = 0; i < orderedList.length(); ++i) {
                 std::cout << orderedList.get(i) << "\n";
