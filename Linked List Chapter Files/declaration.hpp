@@ -16,6 +16,7 @@ namespace LinkedListChapter {
         int demo();
     }
     namespace OrderedListDemo {
-        void demo();
+        void display(LinkedList::OrderedLinkedList<std::string> orderedList);
+        int demo();
     }
 }

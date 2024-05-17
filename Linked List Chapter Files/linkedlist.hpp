@@ -153,33 +153,38 @@ namespace LinkedList {
     template <typename T>
     class OrderedLinkedList : public LinkedList<T> {
         public:
-            void add(std::string value) {
+            void add(std::string newNodeValue) {
                 Node<std::string>* newNode = new Node<std::string>;
-                newNode->data = value;
+                newNode->data = newNodeValue;
 
                 if (this->head == nullptr) {
                     this->head = newNode;
                 }
                 else {
-                    // code's shitty but it seems to work best
+                    // code's shitty but it seems to work best (?)
                     Node<std::string>* currentNode{this->head};
                     Node<std::string>* prevNode{nullptr};
-                    while (value.compare(currentNode->data) > 0 && currentNode->next != nullptr) {
+                    while (newNodeValue.compare(currentNode->data) > 0 && currentNode->next != nullptr) {
                         prevNode = currentNode;
                         currentNode = currentNode->next;
                     }
-                    if (prevNode != nullptr) {
+                    if (prevNode == nullptr) { // runs if there's only one node: the while breaks when next is nullptr
+                        if (newNodeValue.compare(currentNode->data) <= 0) { // checks if the new node is smaller or equal to the only member
+                            this->head = newNode;
+                            newNode->next = currentNode;
+                        }
+                        else {
+                            currentNode->next = newNode;
+                        }
+                    }
+                    else if (newNodeValue.compare(currentNode->data) <= 0) {
                         prevNode->next = newNode;
-                    }
-                    else {
-                        this->head = newNode;
-                    }
-                    if (currentNode->next == nullptr && value.compare(currentNode->data) > 0) {
-                        currentNode->next = newNode;
-                    }
-                    else {
                         newNode->next = currentNode;
                     }
+                    else if (currentNode->next == nullptr) {
+                        currentNode->next = newNode;
+                    }
+                    
                 }
             }
             virtual T get(size_t index) {

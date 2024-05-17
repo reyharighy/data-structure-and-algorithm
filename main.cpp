@@ -7,7 +7,7 @@ int main() {
         std::cout << "Aplikasi Linked List" << "\n";
         // std::cout << "what the fuck am i supposed to do from here" << "\n";
         std::cout << "(1) String Reversal | (2) Stack Implementation | (3) Queue Implementation | "
-        << "(4) Ordered Data Input | (5) Doubly Linked List | (6) Infix-Postfix Processing\n";
+        << "(4) Ordered Data Input | (5) Doubly Linked List | (6) Infix-Postfix Processing | (7) Keluar\n";
         int input{};
         std::cout << "Input: ";
         std::cin >> input;
@@ -34,6 +34,9 @@ int main() {
                 break;
             case 6:
             // call infix-postfix processing function.
+                break;
+            case 7:
+                return 0;
                 break;
             default:
                 break;
