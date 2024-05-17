@@ -32,7 +32,8 @@ short Program::taskList(const short* chapterID) {
             {0, "Antrian (Queue):"},
             {1, "Implementasi Antrian dengan Array Terbatas"},
             {2, "Implementasi Antrian dengan Array Terbatas dan Proses Penyisipan Data"},
-            {3, "Implementasi Antrian dengan Array Dinamis dan Proses Penyisipan Data"}
+            {3, "Implementasi Antrian dengan Array Dinamis dan Proses Penyisipan Data"},
+            {4, "Implementasi linked list untuk mencari data"}
         };
     } else if (*chapterID == 3) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Senarai Berantai (Linked List)

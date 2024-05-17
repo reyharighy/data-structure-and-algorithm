@@ -55,7 +55,8 @@ private:
     std::map<const short, Program*> queueProgramDictionary { // Seluruh objek subProgram dari Chapter Antrian (Queue)
         {1, new QueueTwoOne},
         {2, new QueueTwoTwo},
-        {3, new QueueTwoThree}
+        {3, new QueueTwoThree},
+        {4, new QueueTwoFour}
     };
 
 public:

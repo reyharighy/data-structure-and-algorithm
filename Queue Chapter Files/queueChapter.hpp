@@ -82,4 +82,32 @@ public:
     END OF SCOPE FOR PART 3.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 4: Deklarasi awal untuk objek kelas dengan nama tugas Implementasi linked list untuk mencari data.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+class QueueTwoFour: public Program {
+private:
+    int filledNumber {0};
+    std::string invalidIntInput;
+    class linkedList {
+    public:
+        std::string dataCodename, theData;
+        linkedList(std::string dataCodenameInput, std::string theDataInput) : dataCodename(dataCodenameInput), theData(theDataInput) {}
+    };
+    std::vector<linkedList> array;
+    void menuInterface();
+    void push();
+    void pop();
+    void find();
+    void display();
+
+public:
+    void start() override; // Metode polymorphism untuk menjalankan program
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 4.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
 #endif
