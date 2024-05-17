@@ -41,6 +41,22 @@ namespace LinkedListChapter {
                         orderedList.add(dataInput);
                         break;
                     }
+                    case 2: {
+                        int dataInput{};
+                        std::cout << "Masukkan urutan data yang ingin di-output (mulai dari 1): ";
+                        std::cin.ignore();
+                        std::cin >> dataInput;
+                        std::cout << "Data yang di-output: " << orderedList.get(dataInput - 1) << "\n";
+                        break;
+                    }
+                    case 3: {
+                        std::cout << "Masukkan urutan data yang ingin dihapus (mulai dari 1): ";
+                        std::cin.ignore();
+                        int dataInput{};
+                        std::cin >> dataInput;
+                        orderedList.remove(dataInput - 1);
+                        break;
+                    }
                     case 4:
                         return 0;
                         break;

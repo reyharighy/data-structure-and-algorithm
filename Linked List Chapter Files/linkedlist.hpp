@@ -164,7 +164,10 @@ namespace LinkedList {
                     // code's shitty but it seems to work best (?)
                     Node<std::string>* currentNode{this->head};
                     Node<std::string>* prevNode{nullptr};
-                    while (newNodeValue.compare(currentNode->data) > 0 && currentNode->next != nullptr) {
+                    while (newNodeValue.compare(currentNode->data) > 0 && currentNode->next != nullptr) { 
+                        /* traverse until the new value is less than the current value
+                        or the current value's next is a nullptr
+                        */
                         prevNode = currentNode;
                         currentNode = currentNode->next;
                     }
@@ -177,21 +180,30 @@ namespace LinkedList {
                             currentNode->next = newNode;
                         }
                     }
-                    else if (newNodeValue.compare(currentNode->data) <= 0) {
+                    else if (newNodeValue.compare(currentNode->data) <= 0) { // checks if the new value is less than the current value
                         prevNode->next = newNode;
                         newNode->next = currentNode;
                     }
-                    else if (currentNode->next == nullptr) {
+                    else { // checks if the next value of the current node points to nothing
                         currentNode->next = newNode;
                     }
                     
                 }
             }
-            virtual T get(size_t index) {
+            T get(size_t index) {
                 return LinkedList<T>::get(index);
             }
-            virtual size_t length() {
+            size_t length() {
                 return LinkedList<T>::length();
+            }
+            void remove(size_t index) {
+                LinkedList<T>::remove(index);
+            }
+            void removeAll() {
+                LinkedList<T>::removeAll();
+            }
+            T take(size_t index) {
+                return LinkedList<T>::take(index);
             }
     };
 }
