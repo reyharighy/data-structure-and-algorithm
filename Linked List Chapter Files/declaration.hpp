@@ -24,6 +24,12 @@ namespace LinkedListChapter {
     namespace KeyValListDemo {
         int demo();
     }
+    namespace DoublyLinkedListDemo {
+        int demo();
+    }
+    namespace InfixProcessingDemo {
+        int demo();
+    }
 }
 
 #endif

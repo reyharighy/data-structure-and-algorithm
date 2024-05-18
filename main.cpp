@@ -31,8 +31,10 @@ int main() {
                 break;
             case 5:
             // call doubly linked list function.
+                LinkedListChapter::DoublyLinkedListDemo::demo();
                 break;
             case 6:
+                LinkedListChapter::InfixProcessingDemo::demo();
             // call infix-postfix processing function.
                 break;
             case 7:

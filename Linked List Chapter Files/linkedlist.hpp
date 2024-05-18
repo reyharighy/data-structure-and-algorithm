@@ -27,8 +27,8 @@ namespace LinkedListImplementation {
                 return currentNode;
             }
             Node<T>* head{nullptr};
-            int size{0};
-            int maxsize{-1};
+            // int size{0};
+            // int maxsize{-1};
         public:
             LinkedList() {}
             LinkedList(const LinkedList& other) {
@@ -207,6 +207,64 @@ namespace LinkedListImplementation {
             }
     };
 
+    template<typename T>
+    struct DoublyNode {
+        T data;
+        DoublyNode<T>* prev{nullptr};
+        DoublyNode<T>* next{nullptr};
+    };
+
+    template<typename T>
+    class DoublyLinkedList {
+        protected:
+            DoublyNode<T>* head{nullptr};
+            DoublyNode<T>* tail{nullptr};
+        public:
+            DoublyLinkedList() {};
+            void add(T value) {
+                DoublyNode<T>* newNode = new DoublyNode<T>;
+                newNode->data = value;
+
+                if (head == nullptr) {
+                    head = newNode;
+                    tail = newNode;
+                }
+                else {
+                    DoublyNode<T>* currentNode = head;
+                    while (currentNode->next != nullptr) {
+                        currentNode = currentNode->next;
+                    }
+                    currentNode->next = newNode;
+                    newNode->prev = currentNode;
+                    tail = newNode;
+                }
+            }
+            void delete(size_t index) {
+                
+            }
+            void forwardTraverseDemo() {
+                DoublyNode<T>* currentNode = head;
+                while (currentNode->next != nullptr) {
+                    std::cout << currentNode->data;
+                    if (currentNode->next != nullptr) {
+                        std::cout << "; ";
+                    }
+                    currentNode = currentNode->next;
+                }
+                std::cout << currentNode->data;
+            }
+            void reverseTraverseDemo() {
+                DoublyNode<T>* currentNode = tail;
+                while (currentNode->prev != nullptr) {
+                    std::cout << currentNode->data;
+                    if (currentNode->prev != nullptr) {
+                        std::cout << "; ";
+                    }
+                    currentNode = currentNode->prev;
+                }
+                std::cout << currentNode->data;
+            }
+    };
 }
 
 #endif

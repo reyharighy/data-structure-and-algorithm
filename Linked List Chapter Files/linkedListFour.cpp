@@ -11,7 +11,7 @@ namespace LinkedListChapter {
 
         class KeyValList : public LinkedListImplementation::LinkedList<KeyVal> {
             public:
-                std::string find(std::string key) { // finds the value of a key.
+                std::string getDataOfKey(std::string key) {
                     LinkedListImplementation::Node<KeyVal>* currentNode = this->head;
                     int index = 0;
                     size_t len = this->length();
@@ -23,10 +23,20 @@ namespace LinkedListChapter {
                         return currentNode->data.value;
                     }
                     throw std::out_of_range("Data not found");
-                };
-                KeyVal get(size_t index) {
-                    return LinkedListImplementation::LinkedList<KeyVal>::get(index);
                 }
+                size_t getIndexOfKey(std::string key) { // returns the index of a key.
+                    LinkedListImplementation::Node<KeyVal>* currentNode = this->head;
+                    int index = 0;
+                    size_t len = this->length();
+                    while (currentNode->data.key != key && currentNode->next != nullptr) {
+                        currentNode = currentNode->next;
+                        ++index;
+                    }
+                    if (currentNode->data.key == key) {
+                        return index;
+                    }
+                    throw std::out_of_range("Data not found");
+                };
         };
 
         void display(KeyValList list) {
@@ -47,7 +57,7 @@ namespace LinkedListChapter {
             while (true) {
                 std::cout << "List kode & nama" << "\n";
                 int input{};
-                std::cout << "[(1) Tampilkan | (2) Tambah | (3) Cari | (9) Keluar]: ";
+                std::cout << "[(1) Tampilkan | (2) Tambah | (3) Cari | (4) Hapus | (9) Keluar]: ";
                 std::cin >> input;
 
                 switch (input) {
@@ -71,8 +81,23 @@ namespace LinkedListChapter {
                         std::string keyInput;
                         std::getline(std::cin, keyInput); 
                         try {
-                            auto value = list.find(keyInput);
+                            auto value = list.getDataOfKey(keyInput);
                             std::cout << "Hasil: \n" << keyInput << ": " << value << "\n";
+                        }
+                        catch (const std::exception& e) {
+                            std::cout << "Data tidak ditemukan\n";
+                        }
+                        break;
+                    }
+                    case 4: {
+                        std::cout << "Masukkan kunci: ";
+                        std::cin.ignore();
+                        std::string keyInput;
+                        std::getline(std::cin, keyInput);
+                        try {
+                            auto index = list.getIndexOfKey(keyInput);
+                            list.remove(index);
+                            std::cout << "Data telah dihapus.";
                         }
                         catch (const std::exception& e) {
                             std::cout << "Data tidak ditemukan\n";
