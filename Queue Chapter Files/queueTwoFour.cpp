@@ -23,16 +23,15 @@ void QueueTwoFour::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 2: Fungsi "push" bertujuan untuk menyisipkan data baru ke dalam tipe data collections sesuai urutan abjad yang disertai dengan 
-    beberapa skenario error handling sesuai dengan prasyarat yang ditentukan di dalam program.
+    PART 2: Fungsi "push" bertujuan untuk menyisipkan data dan kode nama data baru ke dalam list dengan linked list.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void QueueTwoFour::push() {
     std::string theDataInput;
-    while(true) { // Data baru tidak valid jika input kosong
+    while(true) {
         std::cout << "Masukan nama data baru pada tumpukan => ";
-        theDataInput = normalizeInput(); // Akses ke fungsi PART 5 dari "customUtility.hpp"
-        if(theDataInput.empty()){
+        theDataInput = normalizeInput(); // Akses ke fungsi PART 1 dari "customUtility.hpp"
+        if(theDataInput.empty()){ // Dataa tidak valid jika input kosong
             std::cout << "<Tidak ada data baru yang dimasukan>";
         } else {
             break;
@@ -42,7 +41,7 @@ void QueueTwoFour::push() {
     std::string dataCodenameInput;
     while (true) {
         std::cout << "Masukan kode nama untuk " << theDataInput << " => ";
-        dataCodenameInput = normalizeInput(); // Akses ke fungsi PART 5 dari "customUtility.hpp"
+        dataCodenameInput = normalizeInput(); // Akses ke fungsi PART 1 dari "customUtility.hpp"
         if(dataCodenameInput.empty()) { // Kode nama tidak valid jika input kosong
             std::cout << "<Kode nama tidak boleh kosong>";
         } else {
@@ -53,14 +52,14 @@ void QueueTwoFour::push() {
     linkedList node(dataCodenameInput, theDataInput);
     if (array.empty()) {
         array.push_back(node);
-    } else {
+    } else { // Masukkan data ke dalam array di posisi awal jika array tidak kosong
         array.insert(array.begin(), node);
     }
 
     filledNumber++;
-    std::cout   << "<Data " << '"' << theDataInput << '"'
+    std::cout   << std::endl << "<Data " << '"' << theDataInput << '"'
                 << " dengan kode nama " << '"' << dataCodenameInput << '"' 
-                << " berhasil ditambahkan>";
+                << " berhasil ditambahkan>" << std::endl;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -68,38 +67,28 @@ void QueueTwoFour::push() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 3: Fungsi "pop" bertujuan untuk mengeluarkan sebuah data di dalam tipe data collections.
+    PART 3: Fungsi "pop" bertujuan untuk mengeluarkan data di dalam list.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void QueueTwoFour::pop() {
     if (array.size()) {
         std::cout << "Masukkan kode nama data yang ingin dihapus atau ketik ALL untuk menghapus semua data => ";
-        std::string searchInput {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
+        std::string searchInput {normalizeInput()}; // Akses ke fungsi PART 1 dari "customUtility.hpp"
         bool searchExisted {false};
 
         if(searchInput == "ALL") {
             array.clear();
             filledNumber = 0;
-            std::cout << "<Seluruh data berhasil dihapus dari list>";
+            std::cout << std::endl << "<Seluruh data berhasil dihapus dari list>" << std::endl;
             return;
         }
 
         for (size_t i = 0; i < array.size(); i++) {
-            const linkedList& node = array[i];
-
-            if (searchInput == node.dataCodename || searchInput == node.theData) {
-                if (i == array.size() - 1) {
-                    array.pop_back();
-                } else {
-                    for (size_t j = i; j < array.size() - 1; j++) {
-                        array[j] = array[j + 1];
-                    }
-                    array.pop_back();
-                }
+            if (searchInput == array[i].dataCodename || searchInput == array[i].theData) {
+                array.erase(array.begin() + i); // Hapus array yang ditunjuk oleh iterator
 
                 filledNumber--;
                 searchExisted = true;
-                break;
             }
         }
 
@@ -108,14 +97,14 @@ void QueueTwoFour::pop() {
     ------------------------------------------------------------------------------------------------------------------------------------*/
 
         if (searchExisted) {
-            std::cout << "<Data " << '"' << searchInput << '"' << " berhasil dihapus dari list>";
+            std::cout << std::endl << "<Data " << '"' << searchInput << '"' << " berhasil dihapus dari list>" << std::endl;
         } else if (searchInput.empty()) {
-            std::cout << "<Pencarian tidak boleh kosong>";
+            std::cout << std::endl << "<Pencarian tidak boleh kosong>" << std::endl;
         } else {
-            std::cout << "<Data " << '"' << searchInput << '"' << " tidak ada di dalam list>";
+            std::cout << std::endl << "<Data " << '"' << searchInput << '"' << " tidak ada di dalam list>" << std::endl;
         }
     } else {
-        std::cout << "<List tidak menyimpan data>";
+        std::cout << std::endl << "<List tidak menyimpan data>" << std::endl;
     }
 
     /*------------------------------------------------------------------------------------------------------------------------------------
@@ -134,11 +123,10 @@ void QueueTwoFour::pop() {
 void QueueTwoFour::display() {
     if (array.size()) {
         for (size_t i = 0; i < array.size(); i++) {
-            const linkedList& node = array[i];
-            std::cout << node.dataCodename << " : " << node.theData << std::endl;
+            std::cout << array[i].dataCodename << " : " << array[i].theData << std::endl;
         }
     } else {
-        std::cout << "<List belum menyimpan data>";
+        std::cout << std::endl << "<List belum menyimpan data>" << std::endl;
     }
 }
 
@@ -154,29 +142,29 @@ void QueueTwoFour::display() {
 void QueueTwoFour::find() {
     if (array.size()) {
         std::cout << "Masukkan kode nama data yang ingin dicari => ";
-        std::string searchInput {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
+        std::string searchInput {normalizeInput()}; // Akses ke fungsi PART 1 dari "customUtility.hpp"
         bool searchExisted {false};
         std::cout << "Hasil pencarian :" << std::endl;
 
-        for (const linkedList& node : array) {
-            if (searchInput == node.dataCodename || searchInput == node.theData) {
-                std::cout << node.dataCodename << " : " << node.theData << std::endl;
+        for (size_t i = 0; i < array.size(); i++) {
+            if (searchInput == array[i].dataCodename || searchInput == array[i].theData) {
+                std::cout << array[i].dataCodename << " : " << array[i].theData << std::endl;
                 searchExisted = true;
             }
         }
     /*------------------------------------------------------------------------------------------------------------------------------------
-        PART 5.1: Umpan balik kepada pengguna apakah proses pengeluaran berhasil atau tidak yang disertai dengan berbagai skenario.
+        PART 5.1: Umpan balik kepada pengguna apakah proses pencarian berhasil atau tidak yang disertai dengan berbagai skenario.
     ------------------------------------------------------------------------------------------------------------------------------------*/
         if (searchExisted) {
-            std::cout << "<Data " << '"' << searchInput << '"' << " berhasil ditemukan>";
+            std::cout << std::endl << "<Data " << '"' << searchInput << '"' << " berhasil ditemukan>" << std::endl;
         } else if (searchInput.empty()) {
-            std::cout << "<Pencarian tidak boleh kosong>";
+            std::cout << std::endl << "<Pencarian tidak boleh kosong>" << std::endl;
         } else {
-            std::cout << "<Data " << '"' << searchInput << '"' << " tidak ada di dalam list>";
+            std::cout << std::endl << "<Data " << '"' << searchInput << '"' << " tidak ada di dalam list>" << std::endl;
         }
     }
     else {
-        std::cout << "<List belum menyimpan data>";
+        std::cout << std::endl << "<List belum menyimpan data>" << std::endl;
     }
 
     /*------------------------------------------------------------------------------------------------------------------------------------
