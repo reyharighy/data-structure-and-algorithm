@@ -6,7 +6,7 @@
 
 // for Linked List Doubly Linked List
 
-namespace LinkedList {
+namespace LinkedListImplementation {
     template <typename T>
     struct Node {
         T data;
@@ -206,6 +206,7 @@ namespace LinkedList {
                 return LinkedList<T>::take(index);
             }
     };
+
 }
 
 #endif

@@ -6,7 +6,7 @@ namespace LinkedListChapter {
     namespace ReverseString {
         void reverseString(std::string str) {
             int length = str.length();
-            LinkedList::LinkedList<char> reversedLetters;
+            LinkedListImplementation::LinkedList<char> reversedLetters;
 
             for (int i = 0; i < length; i++) {
                 reversedLetters.add(0, str[i]);

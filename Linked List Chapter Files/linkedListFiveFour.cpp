@@ -5,7 +5,7 @@
 
 namespace LinkedListChapter {
     namespace OrderedListDemo {
-        void display(LinkedList::OrderedLinkedList<std::string> orderedList) {
+        void display(LinkedListImplementation::OrderedLinkedList<std::string> orderedList) {
             std::cout << "======\n";
             size_t length = orderedList.length();
             if (length == 0) {
@@ -24,7 +24,7 @@ namespace LinkedListChapter {
         }
 
         int demo() {
-            LinkedList::OrderedLinkedList<std::string> orderedList = LinkedList::OrderedLinkedList<std::string>();
+            LinkedListImplementation::OrderedLinkedList<std::string> orderedList = LinkedListImplementation::OrderedLinkedList<std::string>();
 
             while (true) {
                 display(orderedList);

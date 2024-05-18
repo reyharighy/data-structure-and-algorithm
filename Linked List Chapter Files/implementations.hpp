@@ -9,7 +9,7 @@ namespace Implementations {
         private:
             int size{}; 
             int top{-1};
-            LinkedList::LinkedList<T> stack = LinkedList::LinkedList<T>();
+            LinkedListImplementation::LinkedList<T> stack = LinkedListImplementation::LinkedList<T>();
         public:
             Stack(int size = -1) {
                 this->size = size;
@@ -41,7 +41,7 @@ namespace Implementations {
         private:
             int front{-1};
             int rear{-1};
-            LinkedList::LinkedList<T> queue = LinkedList::LinkedList<T>();
+            LinkedListImplementation::LinkedList<T> queue = LinkedListImplementation::LinkedList<T>();
         public:
             size_t size{};
             Queue(size_t size = 0) {

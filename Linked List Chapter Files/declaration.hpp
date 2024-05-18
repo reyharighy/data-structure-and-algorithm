@@ -1,3 +1,5 @@
+#ifndef LINKEDLISTCHAP_H
+#define LINKEDLISTCHAP_H
 #include "linkedlist.hpp"
 #include "implementations.hpp"
 #include <string>
@@ -16,7 +18,12 @@ namespace LinkedListChapter {
         int demo();
     }
     namespace OrderedListDemo {
-        void display(LinkedList::OrderedLinkedList<std::string> orderedList);
+        void display(LinkedListImplementation::OrderedLinkedList<std::string> orderedList);
+        int demo();
+    }
+    namespace KeyValListDemo {
         int demo();
     }
 }
+
+#endif
