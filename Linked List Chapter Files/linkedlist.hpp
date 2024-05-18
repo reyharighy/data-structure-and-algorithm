@@ -239,8 +239,30 @@ namespace LinkedListImplementation {
                     tail = newNode;
                 }
             }
-            void delete(size_t index) {
-                
+            void remove(size_t index) {
+                if (index == 0) {
+                    DoublyNode<T>* nodeToRemove = head;
+                    this->head = head->next;
+                    head->prev = nullptr;
+                    delete nodeToRemove;
+                }
+                else {
+                    DoublyNode<T>* currentNode = head;
+                    for (int i = 0; i < index; ++i) {
+                        if (currentNode->next == nullptr) {
+                            throw std::out_of_range("Index out of range");
+                        }
+                        currentNode = currentNode->next;
+                    }
+                    std::cout << "Deleting... \n";
+                    if (currentNode->next != nullptr) {
+                        currentNode->next->prev = currentNode->prev;
+                    }
+                    if (currentNode->prev != nullptr) {
+                        currentNode->prev->next = currentNode->next;
+                    }
+                    delete currentNode;
+                }
             }
             void forwardTraverseDemo() {
                 DoublyNode<T>* currentNode = head;
@@ -252,6 +274,7 @@ namespace LinkedListImplementation {
                     currentNode = currentNode->next;
                 }
                 std::cout << currentNode->data;
+                std::cout << "\n";
             }
             void reverseTraverseDemo() {
                 DoublyNode<T>* currentNode = tail;
@@ -263,6 +286,7 @@ namespace LinkedListImplementation {
                     currentNode = currentNode->prev;
                 }
                 std::cout << currentNode->data;
+                std::cout << "\n";
             }
     };
 }
