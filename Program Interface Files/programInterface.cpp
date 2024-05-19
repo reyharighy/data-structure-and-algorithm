@@ -40,6 +40,14 @@ short Program::taskList(const short* chapterID) {
             {0, "Senarai Berantai (Linked List):"}
             // Future Notes: Belum terdefinisikan
         };
+    } else if (*chapterID == 4) {
+        taskNameSelected = new std::map<short, std::string> { // Chapter Urutan (Sort)
+            {0, "Urutan (Sort):"},
+            {1, "Mengurutkan Data Menggunakan Bubble Sort"},
+            {2, "Mengurutkan Data Menggunakan Insertion Sort"},
+            {3, "Mengurutkan Data Menggunakan Selection Sort"},
+            {4, "Pre-order, In-order, dan Post-order Traversal pada Pohon Biner"}
+        };
     }
 
     /*----------------------------------------------------------------------------------------------------
@@ -62,7 +70,7 @@ short Program::taskList(const short* chapterID) {
 
     std::cout << "\n " << std::to_string(taskCount + 1) // standard output untuk keluar dari suatu chapter
               << ". Lihat Program-program pada Bab lain"
-              << "\n\nSilahkan masukan angka pilihan menu => ";
+              << "\n\nSilahkan masukkan angka pilihan menu => ";
 
     /*----------------------------------------------------------------------------------------------------
         END OF SCOPE FOR PART 1.2.

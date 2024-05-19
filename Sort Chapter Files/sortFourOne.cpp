@@ -11,8 +11,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourOne::menuInterface() {
-    std::cout << "\n\nPilih menu untuk pengoperasian pada sort:\n"
-              << "  1. Masukkan data baru\n  2. Urutkan data\n  3. Lihat Program-program lain\n => ";
+    std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
+              << "  1. Masukkan data baru\n  2. Urutkan data\n"  
+              << "  3. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -25,15 +26,13 @@ void SortFourOne::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourOne::push() {
-    std::cout << "Masukan data baru => ";
-    std::long theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
+    std::cout << "Masukkan data baru => ";
+    std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
-        if (isLast) {
-            array.push_back(theData);
-        }
-
-        filledNumber++;
-        std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
+    std::istringstream iss(theData);
+    std::string num;
+    while (iss >> num) {
+        array.push_back(std::stol(num));
     }
 }
 
@@ -46,7 +45,23 @@ void SortFourOne::push() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourOne::sort() {
-
+    if(array.size()) {
+        arrayCopy = array;
+        std::cout << array << std::endl;
+        for (size_t i = 0; i < array.size(); i++) {
+            for (size_t j = 0; j < array.size() - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    std::swap(array[j], array[j + 1]);
+                    std::cout << array[j] << " < " << array[j + 1] 
+                              << std::endl << array << std::endl;
+                }
+            }
+        }
+        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
+    } else {
+        std::cout << "<Data kosong>";
+    }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------

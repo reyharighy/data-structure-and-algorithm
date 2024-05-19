@@ -160,7 +160,7 @@ std::string titleCase() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* filledCapacityPointer, std::string* invalidIntInputPointer, std::string** collectionPointer) {
-    std::cout << "Silakan masukan jumlah kapasitas => ";
+    std::cout << "Silakan masukkan jumlah kapasitas => ";
     int newCapacity {inputIntValidator(&*invalidIntInputPointer)};
 
     /*------------------------------------------------------------------------------------------------------------------------------------
