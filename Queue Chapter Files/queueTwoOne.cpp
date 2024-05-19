@@ -14,7 +14,7 @@ void QueueTwoOne::menuInterface() {
     std::cout << "\nKapasitas antrian = " << (isCapacitySet ? std::to_string(capacity) : "<Belum ditentukan>")
               << "\nAntrian terisi = " << (isCapacitySet ? std::to_string(filledCapacity) : "<Tidak terdefinisi>")
               << "\n\nPilih menu untuk pengoperasian pada antrian:\n"
-              << "  1. Tentukan kapasitas antrian\n  2. Masukan data baru ke dalam antrian\n  3. Kosongkan antrian\n"
+              << "  1. Tentukan kapasitas antrian\n  2. Masukkan data baru ke dalam antrian\n  3. Kosongkan antrian\n"
               << "  4. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
 
@@ -29,13 +29,13 @@ void QueueTwoOne::menuInterface() {
 
 void QueueTwoOne::push() {
     if (isCapacitySet) { // Kapasitas harus ditentukan dahulu sebelum penambahan data
-        std::cout << "Masukan data baru pada antrian => ";
+        std::cout << "Masukkan data baru pada antrian => ";
         std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
-        if (filledCapacity == capacity) { // Data baru tidak dapat ditambahkan jika kapasitas sudah penuh
-            std::cout << "<Antrian sudah penuh. " << '"' << theData << '"' << " tidak dimasukan>";
-        } else if (theData.empty()) { // Data baru tidak valid jika input kosong
+        if (theData.empty()) { // Data baru tidak valid jika input kosong
             std::cout << "<Data yang dimasukan tidak boleh kosong>";
+        } else if (filledCapacity == capacity) { // Data baru tidak dapat ditambahkan jika kapasitas sudah penuh
+            std::cout << "<Antrian sudah penuh. " << '"' << theData << '"' << " tidak dimasukkan>";
         } else {
             arrayPointer[filledCapacity] = theData;
             filledCapacity++;

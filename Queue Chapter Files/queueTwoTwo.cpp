@@ -15,7 +15,7 @@ void QueueTwoTwo::menuInterface() {
               << "\nAntrian terisi = " << (isCapacitySet ? std::to_string(filledCapacity) : "<Tidak terdefinisi>")
               << "\n\nPilih menu untuk pengoperasian pada antrian:\n"
               << "  1. Tentukan kapasitas antrian\n"
-              << "  2. Masukan data baru ke dalam antrian\n  3. Menghapus data di dalam antrian\n"
+              << "  2. Masukkan data baru ke dalam antrian\n  3. Menghapus data di dalam antrian\n"
               << "  4. Tampilkan data di dalam antrian\n  5. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
 
@@ -30,7 +30,7 @@ void QueueTwoTwo::menuInterface() {
 
 void QueueTwoTwo::push() {
     if (isCapacitySet) { // Kapasitas harus ditentukan dahulu sebelum penambahan data
-        std::cout << "Masukan data baru pada antrian => ";
+        std::cout << "Masukkan data baru pada antrian => ";
         std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
         if (filledCapacity == capacity) { // Data baru tidak dapat ditambahkan jika kapasitas sudah penuh

@@ -13,7 +13,7 @@
 void QueueTwoThree::menuInterface() {
     std::cout << "\nJumlah data di dalam antrian = " << (filledNumber ? std::to_string(filledNumber) : "0")
               << "\n\nPilih menu untuk pengoperasian pada antrian:\n"
-              << "  1. Masukan data baru ke dalam antrian\n  2. Menghapus data di dalam antrian\n"
+              << "  1. Masukkan data baru ke dalam antrian\n  2. Menghapus data di dalam antrian\n"
               << "  3. Tampilkan data di dalam antrian\n  4. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
 
@@ -27,7 +27,7 @@ void QueueTwoThree::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void QueueTwoThree::push() {
-    std::cout << "Masukan data baru pada tumpukan => ";
+    std::cout << "Masukkan data baru pada tumpukan => ";
     std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
     if (theData.empty()) { // Data baru tidak valid jika input kosong

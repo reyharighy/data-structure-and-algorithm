@@ -13,7 +13,7 @@
 void QueueTwoFour::menuInterface() {
     std::cout << "\nJumlah data di dalam list = " << (filledNumber ? std::to_string(filledNumber) : "0")
               << "\n\nPilih menu untuk pengoperasian pada linked list:\n"
-              << "  1. Masukan data baru ke dalam list\n  2. Menghapus data di dalam list\n"
+              << "  1. Masukkan data baru ke dalam list\n  2. Menghapus data di dalam list\n"
               << "  3. Tampilkan data di dalam list\n  4. Cari data di dalam list\n"
               << "  5. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
 }
@@ -29,7 +29,7 @@ void QueueTwoFour::menuInterface() {
 void QueueTwoFour::push() {
     std::string theDataInput;
     while(true) {
-        std::cout << "Masukan nama data baru pada tumpukan => ";
+        std::cout << "Masukkan nama data baru pada tumpukan => ";
         theDataInput = normalizeInput(); // Akses ke fungsi PART 1 dari "customUtility.hpp"
         if(theDataInput.empty()){ // Dataa tidak valid jika input kosong
             std::cout << "<Tidak ada data baru yang dimasukan>";
@@ -40,7 +40,7 @@ void QueueTwoFour::push() {
 
     std::string dataCodenameInput;
     while (true) {
-        std::cout << "Masukan kode nama untuk " << theDataInput << " => ";
+        std::cout << "Masukkan kode nama untuk " << theDataInput << " => ";
         dataCodenameInput = normalizeInput(); // Akses ke fungsi PART 1 dari "customUtility.hpp"
         if(dataCodenameInput.empty()) { // Kode nama tidak valid jika input kosong
             std::cout << "<Kode nama tidak boleh kosong>";
