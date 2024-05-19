@@ -26,7 +26,7 @@ void StackOneThree::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void StackOneThree::push() {
-    std::cout << "Masukan data baru pada tumpukan => ";
+    std::cout << "Masukkan data baru pada tumpukan => ";
     std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
     
     if (theData.empty()) { // Jika data yang dimasukkan kosong

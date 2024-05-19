@@ -28,7 +28,7 @@ void StackOneOne::menuInterface() {
 
 void StackOneOne::setDecimalValue() {
     while (true) {
-        std::cout << "Silakan masukan bilangan desimal => ";
+        std::cout << "Silakan masukkan bilangan desimal => ";
         long newDecimal {inputIntValidator(&invalidIntInput)}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
         if (newDecimal || (invalidIntInput == "0" ? true : false)) { // Jika nilai desimal bernilai valid

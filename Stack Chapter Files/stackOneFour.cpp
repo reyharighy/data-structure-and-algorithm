@@ -24,7 +24,7 @@ void StackOneFour::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void StackOneFour::getReversedInput() {
-    std::cout << "Masukan string yang ingin dibalik => ";
+    std::cout << "Masukkan string yang ingin dibalik => ";
 
     std::string inputString;
     std::getline(std::cin, inputString);

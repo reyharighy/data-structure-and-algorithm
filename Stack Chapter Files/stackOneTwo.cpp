@@ -28,7 +28,7 @@ void StackOneTwo::menuInterface() {
 
 void StackOneTwo::push() {
     if (isCapacitySet) {
-        std::cout << "Masukan data baru pada tumpukan => ";
+        std::cout << "Masukkan data baru pada tumpukan => ";
         std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
         if (filledCapacity == capacity) { // Data baru tidak dapat ditambahkan jika kapasitas sudah penuh
