@@ -53,7 +53,7 @@ void SortFourOne::sort() {
                 if (array[j] > array[j + 1]) {
                     std::swap(array[j], array[j + 1]);
                     std::cout << array[j] << " < " << array[j + 1] 
-                              << std::endl << array << std::endl;
+                              << " : " << array << std::endl;
                 }
             }
         }
