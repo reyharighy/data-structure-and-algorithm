@@ -88,13 +88,13 @@ public:
 
 class QueueTwoFour: public Program {
 private:
-    int filledNumber {0};
-    std::string invalidIntInput;
     class linkedList {
     public:
         std::string dataCodename, theData;
         linkedList(std::string dataCodenameInput, std::string theDataInput) : dataCodename(dataCodenameInput), theData(theDataInput) {}
     };
+    int filledNumber {0};
+    std::string invalidIntInput;
     std::vector<linkedList> array;
     void menuInterface();
     void push();
