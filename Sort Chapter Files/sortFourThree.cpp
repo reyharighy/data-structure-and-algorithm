@@ -29,10 +29,18 @@ void SortFourThree::push() {
     std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => ";
     std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
-    std::istringstream iss(theData);
-    std::string num;
-    while (iss >> num) {
-        array.push_back(std::stol(num));
+    std::string tempStr;
+    for (char checkDigit : theData) {
+        if (std::isdigit(checkDigit)) {
+            tempStr += checkDigit;
+        } else if (!tempStr.empty()) {
+            array.push_back(std::stol(tempStr));
+            tempStr.clear();
+        }
+    }
+
+    if (!tempStr.empty()) {
+        array.push_back(std::stol(tempStr));
     }
 }
 
