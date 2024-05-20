@@ -13,7 +13,7 @@
 void SortFourOne::menuInterface() {
     std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
               << "  1. Masukkan data baru\n  2. Urutkan data\n"  
-              << "  3. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
+              << "  3. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +26,7 @@ void SortFourOne::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourOne::push() {
-    std::cout << "Masukkan data baru => ";
+    std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => ";
     std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
     std::istringstream iss(theData);

@@ -40,4 +40,50 @@ public:
     ~SortFourOne(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 1.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 2: Deklarasi awal untuk objek kelas dengan nama tugas mengurutkan data menggunakan Insertion Sort.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+class SortFourTwo: public Program {
+private:
+    bool isDataExist {false};
+    std::string invalidIntInput;
+    std::vector<long> array, arrayCopy {};
+    void menuInterface();
+    void sort();
+    void push();
+public:
+    void start() override; // Metode polymorphism untuk menjalankan program
+    ~SortFourTwo(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 2.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 3: Deklarasi awal untuk objek kelas dengan nama tugas mengurutkan data menggunakan Selection Sort.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+class SortFourThree: public Program {
+private:
+    bool isDataExist {false};
+    std::string invalidIntInput;
+    std::vector<long> array, arrayCopy {};
+    void menuInterface();
+    void sort();
+    void push();
+public:
+    void start() override; // Metode polymorphism untuk menjalankan program
+    ~SortFourThree(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 3.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
 #endif

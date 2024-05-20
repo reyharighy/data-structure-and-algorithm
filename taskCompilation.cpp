@@ -121,7 +121,9 @@ private:
     const short chapterID {4};
     std::string invalidIntInput;
     std::map<const short, Program*> sortProgramDictionary { // Seluruh objek subProgram dari Chapter Senarai Berantai (Linked List)
-        {1, new SortFourOne}
+        {1, new SortFourOne},
+        {2, new SortFourTwo},
+        {3, new SortFourThree}
     };
 
 public:
@@ -181,7 +183,7 @@ int main() {
                   << "\n  2. Antrian (Queue)"
                   << "\n  3. Senarai Berantai (Linked List)"
                   << "\n  4. Urutan (Sort)"
-                  << "\n  5. Selesai\n\nSilahkan masukan angka pilihan menu => ";
+                  << "\n  5. Selesai\n\nSilahkan masukkan angka pilihan menu => ";
         
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 

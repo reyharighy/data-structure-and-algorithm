@@ -11,8 +11,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourTwo::menuInterface() {
-    std::cout << "\n\nPilih menu untuk pengoperasian pada sort:\n"
-              << "  1. Masukkan data baru\n  2. Urutkan data\n  3. Lihat Program-program lain\n => ";
+    std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
+              << "  1. Masukkan data baru\n  2. Urutkan data\n"  
+              << "  3. Lihat Program-program lain\n \nMasukkan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -25,38 +26,13 @@ void SortFourTwo::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourTwo::push() {
-    std::cout << "Masukan data baru => ";
-    std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
+    std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => ";
+    std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
-    if (theData.empty()) { // Data baru tidak valid jika input kosong
-        std::cout << "<Tidak ada data baru yang dimasukan>";
-    } else {
-        bool isLast {true};
-
-        for (size_t i = 0; i < array.size(); i++) {
-            if (theData.compare(array[i]) < 0) {
-                if (array.size() == 1) {
-                    array.push_back(array[i]);
-                } else {
-                    array.push_back(array[array.size() - 1]);
-
-                    for (size_t j = array.size() - 1; j > i; j--) {
-                        array[j] = array[j - 1];
-                    }
-                }
-
-                array[i] = theData;
-                isLast = false;
-                break;
-            }
-        }
-
-        if (isLast) {
-            array.push_back(theData);
-        }
-
-        filledNumber++;
-        std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
+    std::istringstream iss(theData);
+    std::string num;
+    while (iss >> num) {
+        array.push_back(std::stol(num));
     }
 }
 
@@ -69,7 +45,30 @@ void SortFourTwo::push() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourTwo::sort() {
-
+    if (array.size()) {
+        arrayCopy = array;
+        std::cout << array << std::endl;
+        for (size_t i = 1; i < array.size(); i++) {
+            int elem = array[i], j = i - 1, loop = 0;
+            while (j >= 0 && elem > array[j]) {
+                loop++;
+                array[j + 1] = array[j];
+                j--;
+            } 
+            array[j + 1] = elem;
+            if (loop != 0) {
+                std::cout << elem << " : ";
+                for (size_t k = 0; k < array.size(); k++) {
+                    std::cout << array[k] << " ";
+                }
+                std::cout << std::endl;
+            }
+        }
+        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
+    } else {
+        std::cout << "<Data kosong>";
+    }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
