@@ -27,7 +27,7 @@ namespace LinkedListChapter {
     namespace DoublyLinkedListDemo {
         int demo();
     }
-    namespace InfixProcessingDemo {
+    namespace PostfixProcessingDemo {
         int demo();
     }
 }

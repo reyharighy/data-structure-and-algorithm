@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <iostream>
 
-// for Linked List Doubly Linked List
+// for Linked List and Doubly Linked List
 
 namespace LinkedListImplementation {
     template <typename T>
@@ -254,7 +254,6 @@ namespace LinkedListImplementation {
                         }
                         currentNode = currentNode->next;
                     }
-                    std::cout << "Deleting... \n";
                     if (currentNode->next != nullptr) {
                         currentNode->next->prev = currentNode->prev;
                     }

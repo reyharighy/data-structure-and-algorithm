@@ -34,7 +34,7 @@ int main() {
                 LinkedListChapter::DoublyLinkedListDemo::demo();
                 break;
             case 6:
-                LinkedListChapter::InfixProcessingDemo::demo();
+                LinkedListChapter::PostfixProcessingDemo::demo();
             // call infix-postfix processing function.
                 break;
             case 7:
