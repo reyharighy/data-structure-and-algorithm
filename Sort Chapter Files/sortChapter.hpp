@@ -37,7 +37,6 @@ private:
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourOne(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +57,6 @@ private:
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourTwo(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -79,7 +77,6 @@ private:
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourThree(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
