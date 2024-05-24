@@ -4,26 +4,62 @@
 
 namespace LinkedListChapter {
     namespace StackDemo {
-        void demo() {
-            int max;
-            std::cout << "===Stack Demo===" << "\n";
-            std::cout << "Masukkan jml. anggota maksimum: "; 
-            std::cin >> max;
-            Implementations::Stack<std::string> stack = Implementations::Stack<std::string>(max);
-
-            std::cin.ignore();
-            for (int i{0}; i < max; i++) {
-                std::string input;
-
-                std::cout << "Masukkan data ke-" << i + 1 << ": ";
-                std::getline(std::cin, input);
-                stack.push(input);
+        void display(Implementations::Stack<std::string> stack) {
+            auto clone = stack;
+            size_t size = clone.length();
+            if (size == 0) {
+                std::cout << "(kosong)\n";
             }
-            std::cout << "======Tampilan data (atas-ke-bawah)======" << "\n";
-            while(!stack.isEmpty()) {
-                std::cout << stack.pop() << "\n"; 
+            else {
+                for (int i = 0; i < size; i++) {
+                    std::cout << clone.pop();
+                    if (i < size - 1) {
+                        std::cout << "; ";
+                    }
+                }
+                std::cout << "\n";
             }
-            std::cout << "======" << "\n";
+        }
+
+        int demo() {
+            std::cout << "Stack Demo\n";
+            std::cout << "Masukkan ukuran maks.: ";
+            size_t sizeInput;
+            std::cin >> sizeInput;
+            auto stack = Implementations::Stack<std::string>(sizeInput);
+            while(true) {
+                std::cout << "Anggota stack: ";
+                display(stack);
+                std::cout << "[(1) Tambah | (2) Ambil | (0) Keluar] ";
+                int input;
+                std::cin >> input;
+                switch (input) {
+                    case 1: {
+                        std::cout << "Masukkan data: ";
+                        std::cin.ignore();
+                        std::string data;
+                        std::getline(std::cin, data);
+                        try {
+                            stack.push(data);
+                        }
+                        catch (const std::out_of_range& e) {
+                            std::cout << "Stack penuh." << "\n";
+                        }
+                        break;
+                    }
+                    case 2:
+                        try {
+                            std::cout << stack.pop() << " diambil.\n";
+                        }
+                        catch (const std::out_of_range& e) {
+                            std::cout << "Stack kosong." << "\n";
+                        }
+                        break;
+                    case 0:
+                        return 0;
+                        break;
+                }
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace LinkedListChapter {
     }
     namespace StackDemo {
         void display(Implementations::Queue<std::string> q);
-        void demo();
+        int demo();
     }
     namespace QueueDemo {
         int demo();

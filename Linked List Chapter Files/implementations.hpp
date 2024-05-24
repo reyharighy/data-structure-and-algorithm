@@ -20,16 +20,27 @@ namespace Implementations {
             bool isFull() {
                 return (top == size - 1) && (size != -1);
             }
+            size_t length() {
+                return top + 1;
+            }
             void push(T item) {
                 if (!isFull()) {
                     stack.add(item);
                     ++top;
                 }
+                else {
+                    throw std::out_of_range("Stack is full.");
+                }
             } 
             T pop() {
-                T data = stack.take(top);
-                --top;
-                return data;
+                if (top == - 1) {
+                    throw std::out_of_range("Stack is empty.");
+                }
+                else {
+                    T data = stack.take(top);
+                    --top;
+                    return data;
+                }
             }
             T peek() {
                 return stack.get(top);
