@@ -21,14 +21,24 @@ namespace LinkedListChapter {
         void demo() {
             std::cout << "===Pembalikan String===" << "\n";
             std::string input;
-            std::cout << "Masukkan data: ";
-            std::getline(std::cin, input);
-            std::getline(std::cin, input);
-
-            std::cout << "Input: " << input << "\n";
+            std::string line;
+            int emptyLineCount = 0;
+            std::cout << "Masukkan data (Masukkan dua baris kosong berturut-turut untuk selesai): \n";
+            while (std::getline(std::cin, line)) {
+                if (line.empty()) {
+                    emptyLineCount++;
+                    if (emptyLineCount == 2) {
+                        break;
+                    }
+                } else {
+                    emptyLineCount = 0;
+                }
+                input += line + '\n';
+            }
+            
             std::cout << "Data yang dibalik: ";
             reverseString(input);
             std::cout << "===" << "\n";
-        }; 
+        }
     }
 }
