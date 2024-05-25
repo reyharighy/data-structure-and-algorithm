@@ -142,7 +142,6 @@ private:
         }
     };
     void menuInterface();
-    void sort();
     void push();
     void pre();
     void in();
