@@ -28,6 +28,53 @@ namespace LinkedListChapter {
             return 0;
         }
 
+        int calculate(char ope, int operand1, int operand2) {
+            int result = 0;
+            switch (ope) {
+                case '^':
+                    result = 1;
+                    for (int i = 1; i <= operand2; ++i) {
+                        result = result * operand1;
+                    }
+                    break;
+                case '*':
+                    result = operand1 * operand2;
+                    break;
+                case '/':
+                    result = operand1 / operand2;
+                    break;
+                case '%':
+                    result = operand1 % operand2;
+                    break;
+                case '+':
+                    result = operand1 + operand2;
+                    break;
+                case '-':
+                    result = operand1 - operand2;
+                    break;
+            }
+            return result;
+        }
+
+        int evalPostFix(std::string postfix) {
+            char character;
+            int operand1, operand2;
+            auto operands = LinkedListImplementation::LinkedList<int>();
+            for (int i = 0; i < postfix.length(); ++i) {
+                character = postfix[i];
+                if ((character >= '0') && (character <= '9')) {
+                    operands.add(character - '0');
+                }
+                else {
+                    operand2 = operands.take(operands.length() - 1);
+                    operand1 = operands.take(operands.length() - 1);
+                    int val = calculate(character, operand1, operand2);
+                    operands.add(val);
+                }   
+            }
+            return operands.take(operands.length() - 1);
+        }
+
         std::string infixToPostfix(std::string input) {
             auto processStack = LinkedListImplementation::LinkedList<char>();
             std::string postfixString = "";
@@ -80,7 +127,19 @@ namespace LinkedListChapter {
                     return 0;
                 }
                 else {
-                    std::cout << input << " = " << infixToPostfix(input) << "\n";
+                    std::string postfix = infixToPostfix(input);
+                    std::cout << input << " = " << postfix << "\n";
+                    std::cout << "Tampilkan hasil? (y/n): ";
+                    char input;
+                    std::cin >> input;
+                    if (input == 'y') {
+                        try {
+                            std::cout << postfix <<  " = " << evalPostFix(postfix) << "\n";
+                        }
+                        catch (const std::exception& e) {
+                            std::cout << "Eror." << "\n";
+                        }
+                    }
                 }
             }
         }
