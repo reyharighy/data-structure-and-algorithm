@@ -1,22 +1,28 @@
 #include "linkedlist.hpp"
 #include <string>
 #include <iostream>
+#include <sstream> 
 
 namespace LinkedListChapter {
     namespace ReverseString {
         void reverseString(std::string str) {
-            int length = str.length();
-            LinkedListImplementation::LinkedList<char> reversedLetters;
+            std::stringstream ss(str);
+            std::string line;
 
-            for (int i = 0; i < length; i++) {
-                reversedLetters.add(0, str[i]);
-            }
+            while (std::getline(ss, line)) {
+                int length = line.length();
+                LinkedListImplementation::LinkedList<char> reversedLetters;
 
-            for (int i = 0; i < length; i++) {
-                std::cout << reversedLetters.get(i);
+                for (int i = 0; i < length; i++) {
+                    reversedLetters.add(0, line[i]);
+                }
+
+                for (int i = 0; i < length; i++) {
+                    std::cout << reversedLetters.get(i);
+                }
+                std::cout << "\n";
             }
-            std::cout << "\n";
-        };
+        }
 
         void demo() {
             std::cout << "===Pembalikan String===" << "\n";
