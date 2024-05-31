@@ -27,7 +27,6 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
 
 class SortFourOne: public Program {
 private:
-    bool isDataExist {false};
     std::string invalidIntInput;
     std::vector<long> array {};
     std::vector<std::string> arrayString {};
@@ -87,7 +86,6 @@ public:
 
 class SortFourTwo: public Program {
 private:
-    bool isDataExist {false};
     std::string invalidIntInput;
     std::vector<long> array {};
     std::vector<std::string> arrayString {};
@@ -141,7 +139,6 @@ public:
 
 class SortFourThree: public Program {
 private:
-    bool isDataExist {false};
     std::string invalidIntInput;
     std::vector<long> array {};
     std::vector<std::string> arrayString {};
@@ -190,4 +187,115 @@ public:
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 3.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 4: Deklarasi awal untuk objek kelas dengan nama tugas Pre-order, In-order, dan Post-order Traversal pada Pohon Biner.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+class SortFourFour: public Program {
+private:
+    std::string invalidIntInput;
+    class Node {
+    public:
+        int data;
+        Node *left, *right;
+        Node(int input) : data(input), left(nullptr), right(nullptr) {}
+    };
+
+    class BST {
+    private:
+        Node* root;
+
+        Node* insert(Node* node, int input) {
+            if (node == nullptr) {
+                return new Node(input);
+            }
+
+            if (input < node->data) {
+                node->left = insert(node->left, input);
+            } else if (input > node->data) {
+                node->right = insert(node->right, input);
+            }
+
+            return node;
+        }
+
+        void inOrder(Node* node) {
+            if (node != nullptr) {
+                inOrder(node->left);
+                std::cout << node->data << " ";
+                inOrder(node->right);
+            }
+        }
+
+        void preOrder(Node* node) {
+            if (node != nullptr) {
+                std::cout << node->data << " ";
+                preOrder(node->left);
+                preOrder(node->right);
+            }
+        }
+
+        void postOrder(Node* node) {
+            if (node != nullptr) {
+                postOrder(node->left);
+                postOrder(node->right);
+                std::cout << node->data << " ";
+            }
+        }
+
+        void deleteTree(Node* node) {
+            if (node == nullptr) {
+                return;
+            }
+            deleteTree(node->left);
+            deleteTree(node->right);
+            delete node;
+        }
+
+    public:
+        BST() : root(nullptr) {}
+
+        void insert(int input) {
+            root = insert(root, input);
+        }
+
+        void deleteAll() {
+            deleteTree(root);
+            root = nullptr;
+        }
+
+        void inOrder() {
+            inOrder(root);
+            std::cout << "\n";
+        }
+
+        void preOrder() {
+            preOrder(root);
+            std::cout << "\n";
+        }
+
+        void postOrder() {
+            postOrder(root);
+            std::cout << "\n";
+        }
+        bool isEmpty() const {
+            return root == nullptr;
+        }
+    };
+    BST tree;
+    void menuInterface();
+    void push();
+    void pre();
+    void in();
+    void post();
+    void del();
+
+public:
+    void start() override; // Metode polymorphism untuk menjalankan program
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 4.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
 #endif

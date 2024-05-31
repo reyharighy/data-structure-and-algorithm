@@ -12,8 +12,7 @@
 
 void SortFourFour::menuInterface() {
     std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
-              << "  1. Masukkan data baru\n  2. Cari data secara Pre-order\n  3. Cari data secara In-order\n"  
-              << "  4. Cari data secara Post-order  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
+              << "  1. Masukkan data baru\n  2. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -21,18 +20,33 @@ void SortFourFour::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 2: Fungsi "push" bertujuan untuk menyisipkan data baru ke dalam tipe data collections sesuai urutan abjad yang disertai dengan 
-    beberapa skenario error handling sesuai dengan prasyarat yang ditentukan di dalam program.
+    PART 2: Fungsi "push" bertujuan untuk menyisipkan data baru ke dalam BST.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourFour::push() {
-    std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => ";
+    std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => \n";
     std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
-    std::istringstream iss(theData);
-    std::string num;
-    while (iss >> num) {
-        array.push_back(std::stol(num));
+    std::string tempStr;
+    if(!theData.empty()) {
+        for (char checkDigit : theData) {
+            if (std::isdigit(checkDigit)) {
+                tempStr += checkDigit;
+            } else if (!tempStr.empty()) {
+                tree.insert(std::stol(tempStr));
+                tempStr.clear();
+            }
+        }
+    } else {
+        std::cout << "<Data yang dimasukan tidak boleh kosong>";
+    }
+
+    if (!tempStr.empty()) {
+        tree.insert(std::stol(tempStr));
+        pre();
+        in();
+        post();
+        del();
     }
 }
 
@@ -41,19 +55,12 @@ void SortFourFour::push() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 3: Fungsi "pre" bertujuan untuk mencari data yang diinginkan menggunakan teknik pencarian Pre-order pada Pohon Biner.
+    PART 3: Fungsi "pre" bertujuan untuk mengurutkan data sesuai Pre-order pada Pohon Biner.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourFour::pre() {
-    if (array.size()) {
-        arrayCopy = array;
-        std::cout << array << std::endl;
-        
-        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
-                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
-    } else {
-        std::cout << "<Data kosong>";
-    }
+    std::cout << "Data hasil urut (Pre-order) : ";
+    tree.preOrder();
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -61,19 +68,12 @@ void SortFourFour::pre() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Fungsi "in" bertujuan untuk mencari data yang diinginkan menggunakan teknik pencarian In-order pada Pohon Biner.
+    PART 4: Fungsi "in" bertujuan untuk mengurutkan data sesuai In-order pada Pohon Biner.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourFour::in() {
-    if (array.size()) {
-        arrayCopy = array;
-        std::cout << array << std::endl;
-        
-        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
-                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
-    } else {
-        std::cout << "<Data kosong>";
-    }
+    std::cout << "Data hasil urut (In-order) : ";
+    tree.inOrder();
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -81,19 +81,12 @@ void SortFourFour::in() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 5: Fungsi "post" bertujuan untuk mencari data yang diinginkan menggunakan teknik pencarian Post-order pada Pohon Biner.
+    PART 5: Fungsi "post" bertujuan untuk mengurutkan data sesuai Post-order pada Pohon Biner.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourFour::post() {
-    if (array.size()) {
-        arrayCopy = array;
-        std::cout << array << std::endl;
-        
-        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
-                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
-    } else {
-        std::cout << "<Data kosong>";
-    }
+    std::cout << "Data hasil urut (Post-order) : ";
+    tree.postOrder();
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -101,20 +94,30 @@ void SortFourFour::post() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 6: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
+    PART 6: Fungsi "del" bertujuan untuk menghapus seluruh data pada tree.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+void SortFourFour::del() {
+    tree.deleteAll();
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 6.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 7: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
     oleh standard output dari "menuInterface".
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-void SortFourThree::start() {
+void SortFourFour::start() {
     while (true) {
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-        if (menuChosen >= 1 && menuChosen <= 3) {
+        if (menuChosen >= 1 && menuChosen <= 2) {
             if (menuChosen == 1) {
                 push();
-            } else if (menuChosen == 2) {
-                sort();
             } else {
                 break;
             }
@@ -127,5 +130,5 @@ void SortFourThree::start() {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE PART 4.
+    END OF SCOPE PART 7.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
