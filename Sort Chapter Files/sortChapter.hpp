@@ -27,11 +27,49 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
 
 class SortFourOne: public Program {
 private:
-    bool isDataExist {false};
     std::string invalidIntInput;
-    std::vector<long> array, arrayCopy {};
+    std::vector<long> array {};
+    std::vector<std::string> arrayString {};
+    void bubbleSort(std::vector<long>& array, bool ascending) {
+        std::cout << "Data sebelum diurutkan: " << array << std::endl;
+        bool swapped;
+        for (int i = 0; i < array.size() - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < array.size() - i - 1; j++) {
+                if ((ascending && array[j] > array[j + 1]) || (!ascending && array[j] < array[j + 1])) {
+                    std::cout << "Menukarkan " << array[j] << " dengan " << array[j + 1] << std::endl;
+                    std::swap(array[j], array[j + 1]);
+                    swapped = true;
+                }
+            }
+            if (!swapped)
+                break;
+            std::cout << "Array saat ini: " << array << std::endl;
+        }
+        std::cout << "Data setelah diurutkan: " << array << std::endl;
+    }
+
+    void bubbleSortString(std::vector<std::string>& arrayString, bool ascending) {
+        std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
+        bool swapped;
+        for (int i = 0; i < arrayString.size() - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < arrayString.size() - i - 1; j++) {
+                if ((ascending && arrayString[j] > arrayString[j + 1]) || (!ascending && arrayString[j] < arrayString[j + 1])) {
+                    std::cout << "Menukarkan " << arrayString[j] << " dengan " << arrayString[j + 1] << std::endl;
+                    std::swap(arrayString[j], arrayString[j + 1]);
+                    swapped = true;
+                }
+            }
+            if (!swapped)
+                break;
+            std::cout << "Array saat ini: " << arrayString << std::endl;
+        }
+        std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
+    }
     void menuInterface();
     void sort();
+    void preview();
     void del();
     void push();
 public:
@@ -48,11 +86,43 @@ public:
 
 class SortFourTwo: public Program {
 private:
-    bool isDataExist {false};
     std::string invalidIntInput;
-    std::vector<long> array, arrayCopy {};
+    std::vector<long> array {};
+    std::vector<std::string> arrayString {};
+    void insertionSort(std::vector<long>& array, bool ascending) {
+        std::cout << "Data sebelum diurutkan: " << array << std::endl;
+        for (int i = 1; i < array.size(); i++) {
+            long k = array[i];
+            int j = i - 1;
+
+            while (j >= 0 && ((ascending && k < array[j]) || (!ascending && k > array[j]))) {
+                array[j + 1] = array[j];
+                j--;
+            } 
+            array[j + 1] = k;
+            std::cout << array << ": " << k << " ke posisi " << j + 1 << std::endl;
+        }
+        std::cout << "Data setelah diurutkan: " << array << std::endl;
+    }
+
+    void insertionSortString(std::vector<std::string>& arrayString, bool ascending) {
+        std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
+        for (int i = 1; i < arrayString.size(); i++) {
+            std::string k = arrayString[i];
+            int j = i - 1;
+
+            while (j >= 0 && ((ascending && k < arrayString[j]) || (!ascending && k > arrayString[j]))) {
+                arrayString[j + 1] = arrayString[j];
+                j--;
+            } 
+            arrayString[j + 1] = k;
+            std::cout << arrayString << ": " << k << " dipindahkan ke posisi " << j + 1 << std::endl;
+        }
+        std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
+    }
     void menuInterface();
     void sort();
+    void preview();
     void del();
     void push();
 public:
@@ -69,11 +139,45 @@ public:
 
 class SortFourThree: public Program {
 private:
-    bool isDataExist {false};
     std::string invalidIntInput;
-    std::vector<long> array, arrayCopy {};
+    std::vector<long> array {};
+    std::vector<std::string> arrayString {};
+    void selectionSort(std::vector<long>& array, bool ascending) {
+        std::cout << "Data sebelum diurutkan: " << array << std::endl;
+        for (int i = 0; i < array.size(); i++) {
+            int k = i;
+            for (int j = i + 1; j < array.size(); j++) {
+                if ((ascending && array[j] < array[k]) || (!ascending && array[j] > array[k])) {
+                    k = j;
+                }
+            }
+            if (i != k) {
+                std::swap(array[i], array[k]);
+                std::cout << array << ": " << "Menukarkan " << array[i] << " dengan " << array[k] << std::endl;
+            }
+        }
+        std::cout << "Data setelah diurutkan: " << array << std::endl;
+    }
+
+    void selectionSortString(std::vector<std::string>& arrayString, bool ascending) {
+        std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
+        for (int i = 0; i < arrayString.size(); i++) {
+            int k = i;
+            for (int j = i + 1; j < arrayString.size(); j++) {
+                if ((ascending && arrayString[j] < arrayString[k]) || (!ascending && arrayString[j] > arrayString[k])) {
+                    k = j;
+                }
+            }
+            if (i != k) {
+                std::swap(arrayString[i], arrayString[k]);
+                std::cout << arrayString << ": " << "Menukarkan " << arrayString[i] << " dengan " << arrayString[k] << std::endl;
+            }
+        }
+        std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
+    }
     void menuInterface();
     void sort();
+    void preview();
     void del();
     void push();
 public:
@@ -83,3 +187,115 @@ public:
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 3.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 4: Deklarasi awal untuk objek kelas dengan nama tugas Pre-order, In-order, dan Post-order Traversal pada Pohon Biner.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+class SortFourFour: public Program {
+private:
+    std::string invalidIntInput;
+    class Node {
+    public:
+        int data;
+        Node *left, *right;
+        Node(int input) : data(input), left(nullptr), right(nullptr) {}
+    };
+
+    class BST {
+    private:
+        Node* root;
+
+        Node* insert(Node* node, int input) {
+            if (node == nullptr) {
+                return new Node(input);
+            }
+
+            if (input < node->data) {
+                node->left = insert(node->left, input);
+            } else if (input > node->data) {
+                node->right = insert(node->right, input);
+            }
+
+            return node;
+        }
+
+        void inOrder(Node* node) {
+            if (node != nullptr) {
+                inOrder(node->left);
+                std::cout << node->data << " ";
+                inOrder(node->right);
+            }
+        }
+
+        void preOrder(Node* node) {
+            if (node != nullptr) {
+                std::cout << node->data << " ";
+                preOrder(node->left);
+                preOrder(node->right);
+            }
+        }
+
+        void postOrder(Node* node) {
+            if (node != nullptr) {
+                postOrder(node->left);
+                postOrder(node->right);
+                std::cout << node->data << " ";
+            }
+        }
+
+        void deleteTree(Node* node) {
+            if (node == nullptr) {
+                return;
+            }
+            deleteTree(node->left);
+            deleteTree(node->right);
+            delete node;
+        }
+
+    public:
+        BST() : root(nullptr) {}
+
+        void insert(int input) {
+            root = insert(root, input);
+        }
+
+        void deleteAll() {
+            deleteTree(root);
+            root = nullptr;
+        }
+
+        void inOrder() {
+            inOrder(root);
+            std::cout << "\n";
+        }
+
+        void preOrder() {
+            preOrder(root);
+            std::cout << "\n";
+        }
+
+        void postOrder() {
+            postOrder(root);
+            std::cout << "\n";
+        }
+        bool isEmpty() const {
+            return root == nullptr;
+        }
+    };
+    BST tree;
+    void menuInterface();
+    void push();
+    void pre();
+    void in();
+    void post();
+    void del();
+
+public:
+    void start() override; // Metode polymorphism untuk menjalankan program
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 4.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+#endif

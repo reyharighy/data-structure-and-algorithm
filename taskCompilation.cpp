@@ -123,7 +123,8 @@ private:
     std::map<const short, Program*> sortProgramDictionary { // Seluruh objek subProgram dari Chapter Senarai Berantai (Linked List)
         {1, new SortFourOne},
         {2, new SortFourTwo},
-        {3, new SortFourThree}
+        {3, new SortFourThree},
+        {4, new SortFourFour}
     };
 
 public:

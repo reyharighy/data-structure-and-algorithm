@@ -11,9 +11,9 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourTwo::menuInterface() {
-    std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
-              << "  1. Masukkan data baru\n  2. Urutkan data\n  3. Hapus semua data\n"  
-              << "  4. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
+    std::cout << "\nPilih menu untuk pengoperasian pada insertion sort:\n"
+              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Urutkan data\n"  
+              << "  4. Hapus semua data\n  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -26,21 +26,47 @@ void SortFourTwo::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourTwo::push() {
-    std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => ";
-    std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
+    std::cout << "\nPilih tipe data yang ingin dimasukkan:\n"
+              << "  1. Integer\n  2. String\n\nMasukkan angka pilihan => ";
+    short pushChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-    std::string tempStr;
-    for (char checkDigit : theData) {
-        if (std::isdigit(checkDigit)) {
-            tempStr += checkDigit;
-        } else if (!tempStr.empty()) {
-            array.push_back(std::stol(tempStr));
-            tempStr.clear();
+    switch(pushChosen) {
+        case 1: {
+            std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => \n";
+            std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
+
+            std::string tempStr;
+            if(!theData.empty()) {
+                for (char checkDigit : theData) {
+                    if (std::isdigit(checkDigit)) {
+                        tempStr += checkDigit;
+                    } else if (!tempStr.empty()) {
+                        array.push_back(std::stol(tempStr));
+                        tempStr.clear();
+                    }
+                }
+            } else {
+                std::cout << "<Data yang dimasukan tidak boleh kosong>";
+            }
+
+            if (!tempStr.empty()) {
+                array.push_back(std::stol(tempStr));
+            }
+            break;
         }
-    }
-
-    if (!tempStr.empty()) {
-        array.push_back(std::stol(tempStr));
+        case 2: {
+            std::cout << "Masukkan data baru (enter untuk menambah data selanjutnya dan enter 2x untuk selesai) => \n";
+            std::string line;
+            while (std::getline(std::cin, line)) {
+                if (line.empty()) {
+                    break;
+                }
+                arrayString.push_back(line);
+            }
+            break;
+        }
+        default:
+            std::cout << "Pilihan tidak valid.";
     }
 }
 
@@ -48,35 +74,35 @@ void SortFourTwo::push() {
     END OF SCOPE FOR PART 2.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
+
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 3: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan Insertion Sort.
+    PART 3: Fungsi "preview" bertujuan untuk melihat semua data dalam array
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-void SortFourTwo::sort() {
-    if (array.size()) {
-        arrayCopy = array;
-        std::cout << array << std::endl;
-        for (size_t i = 1; i < array.size(); i++) {
-            int elem = array[i], j = i - 1, loop = 0;
-            while (j >= 0 && elem > array[j]) {
-                loop++;
-                array[j + 1] = array[j];
-                j--;
-            } 
-            array[j + 1] = elem;
-            if (loop != 0) {
-                std::cout << elem << " : ";
-                for (size_t k = 0; k < array.size(); k++) {
-                    std::cout << array[k] << " ";
-                }
-                std::cout << std::endl;
+void SortFourTwo::preview() {
+    std::cout << "\nPilih preview data yang ingin dilihat:\n"
+              << "  1. Data integer\n  2. Data string  \n\nMasukkan angka pilihan => ";
+    short previewChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        
+        switch(previewChosen) {
+        case 1:
+            if (array.size()) {
+                std::cout << "Data saat ini : " << array << std::endl;
+            } else {
+                std::cout << "<Data kosong>";
             }
+            break;
+        case 2:
+            if (arrayString.size()) {
+                std::cout << "Data saat ini : " << arrayString << std::endl;
+            } else {
+                std::cout << "<Data kosong>";
+            }
+            break;
+
+        default:
+            invalidMenuChosen(&previewChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
         }
-        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
-                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
-    } else {
-        std::cout << "<Data kosong>";
-    }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -84,12 +110,52 @@ void SortFourTwo::sort() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Fungsi "del" bertujuan untuk menghapus semua data dalam array
+    PART 4: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan Insertion Sort.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-void SortFourTwo::del() {
-    array.clear(); // Menghapus semua data dari stack
-    std::cout << "Semua data berhasil dihapus" << std::endl;
+void SortFourTwo::sort() {
+    if (array.size() || arrayString.size()) {
+        std::cout << "\nPilih urutan pengoperasian pada sort:\n"
+                  << "  1. Pengurutan naik Integer (Ascending)\n  2. Pengurutan turun Integer (Descending)\n"
+                  << "  3. Pengurutan naik String (Ascending)\n  4. Pengurutan turun String (Descending)  \n\nMasukkan angka urutan pilihan => ";
+        short sortChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        
+        switch(sortChosen) {
+        case 1:
+            if (!array.size()) {
+                std::cout << "<Data kosong>";
+                break;
+            }
+            insertionSort(array, true);
+            
+            break;
+        case 2:
+            if (!array.size()) {
+                std::cout << "<Data kosong>";
+                break;
+            }
+            insertionSort(array, false);
+            break;
+        case 3:
+            if (!arrayString.size()) {
+                std::cout << "<Data kosong>";
+                break;
+            }
+            insertionSortString(arrayString, true);
+            break;
+        case 4:
+            if (!arrayString.size()) {
+                std::cout << "<Data kosong>";
+                break;
+            }
+            insertionSortString(arrayString, false);
+            break;
+        default:
+            invalidMenuChosen(&sortChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+        }
+    } else {
+        std::cout << "<Data kosong>";
+    }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +163,35 @@ void SortFourTwo::del() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 5: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
+    PART 5: Fungsi "del" bertujuan untuk menghapus semua data dalam array
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+void SortFourTwo::del() {
+    std::cout << "\nPilih data yang ingin dihapus:\n"
+              << "  1. Data integer\n  2. Data string  \n\nMasukkan angka pilihan => ";
+    short delChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        
+        switch(delChosen) {
+        case 1:
+            array.clear(); // Menghapus semua data dari array
+            break;
+        case 2:
+            arrayString.clear(); // Menghapus semua data dari arrayString
+            break;
+
+        default:
+            invalidMenuChosen(&delChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+        }
+    std::cout << "Semua data berhasil dihapus" << std::endl;
+}
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 5.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 6: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
     oleh standard output dari "menuInterface".
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -106,14 +200,18 @@ void SortFourTwo::start() {
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-        if (menuChosen >= 1 && menuChosen <= 4) {
+        if (menuChosen >= 1 && menuChosen <= 5) {
             if (menuChosen == 1) {
                 push();
             } else if (menuChosen == 2) {
-                sort();
+                preview();
             } else if (menuChosen == 3) {
+                sort();
+            } else if (menuChosen == 4) {
                 del();
             } else {
+                array.clear();
+                arrayString.clear();
                 break;
             }
         } else {
@@ -125,5 +223,5 @@ void SortFourTwo::start() {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE PART 5.
+    END OF SCOPE PART 6.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
