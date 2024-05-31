@@ -36,7 +36,6 @@ private:
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourOne(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +57,6 @@ private:
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourTwo(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -80,43 +78,8 @@ private:
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourThree(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 3.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Deklarasi awal untuk objek kelas dengan nama tugas Pre-order, In-order, dan Post-order Traversal pada Pohon Biner.
-----------------------------------------------------------------------------------------------------------------------------------------*/
-
-class SortFourFour: public Program {
-private:
-    bool isDataExist {false};
-    std::string invalidIntInput;
-    std::vector<long> array, arrayCopy {};
-    struct Node {
-        int data;
-        Node* left;
-        Node* right;
-        Node(int value) : data(value), left(nullptr), right(nullptr) {}
-    };
-
-    void menuInterface();
-    void BST();
-    void push();
-    void pre();
-    void in();
-    void post();
-
-public:
-    void start() override; // Metode polymorphism untuk menjalankan program
-    ~SortFourFour(); // Destructor untuk mencegah memory leaks pada variabel "arrayPointer"
-};
-
-/*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE FOR PART 4.
-----------------------------------------------------------------------------------------------------------------------------------------*/
-
-#endif
