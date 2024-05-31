@@ -10,8 +10,6 @@
 #include "../Program Interface Files/programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
 #include <vector>
-#include <sstream>
-#include <iostream>
 
 template<typename T>
 std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
@@ -34,6 +32,7 @@ private:
     std::vector<long> array, arrayCopy {};
     void menuInterface();
     void sort();
+    void del();
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
@@ -54,6 +53,7 @@ private:
     std::vector<long> array, arrayCopy {};
     void menuInterface();
     void sort();
+    void del();
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
@@ -74,6 +74,7 @@ private:
     std::vector<long> array, arrayCopy {};
     void menuInterface();
     void sort();
+    void del();
     void push();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
@@ -82,5 +83,3 @@ public:
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 3.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
-
-#endif
