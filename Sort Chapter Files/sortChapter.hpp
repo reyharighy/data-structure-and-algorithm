@@ -31,7 +31,9 @@ private:
     std::string invalidIntInput;
     std::vector<long> array, arrayCopy {};
     void menuInterface();
+    void menuInterfaceSort();
     void sort();
+    void preview();
     void del();
     void push();
 public:
@@ -52,7 +54,9 @@ private:
     std::string invalidIntInput;
     std::vector<long> array, arrayCopy {};
     void menuInterface();
+    void menuInterfaceSort();
     void sort();
+    void preview();
     void del();
     void push();
 public:
@@ -73,7 +77,9 @@ private:
     std::string invalidIntInput;
     std::vector<long> array, arrayCopy {};
     void menuInterface();
+    void menuInterfaceSort();
     void sort();
+    void preview();
     void del();
     void push();
 public:
@@ -83,3 +89,36 @@ public:
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 3.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 4: Deklarasi awal untuk objek kelas dengan nama tugas Pre-order, In-order, dan Post-order Traversal pada Pohon Biner.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+class SortFourFour: public Program {
+private:
+    bool isDataExist {false};
+    std::string invalidIntInput;
+    std::vector<long> array, arrayCopy {};
+    struct Node {
+        int data;
+        Node* left;
+        Node* right;
+        Node(int value) : data(value), left(nullptr), right(nullptr) {}
+    };
+
+    void menuInterface();
+    void BST();
+    void push();
+    void pre();
+    void in();
+    void post();
+
+public:
+    void start() override; // Metode polymorphism untuk menjalankan program
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 4.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+#endif
