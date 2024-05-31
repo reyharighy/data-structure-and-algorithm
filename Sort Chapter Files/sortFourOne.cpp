@@ -12,8 +12,8 @@
 
 void SortFourOne::menuInterface() {
     std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
-              << "  1. Masukkan data baru\n  2. Urutkan data\n"  
-              << "  3. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
+              << "  1. Masukkan data baru\n  2. Urutkan data\n  3. Hapus semua data\n"  
+              << "  4. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,20 @@ void SortFourOne::sort() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
+    PART 4: Fungsi "del" bertujuan untuk menghapus semua data dalam array
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+void SortFourOne::del() {
+    array.clear(); // Menghapus semua data dari stack
+    std::cout << "Semua data berhasil dihapus" << std::endl;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 4.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 5: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
     oleh standard output dari "menuInterface".
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -86,11 +99,13 @@ void SortFourOne::start() {
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-        if (menuChosen >= 1 && menuChosen <= 3) {
+        if (menuChosen >= 1 && menuChosen <= 4) {
             if (menuChosen == 1) {
                 push();
             } else if (menuChosen == 2) {
                 sort();
+            } else if (menuChosen == 3) {
+                del();
             } else {
                 break;
             }
@@ -103,5 +118,5 @@ void SortFourOne::start() {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE PART 4.
+    END OF SCOPE PART 5.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
