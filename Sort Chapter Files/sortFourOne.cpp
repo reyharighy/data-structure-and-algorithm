@@ -12,13 +12,14 @@
 
 void SortFourOne::menuInterface() {
     std::cout << "\nPilih menu untuk pengoperasian pada bubble sort:\n"
-              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Urutkan data\n"  
-              << "  4. Hapus semua data\n  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
+              << "  1. Masukkan data baru (Integer)\n  2. Masukkan data baru (String)\n  3. Lihat data\n  4. Urutkan data\n"  
+              << "  5. Hapus semua data\n  6. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
 void SortFourOne::menuInterfaceSort() {
     std::cout << "\nPilih urutan pengoperasian pada sort:\n"
-              << "  1. Pengurutan naik (Ascending)\n  2. Pengurutan turun (Descending)  \n\nMasukkan angka urutan pilihan => ";
+              << "  1. Pengurutan naik Integer (Ascending)\n  2. Pengurutan turun Integer (Descending)\n"
+              << "  3. Pengurutan naik String (Ascending)\n  4. Pengurutan turun String (Descending)  \n\nMasukkan angka urutan pilihan => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -30,7 +31,7 @@ void SortFourOne::menuInterfaceSort() {
     beberapa skenario error handling sesuai dengan prasyarat yang ditentukan di dalam program.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-void SortFourOne::push() {
+void SortFourOne::pushInt() {
     std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => ";
     std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
@@ -53,6 +54,16 @@ void SortFourOne::push() {
     }
 }
 
+void SortFourOne::pushStr() {
+    std::cout << "Masukkan data baru (enter untuk menambah data selanjutnya dan enter 2x untuk selesai) => ";
+    std::string line;
+    while (std::getline(std::cin, line)) {
+        if (line.empty()) {
+            break;
+        }
+        arrayString.push_back(line);
+    }
+}
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 2.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
@@ -63,11 +74,29 @@ void SortFourOne::push() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourOne::preview() {
-    if(array.size()) {
-        std::cout << "Data saat ini : " << array << std::endl;
-    } else {
-        std::cout << "<Data kosong>";
-    }
+    std::cout << "\nPilih preview data yang ingin dilihat:\n"
+              << "  1. Data angka\n  2. Data string  \n\nMasukkan angka pilihan preview => ";
+    short previewChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        
+        switch(previewChosen) {
+        case 1:
+            if (array.size()) {
+                std::cout << "Data saat ini : " << array << std::endl;
+            } else {
+                std::cout << "<Data kosong>";
+            }
+            break;
+        case 2:
+            if (arrayString.size()) {
+                std::cout << "Data saat ini : " << arrayString << std::endl;
+            } else {
+                std::cout << "<Data kosong>";
+            }
+            break;
+
+        default:
+            invalidMenuChosen(&previewChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+        }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -77,10 +106,10 @@ void SortFourOne::preview() {
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 4: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan Bubble Sort.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
-
 void SortFourOne::sort() {
-    if(array.size()) {
+    if (array.size() || arrayString.size()) {
         arrayCopy = array;
+        arrayCopyString = arrayString;
         menuInterfaceSort();
         short sortChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
         
@@ -92,11 +121,12 @@ void SortFourOne::sort() {
                 for (size_t innerLoop = 0; innerLoop < array.size() - 1; innerLoop++) {
                     if (array[innerLoop] > array[innerLoop + 1]) {
                         std::swap(array[innerLoop], array[innerLoop + 1]);
-                        std::cout << array <<  " : " << array[innerLoop + 1] << " > " << array[innerLoop] << std::endl;
+                        std::cout << array <<  ": " << array[innerLoop + 1] << " > " << array[innerLoop] << std::endl;
                     }
                 }
             }
-
+            std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                      << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
             break;
 
         case 2:
@@ -110,6 +140,36 @@ void SortFourOne::sort() {
                     }
                 }
             }
+            std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                      << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
+            break;
+
+        case 3:
+            std::cout << std::endl << "Pengurutan naik" << std::endl  << arrayString << std::endl;
+
+            for (size_t i = 0; i < arrayString.size(); i++) {
+                for (size_t j = 0; j < arrayString.size() - 1; j++) {
+                    if (arrayString[j] > arrayString[j + 1]) {
+                        std::swap(arrayString[j], arrayString[j + 1]);
+                    }
+                }
+            }
+            std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                      << arrayCopyString << std::endl << "Data hasil urut : \n" << printArrayString() << std::endl;
+            break;
+
+        case 4:
+            std::cout << std::endl << "Pengurutan turun" << std::endl  << arrayString << std::endl;
+
+            for (size_t i = 0; i < arrayString.size(); i++) {
+                for (size_t j = 0; j < arrayString.size() - 1; j++) {
+                    if (arrayString[j] < arrayString[j + 1]) {
+                        std::swap(arrayString[j], arrayString[j + 1]);
+                    }
+                }
+            }
+            std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                      << arrayCopyString << std::endl << "Data hasil urut : \n" << printArrayString() << std::endl;
 
             break;
 
@@ -117,11 +177,17 @@ void SortFourOne::sort() {
             invalidMenuChosen(&sortChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
         }
         
-        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
-                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
+        
     } else {
         std::cout << "<Data kosong>";
     }
+}
+std::string SortFourOne::printArrayString() {
+    std::string result;
+    for (size_t i = 0; i < arrayString.size(); i++) {
+        result += arrayString[i] + "\n";
+    }
+    return result;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -134,6 +200,7 @@ void SortFourOne::sort() {
 
 void SortFourOne::del() {
     array.clear(); // Menghapus semua data dari stack
+    arrayString.clear(); // Menghapus semua data dari stack
     std::cout << "Semua data berhasil dihapus" << std::endl;
 }
 
@@ -151,18 +218,22 @@ void SortFourOne::start() {
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-        if (menuChosen >= 1 && menuChosen <= 5) {
+        if (menuChosen >= 1 && menuChosen <= 6) {
             if (menuChosen == 1) {
-                push();
+                pushInt();
             } else if (menuChosen == 2) {
-                preview();
+                pushStr();
             } else if (menuChosen == 3) {
-                sort();
+                preview();
             } else if (menuChosen == 4) {
+                sort();
+            } else if (menuChosen == 5) {
                 del();
             } else {
                 array.clear();
                 arrayCopy.clear();
+                arrayString.clear();
+                arrayCopyString.clear();
                 break;
             }
         } else {

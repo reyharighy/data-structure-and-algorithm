@@ -29,13 +29,16 @@ class SortFourOne: public Program {
 private:
     bool isDataExist {false};
     std::string invalidIntInput;
+    std::string printArrayString();
     std::vector<long> array, arrayCopy {};
+    std::vector<std::string> arrayString, arrayCopyString {};
     void menuInterface();
     void menuInterfaceSort();
     void sort();
     void preview();
     void del();
-    void push();
+    void pushInt();
+    void pushStr();
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
 };
@@ -88,37 +91,6 @@ public:
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 3.
-----------------------------------------------------------------------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Deklarasi awal untuk objek kelas dengan nama tugas Pre-order, In-order, dan Post-order Traversal pada Pohon Biner.
-----------------------------------------------------------------------------------------------------------------------------------------*/
-
-class SortFourFour: public Program {
-private:
-    bool isDataExist {false};
-    std::string invalidIntInput;
-    std::vector<long> array, arrayCopy {};
-    struct Node {
-        int data;
-        Node* left;
-        Node* right;
-        Node(int value) : data(value), left(nullptr), right(nullptr) {}
-    };
-
-    void menuInterface();
-    void BST();
-    void push();
-    void pre();
-    void in();
-    void post();
-
-public:
-    void start() override; // Metode polymorphism untuk menjalankan program
-};
-
-/*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE FOR PART 4.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 #endif
