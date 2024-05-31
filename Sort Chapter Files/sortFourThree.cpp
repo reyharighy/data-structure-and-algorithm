@@ -11,9 +11,14 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourThree::menuInterface() {
-    std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
-              << "  1. Masukkan data baru\n  2. Urutkan data\n  3. Hapus semua data\n"  
-              << "  4. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
+    std::cout << "\nPilih menu untuk pengoperasian pada selection sort:\n"
+              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Urutkan data\n"  
+              << "  4. Hapus semua data\n  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
+}
+
+void SortFourThree::menuInterfaceSort() {
+    std::cout << "\nPilih urutan pengoperasian pada sort:\n"
+              << "  1. Pengurutan naik (Ascending)\n  2. Pengurutan turun (Descending)  \n\nMasukkan angka urutan pilihan => ";
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -30,13 +35,17 @@ void SortFourThree::push() {
     std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
     std::string tempStr;
-    for (char checkDigit : theData) {
-        if (std::isdigit(checkDigit)) {
-            tempStr += checkDigit;
-        } else if (!tempStr.empty()) {
-            array.push_back(std::stol(tempStr));
-            tempStr.clear();
+    if(!theData.empty()) {
+        for (char checkDigit : theData) {
+            if (std::isdigit(checkDigit)) {
+                tempStr += checkDigit;
+            } else if (!tempStr.empty()) {
+                array.push_back(std::stol(tempStr));
+                tempStr.clear();
+            }
         }
+    } else {
+        std::cout << "<Data yang dimasukan tidak boleh kosong>";
     }
 
     if (!tempStr.empty()) {
@@ -48,28 +57,14 @@ void SortFourThree::push() {
     END OF SCOPE FOR PART 2.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
+
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 3: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan Selection Sort.
+    PART 3: Fungsi "preview" bertujuan untuk melihat semua data dalam array
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-void SortFourThree::sort() {
-    if (array.size()) {
-        arrayCopy = array;
-        std::cout << array << std::endl;
-        for (size_t i = 0; i < array.size(); i++) {
-            int elem = i;
-            for (size_t j = i + 1; j < array.size(); j++) {
-                if (array[j] > array[elem]) {
-                    elem = j;
-                }
-            }
-            if (i != elem) {
-                std::swap(array[i], array[elem]);
-                std::cout << array[i] << " : " << array << std::endl;
-            }
-        }
-        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
-                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
+void SortFourThree::preview() {
+    if(array.size()) {
+        std::cout << "Data saat ini : " << array << std::endl;
     } else {
         std::cout << "<Data kosong>";
     }
@@ -80,7 +75,66 @@ void SortFourThree::sort() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Fungsi "del" bertujuan untuk menghapus semua data dalam array
+    PART 4: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan Selection Sort.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+void SortFourThree::sort() {
+    if (array.size()) {
+        arrayCopy = array;
+        menuInterfaceSort();
+        short sortChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        
+        switch(sortChosen) {
+        case 1:
+            std::cout << std::endl << "Pengurutan naik" << std::endl  << array << std::endl;
+            
+            for (size_t currentIndex = 0; currentIndex < array.size(); currentIndex++) {
+                int maxElement = currentIndex;
+                for (size_t compareIndex = currentIndex + 1; compareIndex < array.size(); compareIndex++) {
+                    if (array[compareIndex] < array[maxElement]) {
+                        maxElement = compareIndex;
+                    }
+                }
+                if (currentIndex != maxElement) {
+                    std::swap(array[currentIndex], array[maxElement]);
+                    std::cout << array << ": " << array[currentIndex] << std::endl;
+                }
+            }
+
+            break;
+        case 2:
+            std::cout << std::endl << "Pengurutan turun" << std::endl  << array << std::endl;
+            
+            for (size_t currentIndex = 0; currentIndex < array.size(); currentIndex++) {
+                int maxElement = currentIndex;
+                for (size_t compareIndex = currentIndex + 1; compareIndex < array.size(); compareIndex++) {
+                    if (array[compareIndex] > array[maxElement]) {
+                        maxElement = compareIndex;
+                    }
+                }
+                if (currentIndex != maxElement) {
+                    std::swap(array[currentIndex], array[maxElement]);
+                    std::cout << array << ": " << array[currentIndex] << std::endl;
+                }
+            }
+
+            break;
+        default:
+            invalidMenuChosen(&sortChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+        }
+        std::cout << std::endl << "Data berhasil diurutkan" << std::endl << "Data awal : " 
+                  << arrayCopy << std::endl << "Data hasil urut : " << array << std::endl;
+    } else {
+        std::cout << "<Data kosong>";
+    }
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 4.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 5: Fungsi "del" bertujuan untuk menghapus semua data dalam array
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourThree::del() {
@@ -89,11 +143,11 @@ void SortFourThree::del() {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE FOR PART 4.
+    END OF SCOPE FOR PART 5.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 5: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
+    PART 6: Fungsi "start" adalah implementasi metode polymorphism untuk menjalankan program sesuai dengan logis yang ditampilkan
     oleh standard output dari "menuInterface".
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -102,14 +156,18 @@ void SortFourThree::start() {
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-        if (menuChosen >= 1 && menuChosen <= 4) {
+        if (menuChosen >= 1 && menuChosen <= 5) {
             if (menuChosen == 1) {
                 push();
             } else if (menuChosen == 2) {
-                sort();
+                preview();
             } else if (menuChosen == 3) {
+                sort();
+            } else if (menuChosen == 4) {
                 del();
             } else {
+                array.clear();
+                arrayCopy.clear();
                 break;
             }
         } else {
@@ -121,5 +179,5 @@ void SortFourThree::start() {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE PART 5.
+    END OF SCOPE PART 6.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
