@@ -41,7 +41,7 @@ private:
             swapped = false;
             for (int j = 0; j < array.size() - i - 1; j++) {
                 if ((ascending && array[j] > array[j + 1]) || (!ascending && array[j] < array[j + 1])) {
-                    std::cout << array[j] << " bertukar dengan " << array[j + 1] << std::endl;
+                    std::cout << array << " => " << array[j] << " bertukar dengan " << array[j + 1] << std::endl;
                     std::swap(array[j], array[j + 1]);
                     swapped = true;
                 }
@@ -49,7 +49,6 @@ private:
             if (!swapped) {
                 break;
             }
-            std::cout << "Array saat ini: " << array << std::endl;
         }
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
@@ -61,7 +60,7 @@ private:
             swapped = false;
             for (int j = 0; j < arrayString.size() - i - 1; j++) {
                 if ((ascending && arrayString[j] > arrayString[j + 1]) || (!ascending && arrayString[j] < arrayString[j + 1])) {
-                    std::cout << arrayString[j] << " bertukar dengan " << arrayString[j + 1] << std::endl;
+                    std::cout << arrayString << " => " << arrayString[j] << " bertukar dengan " << arrayString[j + 1] << std::endl;
                     std::swap(arrayString[j], arrayString[j + 1]);
                     swapped = true;
                 }
@@ -69,7 +68,6 @@ private:
             if (!swapped) {
                 break;
             }
-            std::cout << "Array saat ini: " << arrayString << std::endl;
         }
         std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
     }
