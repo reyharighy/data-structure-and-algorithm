@@ -37,16 +37,15 @@ void SortFourFour::push() {
                 tempStr.clear();
             }
         }
+        if (!tempStr.empty()) {
+            tree.insert(std::stol(tempStr));
+            pre();
+            in();
+            post();
+            del();
+        }
     } else {
         std::cout << "<Data yang dimasukan tidak boleh kosong>";
-    }
-
-    if (!tempStr.empty()) {
-        tree.insert(std::stol(tempStr));
-        pre();
-        in();
-        post();
-        del();
     }
 }
 

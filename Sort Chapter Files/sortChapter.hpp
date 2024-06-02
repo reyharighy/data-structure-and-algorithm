@@ -12,13 +12,17 @@
 #include <vector>
 
 template<typename T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec)
+std::ostream& operator<<(std::ostream& output, const std::vector<T>& array)
 {
-    for (const auto& el : vec)
+    for (size_t i = 0; i < array.size(); i++)
     {
-        os << el << ' ';
+        output << array[i];
+        if (i != array.size() - 1)
+        {
+            output << " - ";
+        }
     }
-    return os;
+    return output;
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -37,14 +41,14 @@ private:
             swapped = false;
             for (int j = 0; j < array.size() - i - 1; j++) {
                 if ((ascending && array[j] > array[j + 1]) || (!ascending && array[j] < array[j + 1])) {
-                    std::cout << "Menukarkan " << array[j] << " dengan " << array[j + 1] << std::endl;
+                    std::cout << array << " => " << array[j] << " bertukar dengan " << array[j + 1] << std::endl;
                     std::swap(array[j], array[j + 1]);
                     swapped = true;
                 }
             }
-            if (!swapped)
+            if (!swapped) {
                 break;
-            std::cout << "Array saat ini: " << array << std::endl;
+            }
         }
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
@@ -56,14 +60,14 @@ private:
             swapped = false;
             for (int j = 0; j < arrayString.size() - i - 1; j++) {
                 if ((ascending && arrayString[j] > arrayString[j + 1]) || (!ascending && arrayString[j] < arrayString[j + 1])) {
-                    std::cout << "Menukarkan " << arrayString[j] << " dengan " << arrayString[j + 1] << std::endl;
+                    std::cout << arrayString << " => " << arrayString[j] << " bertukar dengan " << arrayString[j + 1] << std::endl;
                     std::swap(arrayString[j], arrayString[j + 1]);
                     swapped = true;
                 }
             }
-            if (!swapped)
+            if (!swapped) {
                 break;
-            std::cout << "Array saat ini: " << arrayString << std::endl;
+            }
         }
         std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
     }
@@ -100,7 +104,7 @@ private:
                 j--;
             } 
             array[j + 1] = k;
-            std::cout << array << ": " << k << " ke posisi " << j + 1 << std::endl;
+            std::cout << array << " => " << k << " ke posisi " << j+2 << std::endl;
         }
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
@@ -116,7 +120,7 @@ private:
                 j--;
             } 
             arrayString[j + 1] = k;
-            std::cout << arrayString << ": " << k << " dipindahkan ke posisi " << j + 1 << std::endl;
+            std::cout << arrayString << " => " << k << " ke posisi " << j+2 << std::endl;
         }
         std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
     }
@@ -147,13 +151,13 @@ private:
         for (int i = 0; i < array.size(); i++) {
             int k = i;
             for (int j = i + 1; j < array.size(); j++) {
-                if ((ascending && array[j] < array[k]) || (!ascending && array[j] > array[k])) {
+                if ((ascending && array[k] > array[j]) || (!ascending && array[k] < array[j])) {
                     k = j;
                 }
             }
             if (i != k) {
                 std::swap(array[i], array[k]);
-                std::cout << array << ": " << "Menukarkan " << array[i] << " dengan " << array[k] << std::endl;
+                std::cout << array << " => " << array[i] << " bertukar dengan " << array[k] << std::endl;
             }
         }
         std::cout << "Data setelah diurutkan: " << array << std::endl;
@@ -164,13 +168,13 @@ private:
         for (int i = 0; i < arrayString.size(); i++) {
             int k = i;
             for (int j = i + 1; j < arrayString.size(); j++) {
-                if ((ascending && arrayString[j] < arrayString[k]) || (!ascending && arrayString[j] > arrayString[k])) {
+                if ((ascending && arrayString[k] > arrayString[j]) || (!ascending && arrayString[k] < arrayString[j])) {
                     k = j;
                 }
             }
             if (i != k) {
                 std::swap(arrayString[i], arrayString[k]);
-                std::cout << arrayString << ": " << "Menukarkan " << arrayString[i] << " dengan " << arrayString[k] << std::endl;
+                std::cout << arrayString << " => " << arrayString[i] << " bertukar dengan " << arrayString[k] << std::endl;
             }
         }
         std::cout << "Data setelah diurutkan: " << arrayString << std::endl;
@@ -219,19 +223,19 @@ private:
             return node;
         }
 
-        void inOrder(Node* node) {
-            if (node != nullptr) {
-                inOrder(node->left);
-                std::cout << node->data << " ";
-                inOrder(node->right);
-            }
-        }
-
         void preOrder(Node* node) {
             if (node != nullptr) {
                 std::cout << node->data << " ";
                 preOrder(node->left);
                 preOrder(node->right);
+            }
+        }
+
+        void inOrder(Node* node) {
+            if (node != nullptr) {
+                inOrder(node->left);
+                std::cout << node->data << " ";
+                inOrder(node->right);
             }
         }
 
@@ -264,13 +268,13 @@ private:
             root = nullptr;
         }
 
-        void inOrder() {
-            inOrder(root);
+        void preOrder() {
+            preOrder(root);
             std::cout << "\n";
         }
 
-        void preOrder() {
-            preOrder(root);
+        void inOrder() {
+            inOrder(root);
             std::cout << "\n";
         }
 
