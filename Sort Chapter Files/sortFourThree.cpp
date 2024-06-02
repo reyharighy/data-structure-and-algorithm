@@ -45,28 +45,29 @@ void SortFourThree::push() {
                         tempStr.clear();
                     }
                 }
+                if (!tempStr.empty()) {
+                    array.push_back(std::stol(tempStr));
+                }
             } else {
                 std::cout << "<Data yang dimasukan tidak boleh kosong>";
-            }
-
-            if (!tempStr.empty()) {
-                array.push_back(std::stol(tempStr));
             }
             break;
         }
         case 2: {
             std::cout << "Masukkan data baru (enter untuk menambah data selanjutnya dan enter 2x untuk selesai) => \n";
             std::string line;
-            while (std::getline(std::cin, line)) {
-                if (line.empty()) {
-                    break;
+            while (std::getline(std::cin, line) && !line.empty()) {
+                std::istringstream iss(line);
+                std::string fragment, normalInput;
+                while (iss >> fragment) { // Proses pemasukan tiap fragment ke dalam variabel "normalInput"
+                    normalInput += fragment + " ";
                 }
-                arrayString.push_back(line);
+                arrayString.push_back(normalInput.substr(0, normalInput.length() - 1));
             }
             break;
         }
         default:
-            std::cout << "Pilihan tidak valid.";
+            invalidMenuChosen(&pushChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
     }
 }
 
@@ -74,35 +75,26 @@ void SortFourThree::push() {
     END OF SCOPE FOR PART 2.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 3: Fungsi "preview" bertujuan untuk melihat semua data dalam array
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourThree::preview() {
     std::cout << "\nPilih preview data yang ingin dilihat:\n"
-              << "  1. Data integer\n  2. Data string  \n\nMasukkan angka pilihan => ";
+              << "  1. Data Integer\n  2. Data String  \n\nMasukkan angka pilihan => ";
     short previewChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
         
-        switch(previewChosen) {
-        case 1:
-            if (array.size()) {
-                std::cout << "Data saat ini : " << array << std::endl;
-            } else {
-                std::cout << "<Data kosong>";
-            }
-            break;
-        case 2:
-            if (arrayString.size()) {
-                std::cout << "Data saat ini : " << arrayString << std::endl;
-            } else {
-                std::cout << "<Data kosong>";
-            }
-            break;
-
-        default:
-            invalidMenuChosen(&previewChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+    if (previewChosen == 1 || previewChosen == 2){
+        if (previewChosen == 1 && array.size()) {
+            std::cout << "Data saat ini : " << array << std::endl;
+        } else if (previewChosen == 2 && arrayString.size()) {
+            std::cout << "Data saat ini : " << arrayString << std::endl;
+        } else { 
+            std::cout << "<Data kosong>";
         }
+    } else {
+        invalidMenuChosen(&previewChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+    }
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -114,47 +106,25 @@ void SortFourThree::preview() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourThree::sort() {
-    if (array.size() || arrayString.size()) {
-        std::cout << "\nPilih urutan pengoperasian pada sort:\n"
-                  << "  1. Pengurutan naik Integer (Ascending)\n  2. Pengurutan turun Integer (Descending)\n"
-                  << "  3. Pengurutan naik String (Ascending)\n  4. Pengurutan turun String (Descending)  \n\nMasukkan angka urutan pilihan => ";
-        short sortChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
-        
-        switch(sortChosen) {
-        case 1:
-            if (!array.size()) {
-                std::cout << "<Data kosong>";
-                break;
-            }
-            selectionSort(array, true);
-            
-            break;
-        case 2:
-            if (!array.size()) {
-                std::cout << "<Data kosong>";
-                break;
-            }
-            selectionSort(array, false);
-            break;
-        case 3:
-            if (!arrayString.size()) {
-                std::cout << "<Data kosong>";
-                break;
-            }
-            selectionSortString(arrayString, true);
-            break;
-        case 4:
-            if (!arrayString.size()) {
-                std::cout << "<Data kosong>";
-                break;
-            }
-            selectionSortString(arrayString, false);
-            break;
-        default:
-            invalidMenuChosen(&sortChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+    std::cout << "\nPilih urutan pengoperasian pada sort:\n"
+                << "  1. Pengurutan naik Integer (Ascending)\n  2. Pengurutan turun Integer (Descending)\n"
+                << "  3. Pengurutan naik String (Ascending)\n  4. Pengurutan turun String (Descending)  \n\nMasukkan angka urutan pilihan => ";
+    short sortChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+    
+    if (sortChosen >= 1 && sortChosen <= 4){
+        if (sortChosen == 1 && array.size()) {
+            selectionSort(array, true); // Pengurutan naik Integer (Ascending)
+        } else if (sortChosen == 2 && array.size()) {
+            selectionSort(array, false); // Pengurutan turun Integer (Descending)
+        } else if (sortChosen == 3 && arrayString.size()) {
+            selectionSortString(arrayString, true); // Pengurutan naik String (Ascending)
+        } else if (sortChosen == 4 && arrayString.size()) {
+            selectionSortString(arrayString, false); // Pengurutan turun String (Descending)
+        } else { 
+            std::cout << "<Data kosong>";
         }
     } else {
-        std::cout << "<Data kosong>";
+        invalidMenuChosen(&sortChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
     }
 }
 
@@ -168,23 +138,25 @@ void SortFourThree::sort() {
 
 void SortFourThree::del() {
     std::cout << "\nPilih data yang ingin dihapus:\n"
-              << "  1. Data integer\n  2. Data string  \n\nMasukkan angka pilihan => ";
+              << "  1. Data Integer\n  2. Data String\n  3. Kembali  \n\nMasukkan angka pilihan => ";
     short delChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
-        
-        switch(delChosen) {
-        case 1:
+    
+    if (delChosen >= 1 && delChosen <= 3){
+        if (delChosen == 1 && array.size()) {
             array.clear(); // Menghapus semua data dari array
-            break;
-        case 2:
+            std::cout << "<Data integer berhasil dihapus>" << std::endl;
+        } else if (delChosen == 2 && arrayString.size()) {
             arrayString.clear(); // Menghapus semua data dari arrayString
-            break;
-
-        default:
-            invalidMenuChosen(&delChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+            std::cout << "<Data string berhasil dihapus>" << std::endl;
+        } else if (delChosen == 3) {
+            return;
+        } else { 
+            std::cout << "<Data sudah kosong>";
         }
-    std::cout << "Semua data berhasil dihapus" << std::endl;
+    } else {
+        invalidMenuChosen(&delChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+    }
 }
-
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 5.
