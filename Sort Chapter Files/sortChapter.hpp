@@ -256,6 +256,23 @@ private:
             delete node;
         }
 
+        void printSpaces(int spaceCount) {
+            for (int i = 0; i < spaceCount; i++) {
+                std::cout << "      ";
+            }
+        }
+
+        void printTree(Node* node, int space) {
+            if (node == nullptr) {
+                return;
+            }
+            space += 1;
+            printTree(node->right, space);
+            printSpaces(space - 1);
+            std::cout << node->data << "\n";
+            printTree(node->left, space);
+        }
+
     public:
         BST() : root(nullptr) {}
 
@@ -266,6 +283,11 @@ private:
         void deleteAll() {
             deleteTree(root);
             root = nullptr;
+        }
+
+        void printLevelOrder() {
+            std::cout << std::endl;
+            printTree(root, 0);
         }
 
         void preOrder() {
@@ -282,12 +304,10 @@ private:
             postOrder(root);
             std::cout << "\n";
         }
-        bool isEmpty() const {
-            return root == nullptr;
-        }
     };
     BST tree;
     void menuInterface();
+    void print();
     void push();
     void pre();
     void in();
