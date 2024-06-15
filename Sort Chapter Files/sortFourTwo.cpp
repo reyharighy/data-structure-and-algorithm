@@ -112,13 +112,17 @@ void SortFourTwo::sort() {
     
     if (sortChosen >= 1 && sortChosen <= 4){
         if (sortChosen == 1 && array.size()) {
-            insertionSort(array, true); // Pengurutan naik Integer (Ascending)
+            arrayClone = array; // Mengkloning array ke arrayClone
+            insertionSort(arrayClone, true); // Pengurutan naik Integer (Ascending)
         } else if (sortChosen == 2 && array.size()) {
-            insertionSort(array, false); // Pengurutan turun Integer (Descending)
+            arrayClone = array; // Mengkloning array ke arrayClone
+            insertionSort(arrayClone, false); // Pengurutan turun Integer (Descending)
         } else if (sortChosen == 3 && arrayString.size()) {
-            insertionSortString(arrayString, true); // Pengurutan naik String (Ascending)
+            arrayStringClone = arrayString; // Mengkloning arrayString ke arrayStringClone
+            insertionSortString(arrayStringClone, true); // Pengurutan naik String (Ascending)
         } else if (sortChosen == 4 && arrayString.size()) {
-            insertionSortString(arrayString, false); // Pengurutan turun String (Descending)
+            arrayStringClone = arrayString; // Mengkloning arrayString ke arrayStringClone
+            insertionSortString(arrayStringClone, false); // Pengurutan turun String (Descending)
         } else { 
             std::cout << "<Data kosong>";
         }

@@ -113,12 +113,16 @@ void SortFourOne::sort() {
     
     if (sortChosen >= 1 && sortChosen <= 4){
         if (sortChosen == 1 && array.size()) {
-            bubbleSort(array, true); // Pengurutan naik Integer (Ascending)
+            arrayClone = array; // Mengkloning array ke arrayClone
+            bubbleSort(arrayClone, true); // Pengurutan naik Integer (Ascending)
         } else if (sortChosen == 2 && array.size()) {
-            bubbleSort(array, false); // Pengurutan turun Integer (Descending)
+            arrayClone = array; // Mengkloning array ke arrayClone
+            bubbleSort(arrayClone, false); // Pengurutan turun Integer (Descending)
         } else if (sortChosen == 3 && arrayString.size()) {
+            arrayStringClone = arrayString; // Mengkloning arrayString ke arrayStringClone
             bubbleSortString(arrayString, true); // Pengurutan naik String (Ascending)
         } else if (sortChosen == 4 && arrayString.size()) {
+            arrayStringClone = arrayString; // Mengkloning arrayString ke arrayStringClone
             bubbleSortString(arrayString, false); // Pengurutan turun String (Descending)
         } else { 
             std::cout << "<Data kosong>";

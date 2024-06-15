@@ -32,8 +32,8 @@ std::ostream& operator<<(std::ostream& output, const std::vector<T>& array)
 class SortFourOne: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array {};
-    std::vector<std::string> arrayString {};
+    std::vector<long> array, arrayClone {};
+    std::vector<std::string> arrayString, arrayStringClone {};
     void bubbleSort(std::vector<long>& array, bool ascending) {
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         bool swapped;
@@ -91,8 +91,8 @@ public:
 class SortFourTwo: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array {};
-    std::vector<std::string> arrayString {};
+    std::vector<long> array, arrayClone {};
+    std::vector<std::string> arrayString, arrayStringClone {};
     void insertionSort(std::vector<long>& array, bool ascending) {
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         for (int i = 1; i < array.size(); i++) {
@@ -144,8 +144,8 @@ public:
 class SortFourThree: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array {};
-    std::vector<std::string> arrayString {};
+    std::vector<long> array, arrayClone {};
+    std::vector<std::string> arrayString, arrayStringClone {};
     void selectionSort(std::vector<long>& array, bool ascending) {
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         for (int i = 0; i < array.size(); i++) {
