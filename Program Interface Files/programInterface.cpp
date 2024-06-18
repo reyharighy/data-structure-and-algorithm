@@ -48,6 +48,14 @@ short Program::taskList(const short* chapterID) {
             {3, "Mengurutkan Data Menggunakan Selection Sort"},
             {4, "Pre-order, In-order, dan Post-order Traversal pada Pohon Biner"}
         };
+    } else if (*chapterID == 5) {
+        taskNameSelected = new std::map<short, std::string> { // Chapter Urutan Tingkat Lanjut (Advanced Sort)
+            {0, "Urutan Tingkat Lanjut (Advanced Sort):"},
+            {1, "Mengurutkan Data Menggunakan In Place Sort"},
+            {2, "Mengurutkan Data Menggunakan Shell Sort"},
+            {3, "Mengurutkan Data Menggunakan Merge Sort"},
+            {4, "Mengurutkan Data Menggunakan Quick Sort"}
+        };
     }
 
     /*----------------------------------------------------------------------------------------------------
