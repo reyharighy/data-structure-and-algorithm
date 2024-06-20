@@ -34,8 +34,8 @@ void linkedListThreeTwo::start() {
     while(true) {
         std::cout << std::endl << "Anggota stack: ";
         display(stack);
-        std::cout << std::endl << "[(1) Tambah | (2) Ambil | (9) Keluar]" 
-                  << std::endl << "Pilihan: ";
+        std::cout << std::endl << "[(1) Tambah | (2) Ambil | (9) Keluar] \n" 
+                  << "Pilihan: ";
         
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
         if (menuChosen == 9) {

@@ -29,40 +29,33 @@ void display(OrderedLinkedList<std::string> orderedList) {
 
 void linkedListThreeFour::start() {
     OrderedLinkedList<std::string> orderedList = OrderedLinkedList<std::string>();
+    std::cout << "Ordered Linked List Demo\n";
 
     while (true) {
         display(orderedList);
-        int input{};
-        std::cout << "[(1) Tambah | (2) Ambil | (3) Hapus | (4) Keluar]: ";
-        std::cin >> input;
+        std::cout << "[(1) Tambah | (2) Ambil | (3) Hapus | (9) Keluar] \n" 
+                  << "Pilihan: ";
 
-        switch(input) {
-            case 1: {
-                std::string dataInput;
-                std::cin.ignore(); // console input cleanup?
-                std::cout << "Masukkan data: ";
-                std::getline(std::cin, dataInput);
-                orderedList.add(dataInput);
-                break;
-            }
-            case 2: {
-                int dataInput{};
-                std::cout << "Masukkan urutan data yang ingin di-output (mulai dari 1): ";
-                std::cin.ignore();
-                std::cin >> dataInput;
-                std::cout << "Data yang di-output: " << orderedList.get(dataInput - 1) << "\n";
-                break;
-            }
-            case 3: {
-                std::cout << "Masukkan urutan data yang ingin dihapus (mulai dari 1): ";
-                std::cin.ignore();
-                int dataInput{};
-                std::cin >> dataInput;
-                orderedList.remove(dataInput - 1);
-                break;
-            }
-            case 4:
-                break;
+        short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        if (menuChosen == 9) {
+            break;
+        } else if (menuChosen == 1) {
+            std::cout << "Masukkan data: ";
+            std::string dataInput;
+            std::getline(std::cin, dataInput);
+            orderedList.add(dataInput);
+        } else if (menuChosen == 2) {
+            std::cout << "Masukkan urutan data yang ingin di-output (mulai dari 1): ";
+            int dataInput{};
+            std::cin >> dataInput;
+            std::cout << "Data yang di-output: " << orderedList.get(dataInput - 1) << "\n";
+        } else if (menuChosen == 3) {
+            std::cout << "Masukkan urutan data yang ingin dihapus (mulai dari 1): ";
+            int dataInput{};
+            std::cin >> dataInput;
+            orderedList.remove(dataInput - 1);
+        } else {
+            invalidMenuChosen(&menuChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
         }
     }
 }

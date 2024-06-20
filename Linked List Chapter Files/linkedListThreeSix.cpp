@@ -125,7 +125,6 @@ void linkedListThreeSix::start() {
     std::cout << "Pemrosesan Infix" << "\n";
     while (true) {
         std::cout << "Masukkan ekspresi infix (atau q untuk keluar): ";
-        std::cin.ignore();
         std::string input;
         std::getline(std::cin, input);
         if (input == "q") {
