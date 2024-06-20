@@ -208,10 +208,17 @@ private:
 
         std::vector<long> L(n1), R(n2);
 
-        for (int i = 0; i < n1; ++i)
+        std::cout << "Mengambil angka ";
+
+        for (int i = 0; i < n1; ++i) {
             L[i] = arr[left + i];
-        for (int j = 0; j < n2; ++j)
+            std::cout << std::to_string(L[i]) << ", ";
+        }
+            
+        for (int j = 0; j < n2; ++j) {
             R[j] = arr[mid + 1 + j];
+            std::cout << std::to_string(R[j]) << ", ";
+        }
 
         int i = 0, j = 0, k = left;
         while (i < n1 && j < n2) {
@@ -238,7 +245,7 @@ private:
         }
 
         // Tampilkan langkah-langkah penggabungan
-        std::cout << "Menggabungkan: ";
+        std::cout << "kemudian diurutkan menjadi: ";
         for (int x = left; x <= right; ++x) {
             std::cout << arr[x];
             if (x < right) std::cout << " - ";
@@ -263,10 +270,17 @@ private:
 
         std::vector<std::string> L(n1), R(n2);
 
-        for (int i = 0; i < n1; ++i)
+        std::cout << "Mengambil karakter/kata ";
+
+        for (int i = 0; i < n1; ++i) {
             L[i] = arr[left + i];
-        for (int j = 0; j < n2; ++j)
+            std::cout << "'" << L[i] << "'" << ", ";
+        }
+            
+        for (int j = 0; j < n2; ++j) {
             R[j] = arr[mid + 1 + j];
+            std::cout << "'" << R[j] << "'" << ", ";
+        }
 
         int i = 0, j = 0, k = left;
         while (i < n1 && j < n2) {
@@ -293,7 +307,7 @@ private:
         }
 
         // Tampilkan langkah-langkah penggabungan
-        std::cout << "Menggabungkan: ";
+        std::cout << "kemudian diurutkan menjadi: ";
         for (int x = left; x <= right; ++x) {
             std::cout << arr[x];
             if (x < right) std::cout << " - ";
