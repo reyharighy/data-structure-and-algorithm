@@ -1,6 +1,7 @@
 /*
-    File ini digunakan sebagai antarmuka untuk menyimpan berbagai fungsi dasar yang berkaitan dengan standard input dari pengguna. 
-    Selain itu, file ini juga berperan dalam memenuhi proses abstraksi dari tiap fungsi yang disediakan.
+    File ini digunakan sebagai antarmuka untuk menyimpan berbagai fungsi dasar
+    yang berkaitan dengan standard input dari pengguna. Selain itu, file ini juga
+    berperan dalam memenuhi proses abstraksi dari tiap fungsi yang disediakan.
 */
 
 #ifndef CUSTOM_UTILITY_H
