@@ -22,22 +22,39 @@ short Program::taskList(const short* chapterID) {
     if (*chapterID == 1) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Tumpukan (Stack)
             {0, "Tumpukan (Stack):"},
-            {1, "Konversi Bilangan Biner ke Bilangan Basis lain"},
-            {2, "Implementasi Tumpukan dengan Array terbatas"},
-            {3, "Implementasi Tumpukan dengan Array dinamis"},
+            {1, "Konversi Bilangan Biner ke Bilangan Basis Lain"},
+            {2, "Implementasi Tumpukan dengan Array Terbatas"},
+            {3, "Implementasi Tumpukan dengan Array Dinamis"},
             {4, "Implementasi Tumpukan untuk Pembalikan String"}
         };
     } else if (*chapterID == 2) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Antrian (Queue)
             {0, "Antrian (Queue):"},
-            {1, "Implementasi Antrian dengan Array terbatas"},
-            {2, "Implementasi Antrian dengan Array terbatas dan Penyisipan"},
-            {3, "Implementasi Antrian dengan Array dinamis dan Penyisipan"}
+            {1, "Implementasi Antrian dengan Array Terbatas"},
+            {2, "Implementasi Antrian dengan Array Terbatas dan Proses Penyisipan Data"},
+            {3, "Implementasi Antrian dengan Array Dinamis dan Proses Penyisipan Data"},
+            {4, "Implementasi linked list untuk mencari data"}
         };
     } else if (*chapterID == 3) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Senarai Berantai (Linked List)
             {0, "Senarai Berantai (Linked List):"}
             // Future Notes: Belum terdefinisikan
+        };
+    } else if (*chapterID == 4) {
+        taskNameSelected = new std::map<short, std::string> { // Chapter Urutan (Sort)
+            {0, "Urutan (Sort):"},
+            {1, "Mengurutkan Data Menggunakan Bubble Sort"},
+            {2, "Mengurutkan Data Menggunakan Insertion Sort"},
+            {3, "Mengurutkan Data Menggunakan Selection Sort"},
+            {4, "Pre-order, In-order, dan Post-order Traversal pada Pohon Biner"}
+        };
+    } else if (*chapterID == 5) {
+        taskNameSelected = new std::map<short, std::string> { // Chapter Urutan Tingkat Lanjut (Advanced Sort)
+            {0, "Urutan Tingkat Lanjut (Advanced Sort):"},
+            {1, "Mengurutkan Data Menggunakan In Place Sort"},
+            {2, "Mengurutkan Data Menggunakan Shell Sort"},
+            {3, "Mengurutkan Data Menggunakan Merge Sort"},
+            {4, "Mengurutkan Data Menggunakan Quick Sort"}
         };
     }
 
@@ -51,7 +68,7 @@ short Program::taskList(const short* chapterID) {
         PART 1.2: Menampilkan daftar seluruh subprogram dari chapter yang dijelajahi.
     ----------------------------------------------------------------------------------------------------*/
     
-    for (size_t i = 0; i <= taskCount; i++) {
+    for (size_t i = 0; i <= taskCount; i++) { // standard output untuk seluruh subProgram dari suatu chapter
         if (i == 0) {
             std::cout << (*taskNameSelected)[i];
         } else {
@@ -59,9 +76,9 @@ short Program::taskList(const short* chapterID) {
         }
     }
 
-    std::cout << "\n " << std::to_string(taskCount + 1)
-                << ". Lihat Program-program pada Bab lain"
-                << "\n\nSilahkan masukan angka pilihan menu => ";
+    std::cout << "\n " << std::to_string(taskCount + 1) // standard output untuk keluar dari suatu chapter
+              << ". Lihat Program-program pada Bab lain"
+              << "\n\nSilahkan masukkan angka pilihan menu => ";
 
     /*----------------------------------------------------------------------------------------------------
         END OF SCOPE FOR PART 1.2.
@@ -84,15 +101,15 @@ short Program::taskList(const short* chapterID) {
 
 bool Program::subProgramSelection(const short* chapterID, std::string* invalidIntInput, std::map<const short, Program*>* subProgramDictionary) {
     short taskCount {taskList(&*chapterID)};
-    short programChosen {short(inputIntValidator(&*invalidIntInput))}; // Mengacu ke "customUtility.hpp"
+    short programChosen {short(inputIntValidator(&*invalidIntInput))}; // Mengambil hasil validasi dari fungsi PART 2 dari "customUtility.hpp"
     
-    if (programChosen >= 1 && programChosen <= taskCount) { // Pilihan standard input subProgram di dalam suatu chapter
-        ((*subProgramDictionary)[programChosen])->start(); // Mengacu ke implementasi masing-masing subProgram
+    if (programChosen >= 1 && programChosen <= taskCount) { // Jangkauan pilihan seluruh subProgram di dalam suatu chapter
+        ((*subProgramDictionary)[programChosen])->start();
     } else if (programChosen == (taskCount + 1)) { // Keluar dari suatu chapter
         return true;
-    } else { // Standard input tidak valid
-        invalidMenuChosen(&programChosen, &*invalidIntInput); // Mengacu ke "customUtility.hpp"
-        outputBuffer(); // Mengacu ke "customUtility.hpp"
+    } else { // Jika standard input tidak valid
+        invalidMenuChosen(&programChosen, &*invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+        outputBuffer(); // Akses ke fungsi PART 3 dari "customUtility.hpp"
     }
 
     return false;

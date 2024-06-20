@@ -10,6 +10,9 @@
                 "${fileDirname}\\taskCompilation.cpp",
                 "${fileDirname}\\Custom Utility Files\\customUtility.cpp",
                 "${fileDirname}\\Program Interface Files\\programInterface.cpp",
+                "${fileDirname}\\Stack Chapter Files\\*.cpp",
+                "${fileDirname}\\Queue Chapter Files\\*.cpp",
+                "${fileDirname}\\Sort Chapter Files\\*.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I/source/includes"
