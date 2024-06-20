@@ -1,5 +1,5 @@
 /*
-    File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "sortChapter.hpp" untuk tugas dengan nama
+    File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "hashChapter.hpp" untuk tugas dengan nama
     pencarian data menggunakan algoritma pencarian linear dan binary search.
 */
 
