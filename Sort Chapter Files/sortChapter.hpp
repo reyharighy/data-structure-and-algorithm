@@ -257,21 +257,23 @@ private:
             delete node;
         }
 
-        void printSpaces(int spaceCount) {
-            for (int i = 0; i < spaceCount; i++) {
-                std::cout << "      ";
-            }
-        }
-
-        void printTree(Node* node, int space) {
+        void printTree(Node* node, int space, bool isRight) {
             if (node == nullptr) {
                 return;
             }
             space += 1;
-            printTree(node->right, space);
-            printSpaces(space - 1);
-            std::cout << node->data << "\n";
-            printTree(node->left, space);
+            printTree(node->right, space, true);
+            std::cout << std::endl;
+            for (int i = 1; i < space; i++) {
+                std::cout << "    ";
+            }
+            if (isRight) {
+                std::cout << "/--";
+            } else if (space > 1){
+                std::cout << "\\--";
+            }
+            std::cout << node->data;
+            printTree(node->left, space, false);
         }
 
     public:
@@ -287,23 +289,23 @@ private:
         }
 
         void printLevelOrder() {
+            printTree(root, 0, 0);
             std::cout << std::endl;
-            printTree(root, 0);
         }
 
         void preOrder() {
             preOrder(root);
-            std::cout << "\n";
+            std::cout << std::endl;
         }
 
         void inOrder() {
             inOrder(root);
-            std::cout << "\n";
+            std::cout << std::endl;
         }
 
         void postOrder() {
             postOrder(root);
-            std::cout << "\n";
+            std::cout << std::endl;
         }
     };
     BST tree;
