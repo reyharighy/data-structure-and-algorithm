@@ -124,7 +124,7 @@ std::string infixToPostfix(std::string input) {
 void linkedListThreeSix::start() {
     std::cout << "Pemrosesan Infix" << "\n";
     while (true) {
-        std::cout << "Masukkan ekspresi infix (atau q untuk keluar): ";
+        std::cout << "Masukkan ekspresi infix tanpa spasi (atau q untuk keluar): ";
         std::string input;
         std::getline(std::cin, input);
         if (input == "q") {
@@ -132,16 +132,16 @@ void linkedListThreeSix::start() {
         }
         else {
             std::string postfix = infixToPostfix(input);
-            std::cout << input << " = " << postfix << "\n";
+            std::cout << "Infix to Postfix = " << input << " => " << postfix << "\n";
             std::cout << "Tampilkan hasil? (y/n): ";
             char input;
-            std::cin >> input;
+            std::cin >> input; std::cin.ignore();
             if (input == 'y') {
                 try {
                     std::cout << postfix <<  " = " << evalPostFix(postfix) << "\n";
                 }
                 catch (const std::exception& e) {
-                    std::cout << "Eror." << "\n";
+                    std::cout << "Error." << "\n";
                 }
             }
         }

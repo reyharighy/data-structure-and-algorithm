@@ -14,7 +14,7 @@ void linkedListThreeFive::start() {
     std::cout << "Doubly Linked List Demo\n";
     
     while(true) {
-        std::cout << "[(1) Tambah | (2) Hapus | (3) Output Maju | (4) Output Mundur | (0) Keluar] \n"
+        std::cout << "[(1) Tambah | (2) Hapus | (3) Output Maju | (4) Output Mundur | (9) Keluar] \n"
                   << "Pilihan: ";
 
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
@@ -27,8 +27,7 @@ void linkedListThreeFive::start() {
             list.add(dataInput);
         } else if (menuChosen == 2) {
             std::cout << "Masukkan urutan data yang ingin dihapus\n(mulai dari 1): ";
-            int indexInput;
-            std::cin >> indexInput;
+            short indexInput {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
             try {
                 list.remove(indexInput - 1);
             }

@@ -45,14 +45,28 @@ void linkedListThreeFour::start() {
             std::getline(std::cin, dataInput);
             orderedList.add(dataInput);
         } else if (menuChosen == 2) {
+            if (orderedList.length() == 0) {
+                std::cout << "List Kosong\n";
+                continue;
+            }
             std::cout << "Masukkan urutan data yang ingin di-output (mulai dari 1): ";
-            int dataInput{};
-            std::cin >> dataInput;
+            short dataInput {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+            if (dataInput < 1 || dataInput > orderedList.length())
+            {
+                std::cout << "Indeks tidak ditemukan.\n";
+                continue;
+            }
             std::cout << "Data yang di-output: " << orderedList.get(dataInput - 1) << "\n";
         } else if (menuChosen == 3) {
             std::cout << "Masukkan urutan data yang ingin dihapus (mulai dari 1): ";
-            int dataInput{};
-            std::cin >> dataInput;
+            short dataInput {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+            if (orderedList.length() == 0) {
+                std::cout << "List Kosong\n";
+                continue;
+            } else if (dataInput < 1 || dataInput > orderedList.length()) {
+                std::cout << "Indeks tidak ditemukan.\n";
+                continue;
+            }
             orderedList.remove(dataInput - 1);
         } else {
             invalidMenuChosen(&menuChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
