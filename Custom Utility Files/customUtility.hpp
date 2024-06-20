@@ -17,10 +17,12 @@
 
 std::string normalizeInput(); // Definisi ada di PART 1
 long inputIntValidator(std::string*); // Definisi ada di PART 2
+double inputFloatValidator(std::string*); // Definisi ada di PART 2
 void outputBuffer(); // Definisi ada di PART 3
 void invalidMenuChosen(short*, std::string*); // Mengacu ke PART 4
 std::string titleCase(); // Definisi ada di PART 5
 void setCapacityValue(bool*, int*, int*, std::string*, std::string**); // Definisi ada di PART 6
+std::string formatDecimal(const double); // Definisi ada di PART 7
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 1.

@@ -11,8 +11,12 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void StackOneOne::menuInterface() {
-    std::cout << "\nBilangan Desimal = " << (isDecimalSet ? std::to_string(decimalValue) : "<Belum ditentukan>")
-              << "\n\nPilih basis bilangan untuk konversi bilangan desimal di atas:\n"
+    if (isDecimalSet) {
+        std::cout << "\nBilangan Desimal = " << decimalValue;
+    } else {
+        std::cout << "\nBilangan Desimal = <Belum ditentukan>";
+    }
+    std::cout << "\n\nPilih basis bilangan untuk konversi bilangan desimal di atas:\n"
               << "  1. Tentukan Bilangan Desimal Baru\n  2. Konversi ke Bilangan Biner\n" \
               << "  3. Konversi ke Bilangan Oktal\n  4. Konversi ke Bilangan Heksadesimal\n" 
               << "  5. Lihat Program-program lain\n\nMasukan angka pilihan menu => ";
@@ -29,16 +33,16 @@ void StackOneOne::menuInterface() {
 void StackOneOne::setDecimalValue() {
     while (true) {
         std::cout << "Silakan masukkan bilangan desimal => ";
-        long newDecimal {inputIntValidator(&invalidIntInput)}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        double newDecimal {inputFloatValidator(&invalidFloatInput)}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
         if (newDecimal || (invalidIntInput == "0" ? true : false)) { // Jika nilai desimal bernilai valid
             decimalValue = newDecimal;
-            std::cout << "<Bilangan desimal berhasil ditentukan menjadi " << '"' << std::to_string(newDecimal) << '"' << ">";
+            std::cout << "<Bilangan desimal berhasil ditentukan menjadi " << '"' << formatDecimal(decimalValue) << '"' << ">";
             break;
-        } else if (invalidIntInput.empty()) { // Jika tidak ada input, maka nilai desimal tidak valid
+        } else if (invalidFloatInput.empty()) { // Jika tidak ada input, maka nilai desimal tidak valid
             std::cout << "<Tidak ada bilangan desimal yang dimasukan>";
         } else { // Nilai desimal tidak valid
-            std::cout << "<Input " << '"' << invalidIntInput << '"' << " bukan bilangan desimal>";
+            std::cout << "<Input " << '"' << invalidFloatInput << '"' << " bukan bilangan desimal>";
         }
     }
 
@@ -55,7 +59,7 @@ void StackOneOne::setDecimalValue() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void StackOneOne::calculateConversion(const short denominator) {
-    std::string resultPrompt = denominator == 2 ? "\nBilangan Biner = 0b" : denominator == 8 ? "\nBilangan Oktal = 0o" : "\nBilangan Heksadesimal = 0x";
+    std::string resultPrompt = denominator == 2 ? "\nBilangan Biner = " : denominator == 8 ? "\nBilangan Oktal = " : "\nBilangan Heksadesimal = ";
 
     /*---------------------------------------------------------------------------------------------------------------------------------------
         PART 3.1: Sebelum melakukan konversi, nilai desimal harus ditentukan terlebih dahulu. Jika tidak, maka proses tidak dapat dijalankan.
@@ -63,16 +67,18 @@ void StackOneOne::calculateConversion(const short denominator) {
 
     if (isDecimalSet) {
         if (decimalValue) { // Jika nilai yang ditentukan selain nol
-            long divisionFloor = decimalValue;
+            double intPart, fracPart;
+            fracPart = std::modf(decimalValue, &intPart); // Memisahkan nilai desimal menjadi bagian integer dan fraksional
+            long divisionFloor = static_cast<long>(intPart); // Mengkonversi nilai integer ke dalam tipe data long
 
             while (true) { // Proses pembagian secara rekursif hingga tidak ada nilai sisa
-                short remainder = divisionFloor % denominator;
-                divisionFloor = divisionFloor / denominator;
+                short remainder = divisionFloor % denominator; // Menyimpan nilai sisa hasil bagi
+                divisionFloor = divisionFloor / denominator; // Menyimpan nilai hasil bagi
                 
-                stack.push_back(remainder);
+                stack.push_back(remainder); // Menyimpan nilai sisa hasil bagi ke dalam vector
 
                 if (divisionFloor == 0) { // Jika nilai sisa lebih kecil dari denominator
-                    std::cout << "\nBilangan Desimal = " << decimalValue << resultPrompt;
+                    std::cout << "\nBilangan Desimal = " << decimalValue << "(10)" << resultPrompt;
 
                     while (!stack.empty()) {
                         if (denominator != 16) { // Jika bilangan basis lain yang dituju selain heksadesimal 
@@ -87,11 +93,31 @@ void StackOneOne::calculateConversion(const short denominator) {
                         
                         stack.pop_back();
                     }
-
-                    std::cout << std::endl;
-                    break;
+                    break; // Keluar dari loop setelah menampilkan hasil konversi
                 }
             }
+
+            if (fracPart > 0.0) {
+                std::cout << ".";
+                int limit = 10; // Batasan untuk menampilkan nilai fraksional
+                while (fracPart > 0.0 && limit-- > 0) { 
+                    fracPart *= denominator; // Mengalikan nilai fraksional dengan basis bilangan
+                    long digit = static_cast<long>(fracPart); // Mengkonversi nilai fraksional ke dalam tipe data long
+                    if (!denominator == 16) {
+                        std::cout << digit;
+                    } else {
+                        if (digit > 9) { // Jika hasil bagi bernilai lebih dari 9 
+                            std::cout << hexadecimalAlpha[digit];
+                        } else {
+                            std::cout << digit;
+                        }
+                    }
+                    fracPart -= digit;
+                }
+            }
+
+            std::cout << "(" << denominator << ")" << std::endl; // Menampilkan basis bilangan yang digunakan
+
         } else {
             std::cout << "Bilangan Desimal = 0" << resultPrompt << "0";
         }

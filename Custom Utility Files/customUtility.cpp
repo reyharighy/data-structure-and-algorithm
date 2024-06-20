@@ -38,8 +38,12 @@ std::string normalizeInput() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 2: Fungsi "inputIntValidator" memvalidasi output dari fungsi "normalizedInput" dengan ekspektasi berupa karakter numerik saja. 
+    PART 2: Fungsi "inputIntValidator" dan "inputFloatValidator" memvalidasi output dari fungsi "normalizedInput" dengan ekspektasi berupa karakter numerik saja. 
     Digunakan untuk berbagai proses lanjutan dengan antisipasi kesalahan input dari pengguna baik disengaja maupun tidak.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 2.1: Fungsi "inputIntValidator" memvalidasi input dengan data tipe integer.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 long inputIntValidator(std::string* invalidIntInputPointer) {
@@ -47,7 +51,7 @@ long inputIntValidator(std::string* invalidIntInputPointer) {
     std::string inputString {normalizeInput()};
     
     /*------------------------------------------------------------------------------------------------------------------------------------
-        PART 2.1: Mengonversi tiap karakter di dalam standard input secara berurut.
+        PART 2.1.1: Mengonversi tiap karakter di dalam standard input secara berurut.
     ------------------------------------------------------------------------------------------------------------------------------------*/
     
     auto [pointer, errorCode] = std::from_chars( // pointer menyimpan karakter pertama non-numerik yang ditemukan
@@ -57,11 +61,11 @@ long inputIntValidator(std::string* invalidIntInputPointer) {
     );
 
     /*------------------------------------------------------------------------------------------------------------------------------------
-        END OF SCOPE FOR PART 2.1.
+        END OF SCOPE FOR PART 2.1.1.
     ------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------------------------------------------------
-        PART 2.2: Jika hasil konversi dari PART 2.1. tidak ada karakter non-numerik, maka data pembalikan adalah karakter numerik yang 
+        PART 2.1.2: Jika hasil konversi dari PART 2.1. tidak ada karakter non-numerik, maka data pembalikan adalah karakter numerik yang 
         akan digunakan untuk proses selanjutnya yang memerlukan tipe data numerik.
     ------------------------------------------------------------------------------------------------------------------------------------*/
     
@@ -71,11 +75,11 @@ long inputIntValidator(std::string* invalidIntInputPointer) {
     }
 
     /*------------------------------------------------------------------------------------------------------------------------------------
-        END OF SCOPE FOR PART 2.2.
+        END OF SCOPE FOR PART 2.1.2.
     ------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------------------------------------------------
-        PART 2.3: Jika ada karakter non-numerik, maka data pembalikan akan memberitahukan bahwa standar input pengguna tidak valid.
+        PART 2.1.3: Jika ada karakter non-numerik, maka data pembalikan akan memberitahukan bahwa standar input pengguna tidak valid.
         Proses selanjutnya akan terjadi melibatkan fungsi PART 4 dan 6, yaitu "invalidMenuChosen" dan "setCapacityValue".
     ------------------------------------------------------------------------------------------------------------------------------------*/
     
@@ -84,7 +88,57 @@ long inputIntValidator(std::string* invalidIntInputPointer) {
     return false;
 
     /*------------------------------------------------------------------------------------------------------------------------------------
-        END OF SCOPE FOR PART 2.3.
+        END OF SCOPE FOR PART 2.1.3.
+    ------------------------------------------------------------------------------------------------------------------------------------*/
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 2.2: Fungsi "inputIntValidator" memvalidasi input dengan data tipe float.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+double inputFloatValidator(std::string* invalidFloatInputPointer) {
+    double inputFloat;
+    std::string inputString {normalizeInput()};
+    
+    /*------------------------------------------------------------------------------------------------------------------------------------
+        PART 2.2.1: Mengonversi tiap karakter di dalam standard input secara berurut.
+    ------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    auto [pointer, errorCode] = std::from_chars( // pointer menyimpan karakter pertama non-numerik yang ditemukan
+        inputString.data(),                      // errorCode akan bernilai nol jika tidak ada hasil konversi yang gagal
+        inputString.data() + inputString.size(),
+        inputFloat
+    );
+
+    /*------------------------------------------------------------------------------------------------------------------------------------
+        END OF SCOPE FOR PART 2.2.1.
+    ------------------------------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------------------------
+        PART 2.2.2: Jika hasil konversi dari PART 2.1. tidak ada karakter non-numerik, maka data pembalikan adalah karakter numerik yang 
+        akan digunakan untuk proses selanjutnya yang memerlukan tipe data numerik.
+    ------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    if (errorCode == std::errc{} && pointer == inputString.data() + inputString.size()) {
+        *invalidFloatInputPointer = inputString;
+        return inputFloat;
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------------------------
+        END OF SCOPE FOR PART 2.2.2.
+    ------------------------------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------------------------
+        PART 2.2.3: Jika ada karakter non-numerik, maka data pembalikan akan memberitahukan bahwa standar input pengguna tidak valid.
+        Proses selanjutnya akan terjadi melibatkan fungsi PART 4 dan 6, yaitu "invalidMenuChosen" dan "setCapacityValue".
+    ------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    std::cin.clear();
+    *invalidFloatInputPointer = inputString;
+    return inputFloat;
+
+    /*------------------------------------------------------------------------------------------------------------------------------------
+        END OF SCOPE FOR PART 2.2.3.
     ------------------------------------------------------------------------------------------------------------------------------------*/
 }
 
@@ -210,4 +264,21 @@ void setCapacityValue(bool* isCapacitySetPointer, int* capacityPointer, int* fil
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 6.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 7: Fungsi "formatDecimal" bertujuan untuk mengubah tipe data double menjadi string dengan format desimal yang lebih rapi.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+std::string formatDecimal(double value) {
+    std::string str = std::to_string(value);
+    str.erase(str.find_last_not_of('0') + 1, std::string::npos); // Menghapus trailing zero
+    if (str.back() == '.') { // Menghapus titik desimal jika tidak ada angka di belakangnya
+        str.pop_back();
+    }
+    return str;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 7.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
