@@ -198,6 +198,120 @@ public:
 
 class SortFiveThree: public Program {
 private:
+    std::string invalidIntInput;
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+
+    void merge(std::vector<long>& arr, int left, int mid, int right, bool ascending) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        std::vector<long> L(n1), R(n2);
+
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[left + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            if (ascending ? (L[i] <= R[j]) : (L[i] >= R[j])) {
+                arr[k] = L[i];
+                ++i;
+            } else {
+                arr[k] = R[j];
+                ++j;
+            }
+            ++k;
+        }
+
+        while (i < n1) {
+            arr[k] = L[i];
+            ++i;
+            ++k;
+        }
+
+        while (j < n2) {
+            arr[k] = R[j];
+            ++j;
+            ++k;
+        }
+
+        // Tampilkan langkah-langkah penggabungan
+        std::cout << "Menggabungkan: ";
+        for (int x = left; x <= right; ++x) {
+            std::cout << arr[x];
+            if (x < right) std::cout << " - ";
+        }
+        std::cout << std::endl;
+    }
+
+    void mergeSort(std::vector<long>& arr, int left, int right, bool ascending) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            mergeSort(arr, left, mid, ascending);
+            mergeSort(arr, mid + 1, right, ascending);
+
+            merge(arr, left, mid, right, ascending);
+        }
+    }
+
+    void mergeString(std::vector<std::string>& arr, int left, int mid, int right, bool ascending) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+
+        std::vector<std::string> L(n1), R(n2);
+
+        for (int i = 0; i < n1; ++i)
+            L[i] = arr[left + i];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[mid + 1 + j];
+
+        int i = 0, j = 0, k = left;
+        while (i < n1 && j < n2) {
+            if (ascending ? (L[i] <= R[j]) : (L[i] >= R[j])) {
+                arr[k] = L[i];
+                ++i;
+            } else {
+                arr[k] = R[j];
+                ++j;
+            }
+            ++k;
+        }
+
+        while (i < n1) {
+            arr[k] = L[i];
+            ++i;
+            ++k;
+        }
+
+        while (j < n2) {
+            arr[k] = R[j];
+            ++j;
+            ++k;
+        }
+
+        // Tampilkan langkah-langkah penggabungan
+        std::cout << "Menggabungkan: ";
+        for (int x = left; x <= right; ++x) {
+            std::cout << arr[x];
+            if (x < right) std::cout << " - ";
+        }
+        std::cout << std::endl;
+    }
+
+    void mergeSortString(std::vector<std::string>& arr, int left, int right, bool ascending) {
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            mergeSortString(arr, left, mid, ascending);
+            mergeSortString(arr, mid + 1, right, ascending);
+
+            mergeString(arr, left, mid, right, ascending);
+        }
+    }
+
     void menuInterface();
     void sort();
     void preview();
