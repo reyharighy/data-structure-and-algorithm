@@ -11,8 +11,8 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixOne::menuInterface() {
-    std::cout << "\nPilih menu untuk pengoperasian pada in place sort:\n"
-              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Search data\n"  
+    std::cout << "\nPilih menu untuk pengoperasian pada pencarian data:\n"
+              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Cari data\n"  
               << "  4. Hapus semua data\n  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
@@ -94,7 +94,7 @@ void hashSixOne::search() {
 void hashSixOne::del() {
     if (array.size()) {
         array.clear(); // Menghapus semua data dari array
-        std::cout << "<Data integer berhasil dihapus>" << std::endl;
+        std::cout << "<Data berhasil dihapus>" << std::endl;
     } else { 
         std::cout << "<Data sudah kosong>";
     }
