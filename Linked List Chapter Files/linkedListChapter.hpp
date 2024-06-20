@@ -61,8 +61,7 @@ public:
         }
     }
 
-    // Adds a node to the end of the linked list.
-    void add(T value) {
+    void add(T value) { // Adds a node to the end of the linked list.
         Node<T>* node = new Node<T>{value, nullptr}; // Creates a new node.
         if (head == nullptr) { // Checks if the head is null.
             head = node; // Assigns the node to the head.
@@ -75,67 +74,86 @@ public:
         }
     }
 
-    // Adds a node at a given index.
-    void add(int index, T value) {
+    void add(size_t index, T value) { // Adds a node at a given index.
         Node<T>* newNode = new Node<T>{value, nullptr};
         if (index == 0) { // For insertion at the head.
             newNode->next = head;
             head = newNode;
         } else {
             Node<T>* currentNode = getNodePointer(index - 1);
+            for (int i = 0; i < index - 1; ++i) {
+                if (currentNode->next == nullptr) {
+                    throw std::out_of_range("Index out of bounds.");
+                }
+
+                currentNode = currentNode->next;
+            }
             newNode->next = currentNode->next;
             currentNode->next = newNode;
         }
     }
 
-    // Removes a node at a given index.
-    void remove(int index) {
+    void remove(size_t index) { // Removes a node at a given index.
         if (index == 0 && head != nullptr) { // For head deletion.
             Node<T>* nodeToBeDeleted = head;
             head = head->next;
             delete nodeToBeDeleted;
         } else {
-            Node<T>* previousNode = getNodePointer(index - 1);
-            Node<T>* nodeToBeDeleted = previousNode->next;
-            if (nodeToBeDeleted == nullptr) throw std::out_of_range("Index out of bounds.");
-            previousNode->next = nodeToBeDeleted->next;
-            delete nodeToBeDeleted;
+            Node<T>* currentNode = head;
+            Node<T>* previousNode = nullptr;
+            for (int i = 0; i < index; ++i) {
+                if (currentNode->next == nullptr) {
+                    throw std::out_of_range("Index out of bounds.");
+                }
+
+                previousNode = currentNode;
+                currentNode = currentNode->next;
+            }
+            previousNode->next = currentNode->next;
+            delete currentNode;
         }
     }
 
-    // Removes the element at a given index and returns the element.
-    T take(int index) {
+    T take(size_t index) {
         T takenItem = get(index); // Gets the data from the node at the given index.
         remove(index); // Removes the node at the given index.
         return takenItem;
     }
 
-    // Returns data from a node at a given index.
-    T get(int index) {
-        Node<T>* currentNode = getNodePointer(index);
-        return currentNode->data;
-    }
-
-    // Returns the number of elements.
-    int length() {
-        int count = 0;
+    T get(size_t index) { // returns data from a node at a given index.
         Node<T>* currentNode = head;
-        while (currentNode != nullptr) {
-            ++count;
+        for (int i = 0; i <= index; ++i) {
+            if (i == index) {
+                return currentNode->data;
+            }
+            if (currentNode->next == nullptr) {
+                break;
+            }
             currentNode = currentNode->next;
         }
-        return count;
-    }
+        throw std::out_of_range("Index out of bounds");
+    };
 
-    // Removes all elements from the list.
-    void removeAll() {
-        while (head != nullptr) {
-            remove(0);
+    size_t length() { // returns the number of elements.
+        int i{0};
+        Node<T>* currentNode = head;
+        if (head != nullptr) {
+            while (currentNode->next != nullptr) {
+                ++i;
+                currentNode = currentNode->next;
+            }
+            ++i;
         }
-    }
+        return i;
+    };
 
-    // Swaps data of two nodes.
-    void swap(int index1, int index2) {
+    void removeAll() { // removes all elements from the list.
+        while(head) {
+            remove(0);
+        };
+    };
+
+    void swap(int index1, int index2) { // Swaps data of two nodes.
         Node<T>* first = getNodePointer(index1);
         Node<T>* second = getNodePointer(index2);
 
@@ -144,8 +162,7 @@ public:
         second->data = temp;
     }
 
-    // Destructor.
-    ~LinkedList() {
+    ~LinkedList() { // Destructor.
         removeAll();
     }
 };
@@ -292,64 +309,93 @@ class OrderedLinkedList : public LinkedList<T> { // Ordered linked list implemen
 template <typename T>
 class Stack {
 private:
+    int size{}; 
     int top{-1}; // Top of the stack.
     LinkedList<T> stack; // Linked list to store the stack.
 
 public:
-    Stack() = default;
-
-    bool isEmpty() const { // checks if the stack is empty.
+    Stack(int size = -1) {
+        this->size = size;
+    }
+    bool isEmpty() {
         return top == -1;
     }
-
-    void push(T item) { // adds the data to the top of the stack.
-        stack.add(item);
-        ++top;
+    bool isFull() {
+        return (top == size - 1) && (size != -1);
     }
-    int length() const { // returns the number of elements.
+    size_t length() {
         return top + 1;
     }
-    T pop() { // removes the data from the top of the stack.
-        if (isEmpty()) throw std::out_of_range("Stack is empty.");
-        return stack.take(top--);
+    void push(T item) {
+        if (!isFull()) {
+            stack.add(item);
+            ++top;
+        }
+        else {
+            throw std::out_of_range("Stack is full.");
+        }
+    } 
+    T pop() {
+        if (top == - 1) {
+            throw std::out_of_range("Stack is empty.");
+        }
+        else {
+            T data = stack.take(top);
+            --top;
+            return data;
+        }
     }
-
-    T peek() const { // returns the data from the top of the stack.
-        if (isEmpty()) throw std::out_of_range("Stack is empty.");
+    T peek() {
         return stack.get(top);
     }
 };
 
 template <typename T>
 class Queue {
-private:
-    int front{-1}; // Front of the queue.
-    int rear{-1}; // Rear of the queue.
-    LinkedList<T> queue; // Linked list to store the queue.
-
-public:
-    Queue() = default;
-
-    bool isEmpty() const { // checks if the queue is empty.
-        return front == -1;
-    }
-
-    void enqueue(T item) { // adds the data to the rear of the queue.
-        queue.add(item);
-        if (isEmpty()) front = 0;
-        ++rear;
-    }
-
-    T dequeue() { // removes the data from the front of the queue.
-        if (isEmpty()) throw std::out_of_range("Queue is empty.");
-        if (front == rear) front = rear = -1;
-        return queue.take(0);
-    }
-
-    T peek() const { // returns the data from the front of the queue.
-        if (isEmpty()) throw std::out_of_range("Queue is empty.");
-        return queue.get(0);
-    }
+    private:
+        int front{-1};
+        int rear{-1};
+        LinkedList<T> queue = LinkedList<T>();
+    public:
+        size_t size{};
+        Queue(size_t size = 0) {
+            this->size = size;
+        }
+        bool isEmpty() {
+            return front == -1 && rear == -1;
+        }
+        bool isFull() {
+            return front == 0 && rear == size - 1;
+        }
+        void enqueue(T item) {
+            if (!isFull()) {
+                queue.add(item);
+                if (isEmpty()) {
+                    front = 0;
+                }
+                ++rear;
+            }
+            else {
+                throw std::out_of_range("Queue is full.");
+            }
+        }
+        T dequeue() {
+            if (!isEmpty()) {
+                T data = queue.take(front);
+                --rear;
+                if (rear < front) {
+                    front = -1;
+                }
+                return data;
+            }
+            throw std::out_of_range("Queue is empty.");
+        }
+        T peek() {
+            if (!isEmpty()) {
+                return queue.get(front);
+            }
+            throw std::out_of_range("Queue is empty.");
+        }
 };
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
@@ -361,36 +407,50 @@ public:
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 class linkedListTwoFour: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };
 
 class linkedListThreeOne: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };
 
 class linkedListThreeTwo: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };
 
 class linkedListThreeThree: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };
 
 class linkedListThreeFour: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };
 
 class linkedListThreeFive: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };
 
 class linkedListThreeSix: public Program {
+private:
+    std::string invalidIntInput;
 public:
     void start() override;
 };

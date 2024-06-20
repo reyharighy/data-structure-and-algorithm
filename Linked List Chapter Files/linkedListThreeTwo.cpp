@@ -27,41 +27,41 @@ void display(Stack<std::string> stack) {
 }
 
 void linkedListThreeTwo::start() {
-    std::cout << "Stack Demo\n";
-    std::cout << "Masukkan ukuran maks.: ";
-    size_t sizeInput;
-    std::cin >> sizeInput;
-    auto stack = Stack<std::string>();
+    std::cout << "Stack Demo\n"
+              << "Masukkan ukuran maks.: ";
+    short sizeInput {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+    auto stack = Stack<std::string>(sizeInput);
     while(true) {
-        std::cout << "Anggota stack: ";
+        std::cout << std::endl << "Anggota stack: ";
         display(stack);
-        std::cout << "[(1) Tambah | (2) Ambil | (0) Keluar] ";
-        int input;
-        std::cin >> input;
-        switch (input) {
-            case 1: {
-                std::cout << "Masukkan data: ";
-                std::cin.ignore();
-                std::string data;
-                std::getline(std::cin, data);
-                try {
+        std::cout << std::endl << "[(1) Tambah | (2) Ambil | (9) Keluar]" 
+                  << std::endl << "Pilihan: ";
+        
+        short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        if (menuChosen == 9) {
+            break;
+        } else if (menuChosen == 1) {
+            std::cout << "Masukkan data: ";
+            std::string data;
+            std::getline(std::cin, data);
+            if (data.empty()) {
+                std::cout << "<Tidak ada data yang dimasukkan>\n";
+            } else {
+                if (!stack.isFull()) {
                     stack.push(data);
-                }
-                catch (const std::out_of_range& e) {
+                    std::cout << "Data " << '"' << data << '"' << " ditambahkan.\n";
+                } else {
                     std::cout << "Stack penuh." << "\n";
                 }
-                break;
             }
-            case 2:
-                try {
-                    std::cout << stack.pop() << " diambil.\n";
-                }
-                catch (const std::out_of_range& e) {
-                    std::cout << "Stack kosong." << "\n";
-                }
-                break;
-            case 0:
-                break;
+        } else if (menuChosen == 2) {
+            if (!stack.isEmpty()) {
+                std::cout << stack.pop() << " diambil.\n";
+            } else {
+                std::cout << "Stack kosong." << "\n";
+            }
+        } else {
+            invalidMenuChosen(&menuChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
         }
     }
 }

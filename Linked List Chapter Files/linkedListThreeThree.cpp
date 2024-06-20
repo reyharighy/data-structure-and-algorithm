@@ -20,43 +20,42 @@ void display(Queue<std::string> q) {
 }
 
 void linkedListThreeThree::start() {
-    std::cout << "Masukkan banyaknya anggota maks.: ";
-    size_t size;
-    std::cin >> size;
-    auto q{Queue<std::string>()};
+    std::cout << "Queue Demo\n"
+              << "Masukkan ukuran maks.: ";
+    short sizeInput {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+    auto q{Queue<std::string>(sizeInput)};
 
     while (true) {
         std::cout << "Anggota antrian: ";
         display(q);
-        std::cout << "\n[(1) Tambah | (2) Ambil | (3) Keluar]: ";
-        int choice;
-        std::cin >> choice;
-        switch (choice) {
-            case 1: {
-                std::cin.ignore();
-                std::string input;
-
-                std::cout << "Masukkan data: ";
-                std::getline(std::cin, input);
-                try {
-                    q.enqueue(input);
-                } catch (const std::out_of_range& e) {
-                    std::cout << "Antrian penuh.\n";
+        std::cout << std::endl << "[(1) Tambah | (2) Ambil | (9) Keluar]" 
+                  << std::endl << "Pilihan: ";
+        
+        short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
+        if (menuChosen == 9) {
+            break;
+        } else if (menuChosen == 1) {
+            std::cout << "Masukkan data: ";
+            std::string data;
+            std::getline(std::cin, data);
+            if (data.empty()) {
+                std::cout << "<Tidak ada data yang dimasukkan>\n";
+            } else {
+                if (!q.isFull()) {
+                    q.enqueue(data);
+                    std::cout << "Data " << '"' << data << '"' << " ditambahkan.\n";
+                } else {
+                    std::cout << "Queue penuh." << "\n";
                 }
-                break;
             }
-            case 2: {
-                try {
-                    std::string data = q.dequeue();
-                    std::cout << "Data yang diambil: " << data << "\n";
-                }
-                catch (const std::out_of_range& e) {
-                    std::cout << "Antrian kosong.\n";
-                }
-                break;
+        } else if (menuChosen == 2) {
+            if (!q.isEmpty()) {
+                std::cout << q.dequeue() << " diambil.\n";
+            } else {
+                std::cout << "Queue kosong." << "\n";
             }
-            default:
-                break;
+        } else {
+            invalidMenuChosen(&menuChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
         }
     }
 }   

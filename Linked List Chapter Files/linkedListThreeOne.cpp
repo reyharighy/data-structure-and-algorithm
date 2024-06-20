@@ -46,7 +46,7 @@ void linkedListThreeOne::start() {
         input += line + '\n';
     }
     
-    std::cout << "Data yang dibalik: ";
+    std::cout << "Data yang dibalik: " << std::endl;
     reverseString(input);
     std::cout << "===" << "\n";
 }
