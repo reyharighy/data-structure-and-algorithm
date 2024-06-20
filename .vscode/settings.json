@@ -1,5 +1,8 @@
 {
+    "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
     "files.associations": {
+        "MLTable": "yaml",
+        "iostream": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -10,12 +13,10 @@
         "cmath": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
-        "cstdarg": "cpp",
         "cstddef": "cpp",
         "cstdint": "cpp",
         "cstdio": "cpp",
         "cstdlib": "cpp",
-        "ctime": "cpp",
         "cwchar": "cpp",
         "cwctype": "cpp",
         "deque": "cpp",
@@ -37,21 +38,16 @@
         "tuple": "cpp",
         "type_traits": "cpp",
         "utility": "cpp",
-        "format": "cpp",
         "initializer_list": "cpp",
         "iosfwd": "cpp",
-        "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
         "numbers": "cpp",
         "ostream": "cpp",
-        "span": "cpp",
         "sstream": "cpp",
         "stdexcept": "cpp",
         "streambuf": "cpp",
-        "text_encoding": "cpp",
-        "typeinfo": "cpp",
-        "variant": "cpp"
+        "typeinfo": "cpp"
     }
 }
