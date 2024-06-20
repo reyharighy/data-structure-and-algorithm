@@ -15,6 +15,7 @@
                 "${fileDirname}\\Linked List Chapter Files\\*.cpp",
                 "${fileDirname}\\Sort Chapter Files\\*.cpp",
                 "${fileDirname}\\Sort Chapter (Advanced) Files\\*.cpp",
+                "${fileDirname}\\Hash Chapter Files\\*.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

@@ -61,6 +61,14 @@ short Program::taskList(const short* chapterID) {
             {3, "Mengurutkan Data Menggunakan Merge Sort"},
             {4, "Mengurutkan Data Menggunakan Quick Sort"}
         };
+    } else if (*chapterID == 6) {
+        taskNameSelected = new std::map<short, std::string> { // Chapter Hash
+            {0, "Hash:"},
+            {1, "Pencarian linier dan pencarian biner secara dinamis"},
+            {2, "Penanganan Tabrakan Hash dengan cara Pengalamatan Terbuka"},
+            {3, "Penanganan Tabrakan Hash dengan cara Pembentukan Rantai"},
+            {4, "Penanganan Tabrakan Hash dengan cara Pengalamatan Buket"}
+        };
     }
 
     /*----------------------------------------------------------------------------------------------------
