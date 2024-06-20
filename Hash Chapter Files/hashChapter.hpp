@@ -17,7 +17,7 @@
 class hashSixOne: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<long> array {}; // Inisialisasi vector untuk menyimpan data integer
     void linearSearch(const std::vector<long>& array, int target) {
         int position = -1;
         for (int index = 0; index < array.size(); ++index) {
@@ -78,62 +78,108 @@ public:
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 2: Deklarasi awal untuk objek kelas dengan nama tugas Penanganan Tabrakan Hash dengan cara Pengalamatan Terbuka 
+    PART 2: Deklarasi awal untuk objek kelas dengan nama tugas Penanganan Tabrakan Hash dengan cara Pengalamatan Terbuka.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
-class hashSixTwo: public Program {
+class hashSixTwo : public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
-    int linearSearch(std::vector<long> array, int size, int target) {
-        int position = -1;
-        int index = 0;
-        while (index < size) {
-            if (array[index] == target) {
-                position = index;
-                break;
-            }
-            index++;
-        }
-        return position;
-    };
+    class HashTable {
+    private:
+        std::vector<std::pair<int, std::string>> table;
+        int capacity;
 
-    int binarySearch(std::vector<long> array, int size, int target) {
-        int low = 0;
-        int high = size - 1;
-        while (high >= low) {
-            int mid = (high + low) / 2;
-            if (target > array[mid]) {
-                low = mid + 1;
-            } else if (target < array[mid]) {
-                high = mid - 1;
-            } else {
-                return mid;
+        int hashFunction(int key) const {
+            return key % capacity;
+        }
+
+    public:
+        HashTable(int size) : table(size, {-1, ""}), capacity(size) {}
+
+        void insert(int key, std::string data) {
+            int hash = hashFunction(key);
+            int ori = hash;
+            while (table[hash].second != "") {
+                if (table[hash].first == key) {
+                    table[hash].second = data;
+                    return;
+                }
+                hash = (hash + 1) % capacity;
+                if (hash == ori) {
+                    std::cout << "Tabel Hash sudah penuh! Hapus data terlebih dahulu";
+                    return;
+                }
+            }
+            table[hash] = {key, data};
+        }
+
+        void search(int key) {
+            int hash = hashFunction(key);
+            int ori = hash;
+            while (table[hash].second != "") {
+                if (table[hash].first == key) {
+                    std::cout << "Kunci " << key << " ditemukan dengan data: " << table[hash].second << '\n';
+                    return;
+                }
+                hash = (hash + 1) % capacity;
+                if (hash == ori) {
+                    std::cout << "Kunci tidak ditemukan di dalam tabel hash" << '\n';
+                    return;
+                }
             }
         }
-        return -1;
-    };
 
-    int search(std::vector<long> array, int size, int target) {
-        bool sorted = true;
-        for (int i = 1; i < size; ++i) {
-            if (array[i - 1] > array[i]) {
-                sorted = false;
-                break;
+        void remove(int key) {
+            int hash = hashFunction(key);
+            int ori = hash;
+            while (table[hash].second != "") {
+                if (table[hash].first == key) {
+                    std::cout << "Data dengan kunci " << key << " berhasil dihapus.\n";
+                    table[hash] = {-1, ""};
+                    return;
+                }
+                hash = (hash + 1) % capacity;
             }
+            std::cout << "Kunci tidak ditemukan di dalam tabel hash.\n";
         }
-        if (sorted) {
-            return binarySearch(array, size, target);
-        } else {
-            return linearSearch(array, size, target);
+
+        void clear() {
+            for (int i = 0; i < capacity; ++i) {
+                table[i] = {-1, ""};
+            }
+            std::cout << "Semua data berhasil dihapus.\n";
+        }
+
+        void display() {
+            std::cout << "Isi Tabel Hash:\n";
+            std::cout << "----------------\n";
+            for (int i = 0; i < capacity; ++i) {
+                if (table[i].second != "") {
+                    std::cout << "Index " << i+1 << ": " << table[i].first << " -> " << table[i].second << '\n';
+                } else {
+                    std::cout << "Index " << i+1 << ": Kosong\n";
+                }
+            }
+            std::cout << "----------------\n";
+        }
+
+        int size() const {
+            int total = 0;
+            for (int i = 0; i < capacity; ++i) {
+                if (table[i].second != "") {
+                    ++total;
+                }
+            }
+            return total;
         }
     };
-
+    HashTable table {0};
     void menuInterface();
     void search();
     void preview();
     void del();
     void push();
+
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
 };
@@ -149,51 +195,134 @@ public:
 class hashSixThree: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
-    int linearSearch(std::vector<long> array, int size, int target) {
-        int position = -1;
-        int index = 0;
-        while (index < size) {
-            if (array[index] == target) {
-                position = index;
-                break;
-            }
-            index++;
-        }
-        return position;
+    struct Node {
+        int key;
+        std::string data;
+        Node* next;
+
+        Node(int k, std::string d) : key(k), data(d), next(nullptr) {}
     };
 
-    int binarySearch(std::vector<long> array, int size, int target) {
-        int low = 0;
-        int high = size - 1;
-        while (high >= low) {
-            int mid = (high + low) / 2;
-            if (target > array[mid]) {
-                low = mid + 1;
-            } else if (target < array[mid]) {
-                high = mid - 1;
+    class HashTable {
+    private:
+        std::vector<Node*> table;
+        int M;
+
+        int hash_function(int key) {
+            return key % M;
+        }
+
+    public:
+        HashTable(int size) : table(size, nullptr), M(size) {}
+
+        void insert(int key, std::string data) {
+            int hash = hash_function(key);
+            Node* newNode = new Node(key, data);
+            if (table[hash] == nullptr) {
+                table[hash] = newNode;
             } else {
-                return mid;
+                Node* current = table[hash];
+                while (current->next != nullptr) {
+                    if (current->key == key) {
+                        current->data = data;  
+                        delete newNode;
+                        return;
+                    }
+                    current = current->next;
+                }
+                if (current->key == key) {
+                    current->data = data; 
+                    delete newNode;
+                } else {
+                    current->next = newNode;
+                }
             }
         }
-        return -1;
-    };
 
-    int search(std::vector<long> array, int size, int target) {
-        bool sorted = true;
-        for (int i = 1; i < size; ++i) {
-            if (array[i - 1] > array[i]) {
-                sorted = false;
-                break;
+        void search(int key) {
+            int hash = hash_function(key);
+            Node* current = table[hash];
+            while (current != nullptr) {
+                if (current->key == key) {
+                    std::cout << "Kunci " << key << " ditemukan dengan data: " << current->data << '\n';
+                    return;
+                }
+                current = current->next;
+            }
+            std::cout << "Kunci tidak ditemukan di dalam tabel hash\n";
+        }
+
+        void remove(int key) {
+            int hash = hash_function(key);
+            Node* current = table[hash];
+            Node* prev = nullptr;
+            while (current != nullptr) {
+                if (current->key == key) {
+                    if (prev == nullptr) {
+                        table[hash] = current->next;
+                    } else {
+                        prev->next = current->next;
+                    }
+                    delete current;
+                    std::cout << "Data dengan kunci " << key << " berhasil dihapus.\n";
+                    return;
+                }
+                prev = current;
+                current = current->next;
+            }
+            std::cout << "Kunci tidak ditemukan di dalam tabel hash.\n";
+        }
+
+        void clear() {
+            for (int i = 0; i < M; ++i) {
+                Node* current = table[i];
+                while (current != nullptr) {
+                    Node* temp = current;
+                    current = current->next;
+                    delete temp;
+                }
+                table[i] = nullptr;
+            }
+            std::cout << "Semua data berhasil dihapus.\n";
+        }
+
+        void display() {
+            std::cout << "Isi Tabel Hash (dengan chaining):\n";
+            for (int i = 0; i < M; ++i) {
+                std::cout << "[" << i << "]: ";
+                Node* current = table[i];
+                while (current != nullptr) {
+                    std::cout << "(" << current->key << ", " << current->data << ") -> ";
+                    current = current->next;
+                }
+                std::cout << "Kosong\n";
             }
         }
-        if (sorted) {
-            return binarySearch(array, size, target);
-        } else {
-            return linearSearch(array, size, target);
+
+        int size() const {
+            int total = 0;
+            for (int i = 0; i < M; ++i) {
+                Node* current = table[i];
+                while (current != nullptr) {
+                    ++total;
+                    current = current->next;
+                }
+            }
+            return total;
+        }
+
+        ~HashTable() {
+            for (int i = 0; i < M; ++i) {
+                Node* current = table[i];
+                while (current != nullptr) {
+                    Node* temp = current;
+                    current = current->next;
+                    delete temp;
+                }
+            }
         }
     };
-
+    HashTable table {0};
     void menuInterface();
     void search();
     void preview();

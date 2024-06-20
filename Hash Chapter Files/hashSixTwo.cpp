@@ -1,6 +1,6 @@
 /*
     File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "hashChapter.hpp" untuk tugas dengan nama
-    pencarian data menggunakan algoritma pencarian linear dan binary search.
+    Penanganan Tabrakan Hash dengan cara Pengalamatan Terbuka.
 */
 
 #include "hashChapter.hpp"
@@ -11,8 +11,8 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixTwo::menuInterface() {
-    std::cout << "\nPilih menu untuk pengoperasian pada in place sort:\n"
-              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Urutkan data\n"  
+    std::cout << "\nPilih menu untuk pengoperasian pada Hash Pengalamatan Terbuka :\n"
+              << "  1. Masukkan data baru\n  2. Lihat data\n  3. Cari data\n"  
               << "  4. Hapus semua data\n  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
@@ -26,25 +26,14 @@ void hashSixTwo::menuInterface() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixTwo::push() {
-    std::cout << "\nPilih tipe data yang ingin dimasukkan:\n"
-              << "  1. Integer\n  2. String\n\nMasukkan angka pilihan => ";
-    short pushChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
-
-    std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => \n"; 
-    std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
-
-    std::string tempStr;
-    if(!theData.empty()) {
-        for (char checkDigit : theData) { // Iterasi untuk mengecek setiap karakter yang dimasukkan oleh user.
-            if (std::isdigit(checkDigit)) { // Jika karakter yang dimasukkan adalah angka, maka tambahkan ke dalam variabel sementara.
-                tempStr += checkDigit;
-            } else if (!tempStr.empty()) { // Jika karakter yang dimasukkan bukan angka, maka masukkan data yang ada di variabel sementara ke dalam array.
-                array.push_back(std::stol(tempStr));
-                tempStr.clear();
-            }
-        }
-        if (!tempStr.empty()) { // Jika masih ada data yang tersisa di variabel sementara, maka masukkan data tersebut ke dalam array.
-            array.push_back(std::stol(tempStr));
+    std::cout << "Masukkan kunci => "; 
+    long key = long(inputIntValidator(&invalidIntInput));
+    if (key) {
+        std::cout << "Masukkan data => "; 
+        std::string theData = normalizeInput();
+        if (!theData.empty()) {
+            table.insert(key, theData);
+            std::cout << "Data " << key << " berhasil ditambahkan\n";
         }
     } else {
         std::cout << "<Data yang dimasukan tidak boleh kosong>";
@@ -56,12 +45,13 @@ void hashSixTwo::push() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 3: Fungsi "preview" bertujuan untuk melihat semua data dalam array
+    PART 3: Fungsi "preview" bertujuan untuk melihat semua data dalam tabel
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixTwo::preview() {
-    if (array.size()) {
-        std::cout << "Data saat ini : " << array << std::endl; // Menampilkan data array
+    if (table.size()) {
+        std::cout << "Data saat ini : \n";
+        table.display();
     } else { 
         std::cout << "<Data kosong>";
     }
@@ -72,16 +62,15 @@ void hashSixTwo::preview() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan In Place Sort.
+    PART 4: Fungsi "search" bertujuan untuk mencari data.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixTwo::search() {
     std::cout << "Masukkan data yang ingin dicari: \n"; 
     long theData {long(inputIntValidator(&invalidIntInput))};
     
-    if (array.size()) {
-        arrayClone = array; // Mengkloning array ke arrayClone
-        search(arrayClone, arrayClone.size(), theData); // Pengurutan naik Integer (Ascending)
+    if (table.size()) {
+        table.search(theData);
     } else { 
         std::cout << "<Data kosong>";
     }
@@ -96,21 +85,11 @@ void hashSixTwo::search() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixTwo::del() {
-    std::cout << "\nPilih data yang ingin dihapus:\n"
-              << "  1. Data Integer\n  2. Kembali  \n\nMasukkan angka pilihan => ";
-    short delChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
-
-    if (delChosen >= 1 && delChosen <= 2){
-        if (delChosen == 1 && array.size()) {
-            array.clear(); // Menghapus semua data dari array
-            std::cout << "<Data integer berhasil dihapus>" << std::endl;
-        } else if (delChosen == 2) {
-            return;
-        } else { 
-            std::cout << "<Data sudah kosong>";
-        }
-    } else {
-        invalidMenuChosen(&delChosen, &invalidIntInput); // Akses ke fungsi PART 4 dari "customUtility.hpp"
+    if (table.size()) {
+        table.clear(); // Menghapus semua data dari tabel
+        std::cout << "<Data berhasil dihapus>" << std::endl;
+    } else { 
+        std::cout << "<Data sudah kosong>";
     }
 }
 
@@ -124,21 +103,24 @@ void hashSixTwo::del() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixTwo::start() {
+    std::cout << "Masukkan ukuran tabel => "; 
+    int tabelSize = int(inputIntValidator(&invalidIntInput));
+    table = HashTable(tabelSize);
     while (true) {
         menuInterface();
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
         if (menuChosen >= 1 && menuChosen <= 5) {
             if (menuChosen == 1) {
-                push(); // Akses ke fungsi PART 2 dari "sortFiveOne.hpp"
+                push(); // Akses ke fungsi PART 2 dari "hashSixTwo.hpp"
             } else if (menuChosen == 2) {
-                preview(); // Akses ke fungsi PART 3 dari "sortFiveOne.hpp"
+                preview(); // Akses ke fungsi PART 3 dari "hashSixTwo.hpp"
             } else if (menuChosen == 3) {
-                search(); // Akses ke fungsi PART 4 dari "sortFiveOne.hpp"
+                search(); // Akses ke fungsi PART 4 dari "hashSixTwo.hpp"
             } else if (menuChosen == 4) {
-                del(); // Akses ke fungsi PART 5 dari "sortFiveOne.hpp"
+                del(); // Akses ke fungsi PART 5 dari "hashSixTwo.hpp"
             } else {
-                array.clear(); // Menghapus semua data dari array
+                table.clear(); // Menghapus semua data dari tabel
                 break;
             }
         } else {

@@ -76,8 +76,7 @@ void hashSixOne::search() {
     long theData {long(inputIntValidator(&invalidIntInput))};
     
     if (array.size()) {
-        arrayClone = array; // Mengkloning array ke arrayClone
-        search(arrayClone, theData); // Pengurutan naik Integer (Ascending)
+        search(array, theData);
     } else { 
         std::cout << "<Data kosong>";
     }

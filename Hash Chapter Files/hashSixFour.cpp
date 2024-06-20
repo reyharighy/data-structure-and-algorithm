@@ -11,7 +11,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixFour::menuInterface() {
-    std::cout << "\nPilih menu untuk pengoperasian pada Pengalamatan Buket:\n"
+    std::cout << "\nPilih menu untuk pengoperasian pada Hash Pengalamatan Buket:\n"
               << "  1. Masukkan data baru\n  2. Lihat data\n  3. Cari data\n"  
               << "  4. Hapus semua data\n  5. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
@@ -62,7 +62,7 @@ void hashSixFour::preview() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 4: Fungsi "sort" bertujuan untuk mengurutkan semua data menggunakan teknik pengurutan In Place Sort.
+    PART 4: Fungsi "search" bertujuan untuk mencari data.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixFour::search() {
@@ -70,7 +70,7 @@ void hashSixFour::search() {
     long theData {long(inputIntValidator(&invalidIntInput))};
     
     if (table.size()) {
-        table.search(theData); // Pengurutan naik Integer (Ascending)
+        table.search(theData);
     } else { 
         std::cout << "<Data kosong>";
     }
@@ -81,12 +81,12 @@ void hashSixFour::search() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 5: Fungsi "del" bertujuan untuk menghapus semua data dalam array
+    PART 5: Fungsi "del" bertujuan untuk menghapus semua data dalam tabel
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void hashSixFour::del() {
     if (table.size()) {
-        table.clear(); // Menghapus semua data dari array
+        table.clear(); // Menghapus semua data dari tabel
         std::cout << "<Data berhasil dihapus>" << std::endl;
     } else { 
         std::cout << "<Data sudah kosong>";
@@ -112,15 +112,15 @@ void hashSixFour::start() {
 
         if (menuChosen >= 1 && menuChosen <= 5) {
             if (menuChosen == 1) {
-                push(); // Akses ke fungsi PART 2 dari "sortFiveOne.hpp"
+                push(); // Akses ke fungsi PART 2 dari "hashSixFour.hpp"
             } else if (menuChosen == 2) {
-                preview(); // Akses ke fungsi PART 3 dari "sortFiveOne.hpp"
+                preview(); // Akses ke fungsi PART 3 dari "hashSixFour.hpp"
             } else if (menuChosen == 3) {
-                search(); // Akses ke fungsi PART 4 dari "sortFiveOne.hpp"
+                search(); // Akses ke fungsi PART 4 dari "hashSixFour.hpp"
             } else if (menuChosen == 4) {
-                del(); // Akses ke fungsi PART 5 dari "sortFiveOne.hpp"
+                del(); // Akses ke fungsi PART 5 dari "hashSixFour.hpp"
             } else {
-                table.clear(); // Menghapus semua data dari array
+                table.clear(); // Menghapus semua data dari tabel
                 break;
             }
         } else {
