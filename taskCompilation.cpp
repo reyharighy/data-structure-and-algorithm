@@ -159,6 +159,7 @@ private:
     std::map<const short, Program*> sortProgramDictionary { // Seluruh objek subProgram dari Chapter Pengurutan Data Tingkat Lanjut
         {1, new SortFiveOne},
         {2, new SortFiveTwo},
+        {3, new SortFiveThree}
     };
 
 public:
