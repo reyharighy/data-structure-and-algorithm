@@ -350,6 +350,95 @@ private:
     void preview();
     void del();
     void push();
+    std::string invalidIntInput;
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+
+    void quickSort(std::vector<long>& arr, int left, int right, bool isAscending) {
+        if (left >= right) {
+            return;
+        }
+        int pivot = arr[(left + right) / 2];
+        int i = left, j = right;
+
+        while (i <= j) {
+            if (isAscending) {
+                while (arr[i] < pivot) {
+                    i++;
+                }
+                while (arr[j] > pivot) {
+                    j--;
+                }
+            }
+            else {
+                while (arr[i] > pivot) {
+                    i++;
+                }
+                while (arr[j] < pivot) {
+                    j--;
+                }
+            }
+            
+
+            if (i <= j) {
+                std::swap(arr[i], arr[j]);
+                
+                for (int h = 0; h < arr.size(); h++) {
+                    std::cout << arr[h] << " ";
+                }
+                std::cout << "\n";
+
+                i++;
+                j--;
+            }
+        }
+
+        quickSort(arr, left, j, isAscending);
+        quickSort(arr, i, right, isAscending);
+    };
+
+    void quickSortString(std::vector<std::string>& arr, int left, int right, bool isAscending) {
+        if (left >= right) {
+            return;
+        }
+        std::string pivot = arr[(left + right) / 2];
+        int i = left, j = right;
+
+        while (i <= j) {
+            if (isAscending) {
+                while (arr[i].compare(pivot) < 0) {
+                    i++;
+                }
+                while (arr[j].compare(pivot) > 0) {
+                    j--;
+                }
+            }
+            else {
+                while (arr[i].compare(pivot) > 0) {
+                    i++;
+                }
+                while (arr[j].compare(pivot) < 0) {
+                    j--;
+                }
+            }
+            
+
+            if (i <= j) {
+                std::swap(arr[i], arr[j]);
+                
+                for (int h = 0; h < arr.size(); h++) {
+                    std::cout << arr[h] << " ";
+                }
+                std::cout << "\n";
+
+                i++;
+                j--;
+            }
+        }
+
+        quickSortString(arr, left, j, isAscending);
+        quickSortString(arr, i, right, isAscending);
+    };
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
 };
