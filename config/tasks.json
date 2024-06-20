@@ -12,7 +12,9 @@
                 "${fileDirname}\\Program Interface Files\\programInterface.cpp",
                 "${fileDirname}\\Stack Chapter Files\\*.cpp",
                 "${fileDirname}\\Queue Chapter Files\\*.cpp",
+                "${fileDirname}\\Linked List Chapter Files\\*.cpp",
                 "${fileDirname}\\Sort Chapter Files\\*.cpp",
+                "${fileDirname}\\Sort Chapter (Advanced) Files\\*.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
                 "-I/source/includes"

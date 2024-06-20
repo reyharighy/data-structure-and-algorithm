@@ -7,6 +7,7 @@
 #include "Custom Utility Files/customUtility.hpp"
 #include "Stack Chapter Files/stackChapter.hpp"
 #include "Queue Chapter Files/queueChapter.hpp"
+#include "Linked List Chapter Files/linkedListChapter.hpp"
 #include "Sort Chapter Files/sortChapter.hpp"
 #include "Sort Chapter (Advanced) Files/advancedSortChapter.hpp"
 
@@ -90,7 +91,12 @@ private:
     const short chapterID {3};
     std::string invalidIntInput;
     std::map<const short, Program*> linkedListProgramDictionary { // Seluruh objek subProgram dari Chapter Senarai Berantai (Linked List)
-
+        {1, new linkedListThreeOne},
+        {2, new linkedListThreeTwo},
+        {3, new linkedListThreeThree},
+        {4, new linkedListThreeFour},
+        {5, new linkedListThreeFive},
+        {6, new linkedListThreeSix}
     };
 
 public:
