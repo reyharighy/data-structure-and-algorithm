@@ -12,7 +12,7 @@
 #include <stdexcept>
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 1: Namespace untuk berbagai masalah yang berkaitan dengan Linked List dan Doubly Linked List.
+    PART 1: Namespace untuk berbagai masalah yang berkaitan dengan Linked List, Doubly Linked List, dan Ordered Linked List.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 template<typename T>
@@ -281,42 +281,40 @@ class OrderedLinkedList : public LinkedList<T> { // Ordered linked list implemen
         }
 };
 
-
-
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 1.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
-    PART 2: Dasar-dasar implementasi Linked List.
+    PART 2: Implementasi Linked List untuk stack dan queue.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 template <typename T>
 class Stack {
 private:
-    int top{-1};
-    LinkedList<T> stack;
+    int top{-1}; // Top of the stack.
+    LinkedList<T> stack; // Linked list to store the stack.
 
 public:
     Stack() = default;
 
-    bool isEmpty() const {
+    bool isEmpty() const { // checks if the stack is empty.
         return top == -1;
     }
 
-    void push(T item) {
+    void push(T item) { // adds the data to the top of the stack.
         stack.add(item);
         ++top;
     }
     int length() const { // returns the number of elements.
         return top + 1;
     }
-    T pop() {
+    T pop() { // removes the data from the top of the stack.
         if (isEmpty()) throw std::out_of_range("Stack is empty.");
         return stack.take(top--);
     }
 
-    T peek() const {
+    T peek() const { // returns the data from the top of the stack.
         if (isEmpty()) throw std::out_of_range("Stack is empty.");
         return stack.get(top);
     }
@@ -325,30 +323,30 @@ public:
 template <typename T>
 class Queue {
 private:
-    int front{-1};
-    int rear{-1};
-    LinkedList<T> queue;
+    int front{-1}; // Front of the queue.
+    int rear{-1}; // Rear of the queue.
+    LinkedList<T> queue; // Linked list to store the queue.
 
 public:
     Queue() = default;
 
-    bool isEmpty() const {
+    bool isEmpty() const { // checks if the queue is empty.
         return front == -1;
     }
 
-    void enqueue(T item) {
+    void enqueue(T item) { // adds the data to the rear of the queue.
         queue.add(item);
         if (isEmpty()) front = 0;
         ++rear;
     }
 
-    T dequeue() {
+    T dequeue() { // removes the data from the front of the queue.
         if (isEmpty()) throw std::out_of_range("Queue is empty.");
         if (front == rear) front = rear = -1;
         return queue.take(0);
     }
 
-    T peek() const {
+    T peek() const { // returns the data from the front of the queue.
         if (isEmpty()) throw std::out_of_range("Queue is empty.");
         return queue.get(0);
     }
@@ -356,6 +354,10 @@ public:
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 2.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 3: Implementasi Linked List untuk berbagai tugas.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 class linkedListTwoFour: public Program {
@@ -392,5 +394,9 @@ class linkedListThreeSix: public Program {
 public:
     void start() override;
 };
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 3.
+----------------------------------------------------------------------------------------------------------------------------------------*/
 
 #endif
