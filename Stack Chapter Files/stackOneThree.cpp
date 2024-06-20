@@ -32,8 +32,8 @@ void StackOneThree::push() {
     if (theData.empty()) { // Jika data yang dimasukkan kosong
         std::cout << "<Tidak ada data baru yang dimasukan>";
     } else {
-        stack.push_back(theData);
-        filledNumber++;
+        stack.push_back(theData); // Menambahkan data ke dalam tumpukan
+        filledNumber++; // Menambahkan jumlah data yang ada di dalam tumpukan
         std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
     }
 }
@@ -50,7 +50,7 @@ void StackOneThree::push() {
 void StackOneThree::flush() {
     std::cout << "\nIsi tumpukan:\n";
 
-    while (!stack.empty()) {
+    while (!stack.empty()) { // Mengeluarkan data dari tumpukan
         std::cout << stack.back() << std::endl;
         stack.pop_back();
     }
@@ -74,9 +74,9 @@ void StackOneThree::start() {
 
         if (menuChosen >= 1 && menuChosen <= 3) {
             if (menuChosen == 1) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "stackOneThree.cpp"
             } else if (menuChosen == 2) {
-                flush();
+                flush(); // Akses ke fungsi PART 3 dari "stackOneThree.cpp"
             } else {
                 break;
             }

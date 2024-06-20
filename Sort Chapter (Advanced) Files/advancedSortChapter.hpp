@@ -9,11 +9,6 @@
 
 #include "../Program Interface Files/programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
-#include <vector>
-#include <string>
-
-template<typename T>
-std::ostream& operator<<(std::ostream& output, const std::vector<T>& array);
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Deklarasi awal untuk objek kelas dengan nama tugas mengurutkan data menggunakan In Place Sort.
@@ -22,9 +17,9 @@ std::ostream& operator<<(std::ostream& output, const std::vector<T>& array);
 class SortFiveOne: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {};
-    std::vector<std::string> arrayString, arrayStringClone {};
-    void inPlaceSort(std::vector<long>& array, bool ascending) {
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+    void inPlaceSort(std::vector<long>& array, bool ascending) { // Fungsi untuk mengurutkan data integer secara in-place
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         for (int i = array.size() - 1; i >= 0; i--) {
             int k = i;
@@ -46,7 +41,7 @@ private:
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
 
-    void inPlaceSortString(std::vector<std::string>& arrayString, bool ascending) {
+    void inPlaceSortString(std::vector<std::string>& arrayString, bool ascending) { // Fungsi untuk mengurutkan data string secara in-place
         std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
         for (int i = arrayString.size() - 1; i >= 0; i--) {
             int k = i;
@@ -87,9 +82,9 @@ public:
 class SortFiveTwo: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {};
-    std::vector<std::string> arrayString, arrayStringClone {};
-    void shellSort(std::vector<long>& array, bool ascending) {
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+    void shellSort(std::vector<long>& array, bool ascending) { // Fungsi untuk mengurutkan data integer menggunakan Shell Sort
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         int gap = 1;
         while (gap < array.size() / 3) {
@@ -137,7 +132,7 @@ private:
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
     
-    void shellSortString(std::vector<std::string>& arrayString, bool ascending) {
+    void shellSortString(std::vector<std::string>& arrayString, bool ascending) { // Fungsi untuk mengurutkan data string menggunakan Shell Sort
         std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
         int gap = 1;
         while (gap < arrayString.size() / 3) {

@@ -37,8 +37,8 @@ void QueueTwoOne::push() {
         } else if (filledCapacity == capacity) { // Data baru tidak dapat ditambahkan jika kapasitas sudah penuh
             std::cout << "<Antrian sudah penuh. " << '"' << theData << '"' << " tidak dimasukkan>";
         } else {
-            arrayPointer[filledCapacity] = theData;
-            filledCapacity++;
+            arrayPointer[filledCapacity] = theData; // Menambahkan data ke dalam antrian
+            filledCapacity++; // Menambahkan jumlah data yang ada di dalam antrian
             std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
         }
     }
@@ -58,17 +58,17 @@ void QueueTwoOne::flush() {
         if (filledCapacity) { // Jika ada data, maka proses penampilan data dilanjutkan
             std::cout << "\nIsi antrian:\n";
 
-            for (size_t i = 0; i < filledCapacity; i++) {
+            for (size_t i = 0; i < filledCapacity; i++) { // Menampilkan data yang ada di dalam antrian
                 std::cout << arrayPointer[i];
 
-                if (i < filledCapacity) {
+                if (i < filledCapacity) { // Jika data yang ditampilkan merupakan data terakhir, maka tambahkan spasi
                     std::cout << std::endl;
                 }
 
-                arrayPointer[i].clear();
+                arrayPointer[i].clear(); // Menghapus data yang sudah ditampilkan
             }
 
-            filledCapacity = 0;
+            filledCapacity = 0; // Mengembalikan jumlah data yang ada di dalam antrian menjadi 0
         } else {
             std::cout << "<Antrian tidak menyimpan data>";
         }
@@ -93,9 +93,9 @@ void QueueTwoOne::start() {
             if (menuChosen == 1) {
                 setCapacityValue(&isCapacitySet, &capacity, &filledCapacity, &invalidIntInput, &arrayPointer); // Akses ke fungsi PART 6 dari "customUtility.hpp" 
             } else if (menuChosen == 2) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "queueTwoOne.cpp"
             } else if (menuChosen == 3) {
-                flush();
+                flush(); // Akses ke fungsi PART 3 dari "queueTwoOne.cpp"
             } else {
                 break;
             }

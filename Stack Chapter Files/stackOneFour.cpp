@@ -27,7 +27,7 @@ void StackOneFour::getReversedInput() {
     std::cout << "Masukkan string yang ingin dibalik => ";
 
     std::string inputString;
-    std::getline(std::cin, inputString);
+    std::getline(std::cin, inputString); // Mengambil input string dari user
 
     std::cout << "\nString Awal = " << '"' << inputString << '"' << "\nString Pembalikan = " << '"';
 
@@ -59,7 +59,7 @@ void StackOneFour::start() {
 
         if (menuChosen >= 1 && menuChosen <= 2) {
             if (menuChosen == 1) {
-                getReversedInput();
+                getReversedInput(); // Akses ke fungsi PART 2 dari "stackOneFour.cpp"
             } else {
                 break;
             }

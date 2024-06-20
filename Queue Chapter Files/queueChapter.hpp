@@ -9,7 +9,6 @@
 
 #include "../Program Interface Files/programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
-#include <vector>
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Deklarasi awal untuk objek kelas dengan nama tugas Implementasi Antrian dengan Array Terbatas.
@@ -17,11 +16,11 @@
 
 class QueueTwoOne: public Program {
 private:
-    bool isCapacitySet {false};
-    int capacity {0};
-    int filledCapacity {0};
+    bool isCapacitySet {false}; // Inisialisasi variabel boolean untuk mengecek apakah kapasitas sudah di-set atau belum
+    int capacity {0}; // Inisialisasi variabel untuk mengecek kapasitas antrian
+    int filledCapacity {0}; // Inisialisasi variabel untuk mengecek kapasitas yang sudah terisi
     std::string invalidIntInput;
-    std::string* arrayPointer = nullptr;
+    std::string* arrayPointer = nullptr; // Pointer untuk menunjuk ke array yang menyimpan data
     void menuInterface();
     void push();
     void flush ();
@@ -41,11 +40,11 @@ public:
 
 class QueueTwoTwo: public Program {
 private:
-    bool isCapacitySet {false};
-    int capacity {0};
-    int filledCapacity {0};
+    bool isCapacitySet {false}; // Inisialisasi variabel boolean untuk mengecek apakah kapasitas sudah di-set atau belum
+    int capacity {0}; // Inisialisasi variabel untuk mengecek kapasitas antrian
+    int filledCapacity {0}; // Inisialisasi variabel untuk mengecek kapasitas yang sudah terisi
     std::string invalidIntInput;
-    std::string* arrayPointer = nullptr;
+    std::string* arrayPointer = nullptr; // Pointer untuk menunjuk ke array yang menyimpan data
     void menuInterface();
     void push();
     void pop();
@@ -66,9 +65,9 @@ public:
 
 class QueueTwoThree: public Program {
 private:
-    int filledNumber {0};
+    int filledNumber {0}; // Inisialisasi variabel untuk mengecek jumlah data yang sudah terisi
     std::string invalidIntInput;
-    std::vector<std::string> array {};
+    std::vector<std::string> array {}; // Inisialisasi vector untuk menyimpan data
     void menuInterface();
     void push();
     void pop();
@@ -88,14 +87,14 @@ public:
 
 class QueueTwoFour: public Program {
 private:
-    class linkedList {
+    class linkedList { // Kelas untuk menyimpan data yang akan dicari
     public:
         std::string dataCodename, theData;
         linkedList(std::string dataCodenameInput, std::string theDataInput) : dataCodename(dataCodenameInput), theData(theDataInput) {}
     };
-    int filledNumber {0};
+    int filledNumber {0}; // Inisialisasi variabel untuk mengecek jumlah data yang sudah terisi
     std::string invalidIntInput;
-    std::vector<linkedList> array;
+    std::vector<linkedList> array; // Inisialisasi vector untuk menyimpan data
     void menuInterface();
     void push();
     void pop();

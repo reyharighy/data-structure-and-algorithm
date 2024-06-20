@@ -9,7 +9,7 @@
 
 #include "../Program Interface Files/programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
-#include <vector>
+#include <cmath>
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Deklarasi awal untuk objek kelas dengan nama tugas Konversi Bilangan Biner Bilangan Basis Lain.
@@ -17,11 +17,11 @@
 
 class StackOneOne: public Program {
 private:
-    std::string invalidIntInput;
-    long decimalValue;
-    bool isDecimalSet {false};
-    std::vector<short> stack {};
-    std::map<short, std::string> hexadecimalAlpha {{10, "A"}, {11, "B"}, {12, "C"}, {13, "D"}, {14, "E"}, {15, "F"}};
+    std::string invalidIntInput, invalidFloatInput;
+    double decimalValue; // Inisialisasi variabel untuk menyimpan nilai desimal
+    bool isDecimalSet {false}; // Inisialisasi variabel boolean untuk mengecek apakah nilai decimal sudah di-set atau belum
+    std::vector<short> stack {}; // Inisialisasi vector untuk menyimpan hasil konversi
+    std::map<short, std::string> hexadecimalAlpha {{10, "A"}, {11, "B"}, {12, "C"}, {13, "D"}, {14, "E"}, {15, "F"}}; // Inisialisasi map untuk konversi ke hexadecimal
     void menuInterface();
     void setDecimalValue();
     void calculateConversion(const short);
@@ -41,10 +41,10 @@ public:
 class StackOneTwo: public Program {
 private:
     bool isCapacitySet {false};
-    int capacity {0};
-    int filledCapacity {0};
+    int capacity {0}; // Inisialisasi variabel untuk mengecek kapasitas tumpukan
+    int filledCapacity {0}; // Inisialisasi variabel untuk mengecek kapasitas yang sudah terisi
     std::string invalidIntInput;
-    std::string* stackPointer = nullptr;
+    std::string* stackPointer = nullptr; // Pointer untuk menunjuk ke array yang menyimpan data
     void menuInterface();
     void push();
     void flush();
@@ -64,9 +64,9 @@ public:
 
 class StackOneThree: public Program {
 private:
-    int filledNumber {0};
+    int filledNumber {0}; // Inisialisasi variabel untuk mengecek jumlah data yang sudah terisi
     std::string invalidIntInput;
-    std::vector<std::string> stack {};
+    std::vector<std::string> stack {}; // Inisialisasi vector untuk menyimpan data
     void menuInterface();
     void push();
     void flush();
@@ -86,7 +86,7 @@ public:
 class StackOneFour: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<char> stack {};
+    std::vector<char> stack {}; // Inisialisasi vector untuk menyimpan data
     void menuInterface();
     void getReversedInput();
 

@@ -36,8 +36,8 @@ void StackOneTwo::push() {
         } else if (theData.empty()) { // Data baru tidak valid jika input kosong
             std::cout << "<Tidak ada data baru yang dimasukan>";
         } else {
-            stackPointer[filledCapacity] = theData;
-            filledCapacity++;
+            stackPointer[filledCapacity] = theData; // Menambahkan data ke dalam tumpukan
+            filledCapacity++; // Menambahkan jumlah data yang ada di dalam tumpukan
             std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
         }
     }
@@ -54,10 +54,10 @@ void StackOneTwo::push() {
 
 void StackOneTwo::flush() {
     if (isCapacitySet) { // Kapasitas harus ditentukan sebelum melakukan proses pengeluaran
-        if (filledCapacity) {
+        if (filledCapacity) { // Tidak ada data yang bisa dikeluarkan jika tumpukan kosong
             std::cout << "\nIsi tumpukan:\n";
 
-            for (size_t i = filledCapacity; i > 0; --i) {
+            for (size_t i = filledCapacity; i > 0; --i) { // Mengeluarkan data dari tumpukan
                 std::cout << stackPointer[i - 1] << std::endl;
                 stackPointer[i - 1].clear();
             }
@@ -87,9 +87,9 @@ void StackOneTwo::start() {
             if (menuChosen == 1) {
                 setCapacityValue(&isCapacitySet, &capacity, &filledCapacity, &invalidIntInput, &stackPointer); // Akses ke fungsi PART 6 dari "customUtility.hpp" 
             } else if (menuChosen == 2) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "stackOneTwo.cpp"
             } else if (menuChosen == 3) {
-                flush();
+                flush(); // Akses ke fungsi PART 3 dari "stackOneTwo.cpp"
             } else {
                 break;
             }

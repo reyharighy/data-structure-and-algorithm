@@ -31,21 +31,21 @@ void SortFourOne::push() {
     short pushChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
     switch(pushChosen) {
-        case 1: {
-            std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => \n";
+        case 1: { // Jika user memilih untuk memasukkan data integer.
+            std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => \n"; 
             std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
             std::string tempStr;
             if(!theData.empty()) {
-                for (char checkDigit : theData) {
-                    if (std::isdigit(checkDigit)) {
+                for (char checkDigit : theData) { // Iterasi untuk mengecek setiap karakter yang dimasukkan oleh user.
+                    if (std::isdigit(checkDigit)) { // Jika karakter yang dimasukkan adalah angka, maka tambahkan ke dalam variabel sementara.
                         tempStr += checkDigit;
-                    } else if (!tempStr.empty()) {
+                    } else if (!tempStr.empty()) { // Jika karakter yang dimasukkan bukan angka, maka masukkan data yang ada di variabel sementara ke dalam array.
                         array.push_back(std::stol(tempStr));
                         tempStr.clear();
                     }
                 }
-                if (!tempStr.empty()) {
+                if (!tempStr.empty()) { // Jika masih ada data yang tersisa di variabel sementara, maka masukkan data tersebut ke dalam array.
                     array.push_back(std::stol(tempStr));
                 }
             } else {
@@ -53,16 +53,16 @@ void SortFourOne::push() {
             }
             break;
         }
-        case 2: {
+        case 2: { // Jika user memilih untuk memasukkan data string.
             std::cout << "Masukkan data baru (enter untuk menambah data selanjutnya dan enter 2x untuk selesai) => \n";
             std::string line;
-            while (std::getline(std::cin, line) && !line.empty()) {
+            while (std::getline(std::cin, line) && !line.empty()) { // Iterasi untuk mengecek setiap baris yang dimasukkan oleh user.
                 std::istringstream iss(line);
-                std::string fragment, normalInput;
+                std::string fragment, normalInput; // Variabel "fragment" untuk menampung data sementara, dan "normalInput" untuk menampung data yang sudah di-normalisasi.
                 while (iss >> fragment) { // Proses pemasukan tiap fragment ke dalam variabel "normalInput"
                     normalInput += fragment + " ";
                 }
-                arrayString.push_back(normalInput.substr(0, normalInput.length() - 1));
+                arrayString.push_back(normalInput.substr(0, normalInput.length() - 1)); // Menambahkan data yang sudah di-normalisasi ke dalam arrayString.
             }
             break;
         }
@@ -86,9 +86,9 @@ void SortFourOne::preview() {
         
     if (previewChosen == 1 || previewChosen == 2){
         if (previewChosen == 1 && array.size()) {
-            std::cout << "Data saat ini : " << array << std::endl;
+            std::cout << "Data saat ini : " << array << std::endl; // Menampilkan data array
         } else if (previewChosen == 2 && arrayString.size()) {
-            std::cout << "Data saat ini : " << arrayString << std::endl;
+            std::cout << "Data saat ini : " << arrayString << std::endl; // Menampilkan data arrayString
         } else { 
             std::cout << "<Data kosong>";
         }
@@ -106,7 +106,7 @@ void SortFourOne::preview() {
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourOne::sort() {
-    std::cout << "\nPilih urutan pengoperasian pada sort:\n"
+    std::cout << "\nPilih urutan pengoperasian pada bubble sort:\n"
                 << "  1. Pengurutan naik Integer (Ascending)\n  2. Pengurutan turun Integer (Descending)\n"
                 << "  3. Pengurutan naik String (Ascending)\n  4. Pengurutan turun String (Descending)  \n\nMasukkan angka urutan pilihan => ";
     short sortChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
@@ -178,16 +178,16 @@ void SortFourOne::start() {
 
         if (menuChosen >= 1 && menuChosen <= 5) {
             if (menuChosen == 1) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "sortFourOne.cpp"
             } else if (menuChosen == 2) {
-                preview();
+                preview(); // Akses ke fungsi PART 3 dari "sortFourOne.cpp"
             } else if (menuChosen == 3) {
-                sort();
+                sort(); // Akses ke fungsi PART 4 dari "sortFourOne.cpp"
             } else if (menuChosen == 4) {
-                del();
+                del(); // Akses ke fungsi PART 5 dari "sortFourOne.cpp"
             } else {
-                array.clear();
-                arrayString.clear();
+                array.clear(); // Menghapus semua data dari array
+                arrayString.clear(); // Menghapus semua data dari arrayString
                 break;
             }
         } else {

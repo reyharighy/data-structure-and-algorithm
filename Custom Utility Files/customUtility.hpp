@@ -10,6 +10,7 @@
 #include <iostream>
 #include <sstream>
 #include <charconv>
+#include <vector>
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Deklarasi awal untuk berbagai fungsi dari file "customUtility.cpp". Definisi tiap fungsi ada di file "customUtility.cpp".
@@ -26,6 +27,27 @@ std::string formatDecimal(const double); // Definisi ada di PART 7
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     END OF SCOPE FOR PART 1.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    PART 2: Operator overloading untuk menampilkan data dalam bentuk array.
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+template<typename T> // Fungsi untuk menampilkan data dalam bentuk array
+std::ostream& operator<<(std::ostream& output, const std::vector<T>& array) {
+    for (size_t i = 0; i < array.size(); i++)
+    {
+        output << array[i]; // Menampilkan data
+        if (i != array.size() - 1) // Jika data bukan merupakan data terakhir, maka tambahkan pemisah
+        {
+            output << " - ";
+        }
+    }
+    return output;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 2.
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 #endif 

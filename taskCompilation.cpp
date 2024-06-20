@@ -35,7 +35,7 @@ public:
     }
 
     ~StackChapter() { // Desctructor untuk mencegah memory leaks
-        for (std::pair<const short, Program*>& pair : stackProgramDictionary) {
+        for (std::pair<const short, Program*>& pair : stackProgramDictionary) { // Menghapus seluruh objek subProgram dari dictionary
             delete pair.second;
         }
     }
@@ -70,7 +70,7 @@ public:
     }
 
     ~QueueChapter() { // Desctructor untuk mencegah memory leaks
-        for (std::pair<const short, Program*>& pair : queueProgramDictionary) {
+        for (std::pair<const short, Program*>& pair : queueProgramDictionary) { // Menghapus seluruh objek subProgram dari dictionary
             delete pair.second;
         }
     }
@@ -102,7 +102,7 @@ public:
     }
 
     ~LinkedListChapter() { // Desctructor untuk mencegah memory leaks
-        for (std::pair<const short, Program*>& pair : linkedListProgramDictionary) {
+        for (std::pair<const short, Program*>& pair : linkedListProgramDictionary) { // Menghapus seluruh objek subProgram dari dictionary
             delete pair.second;
         }
     }
@@ -137,7 +137,7 @@ public:
     }
 
     ~SortChapter() { // Desctructor untuk mencegah memory leaks
-        for (std::pair<const short, Program*>& pair : sortProgramDictionary) {
+        for (std::pair<const short, Program*>& pair : sortProgramDictionary) { // Menghapus seluruh objek subProgram dari dictionary
             delete pair.second;
         }
     }
@@ -170,7 +170,7 @@ public:
     }
 
     ~SortChapterAdvanced() { // Desctructor untuk mencegah memory leaks
-        for (std::pair<const short, Program*>& pair : sortProgramDictionary) {
+        for (std::pair<const short, Program*>& pair : sortProgramDictionary) { // Menghapus seluruh objek subProgram dari dictionary
             delete pair.second;
         }
     }
@@ -185,18 +185,18 @@ public:
 --------------------------------------------------------------------------------------------------------------------------------------*/
 
 void chapterSelection(short menuChosen) {
-    Program* chapter = nullptr;
+    Program* chapter = nullptr; // Inisialisasi pointer objek kelas Program
     
     if (menuChosen == 1) {
-        chapter = new StackChapter();
+        chapter = new StackChapter(); // Membuat objek kelas StackChapter
     } else if (menuChosen == 2) {
-        chapter = new QueueChapter();
+        chapter = new QueueChapter(); // Membuat objek kelas QueueChapter
     } else if (menuChosen == 3) {
-        chapter = new LinkedListChapter();
+        chapter = new LinkedListChapter(); // Membuat objek kelas LinkedListChapter
     } else if (menuChosen == 4) {
-        chapter = new SortChapter();
+        chapter = new SortChapter(); // Membuat objek kelas SortChapter
     } else if (menuChosen == 5) {
-        chapter = new SortChapterAdvanced();
+        chapter = new SortChapterAdvanced(); // Membuat objek kelas SortChapterAdvanced
     }
     chapter->start(); // Menjalankan metode polymorphism dari kontrak virtual void start()
     delete chapter; // Mencegah memory leaks

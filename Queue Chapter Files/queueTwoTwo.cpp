@@ -38,25 +38,25 @@ void QueueTwoTwo::push() {
         } else if (theData.empty()) { // Data baru tidak valid jika input kosong
             std::cout << "<Data yang dimasukan tidak boleh kosong>";
         } else {
-            bool isLast {true};
+            bool isLast {true}; // Menentukan apakah data yang dimasukkan merupakan data terakhir di dalam antrian
 
-            for (size_t i = 0; i < filledCapacity; i++) {
+            for (size_t i = 0; i < filledCapacity; i++) { // Menyisipkan data baru sesuai urutan abjad
                 if ((theData.compare(arrayPointer[i]) < 0)) {
-                    for (size_t j = filledCapacity; j > i; j--) {
+                    for (size_t j = filledCapacity; j > i; j--) { // Menggeser data ke kanan untuk menyisipkan data baru
                         arrayPointer[j] = arrayPointer[j - 1];
                     }
 
                     arrayPointer[i] = theData;
-                    isLast = false;
+                    isLast = false; // Data yang dimasukkan bukan merupakan data terakhir
                     break;
                 }
             }
 
-            if (isLast) {
+            if (isLast) { // Data yang dimasukkan merupakan data terakhir di dalam antrian
                 arrayPointer[filledCapacity] = theData;
             }
 
-            filledCapacity++;
+            filledCapacity++; // Menambahkan jumlah data yang ada di dalam antrian
             std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
         }
     }
@@ -75,25 +75,25 @@ void QueueTwoTwo::pop() {
         if (filledCapacity) { // Jika ada data, maka proses pengeluaran data dilanjutkan
             std::cout << "Masukkan data yang ingin dikeluarkan => ";
             std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
-            bool theDataExisted {false};
-            bool isLast;
+            bool theDataExisted {false}; // Menentukan apakah data yang diminta ada di dalam antrian
+            bool isLast; // Menentukan apakah data yang diminta merupakan data terakhir di dalam antrian
 
-            for (size_t i = 0; i < filledCapacity; i++) {
-                if (theData == arrayPointer[i]) {
-                    isLast = (i == (filledCapacity - 1)) ? true : false;
+            for (size_t i = 0; i < filledCapacity; i++) { // Mengeluarkan data yang diminta dari antrian
+                if (theData == arrayPointer[i]) { // Data yang diminta ditemukan
+                    isLast = (i == (filledCapacity - 1)) ? true : false; // Cek jika kata yang diminta merupakan data terakhir di dalam antrian
 
-                    if (isLast) {
+                    if (isLast) { // Langsung hapus data jika kata yang diminta merupakan data terakhir di dalam antrian
                         arrayPointer[i].clear();
-                    } else {
+                    } else { // Geser data ke kiri untuk menghapus data yang diminta jika bukan terakhir
                         for (size_t j = i; j < filledCapacity - 1; j++) {
                             arrayPointer[j] = arrayPointer[j + 1];
                         }
 
-                        arrayPointer[filledCapacity - 1].clear();
+                        arrayPointer[filledCapacity - 1].clear(); // Hapus data terakhir yang sudah digeser
                     }
 
-                    filledCapacity--;
-                    theDataExisted = true;
+                    filledCapacity--; // Mengurangi jumlah data yang ada di dalam antrian
+                    theDataExisted = true; // Data yang diminta ada di dalam antrian
                     break;
                 }
             }
@@ -102,14 +102,14 @@ void QueueTwoTwo::pop() {
             PART 3.1: Umpan balik kepada pengguna apakah proses pengeluaran berhasil atau tidak yang disertai dengan berbagai skenario.
         --------------------------------------------------------------------------------------------------------------------------------*/
 
-            if (theDataExisted) {
+            if (theDataExisted) { // Data yang diminta berhasil dikeluarkan dari antrian
                 std::cout << "<Data " << '"' << theData << '"' << " berhasil dikeluarkan dari antrian>";
-            } else if (theData.empty()) {
+            } else if (theData.empty()) { // Data yang diminta kosong
                 std::cout << "<Data yang diminta tidak boleh kosong>";
-            } else {
+            } else { // Data yang diminta tidak ada di dalam antrian
                 std::cout << "<Data " << '"' << theData << '"' << " tidak ada di dalam antrian>";
             }
-        } else {
+        } else { // Tidak ada data yang bisa dikeluarkan jika antrian kosong
             std::cout << "<Antrian tidak menyimpan data>";
         }
 
@@ -132,10 +132,10 @@ void QueueTwoTwo::display() {
         if (filledCapacity) { // Jika ada data, maka proses penampilan data dilanjutkan
             std::cout << "\nIsi antrian:\n";
             
-            for (size_t i = 0; i < filledCapacity; i++) {
+            for (size_t i = 0; i < filledCapacity; i++) { // Menampilkan data yang ada di dalam antrian
                 std::cout << arrayPointer[i];
 
-                if (i != (filledCapacity - 1)) {
+                if (i != (filledCapacity - 1)) { // Jika data yang ditampilkan bukan merupakan data terakhir, maka tambahkan pemisah
                     std::cout << " - ";
                 }
             }
@@ -165,11 +165,11 @@ void QueueTwoTwo::start() {
             if (menuChosen == 1) {
                 setCapacityValue(&isCapacitySet, &capacity, &filledCapacity, &invalidIntInput, &arrayPointer); // Akses ke fungsi PART 6 dari "customUtility.hpp" 
             } else if (menuChosen == 2) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "queueTwoTwo.cpp"
             } else if (menuChosen == 3) {
-                pop();
+                pop(); // Akses ke fungsi PART 3 dari "queueTwoTwo.cpp" 
             } else if (menuChosen == 4) {
-                display();
+                display(); // Akses ke fungsi PART 4 dari "queueTwoTwo.cpp"
             } else {
                 break;
             }

@@ -9,21 +9,6 @@
 
 #include "../Program Interface Files/programInterface.hpp"
 #include "../Custom Utility Files/customUtility.hpp"
-#include <vector>
-
-template<typename T>
-std::ostream& operator<<(std::ostream& output, const std::vector<T>& array)
-{
-    for (size_t i = 0; i < array.size(); i++)
-    {
-        output << array[i];
-        if (i != array.size() - 1)
-        {
-            output << " - ";
-        }
-    }
-    return output;
-}
 
 /*----------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Deklarasi awal untuk objek kelas dengan nama tugas mengurutkan data menggunakan Bubble Sort.
@@ -32,9 +17,9 @@ std::ostream& operator<<(std::ostream& output, const std::vector<T>& array)
 class SortFourOne: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {};
-    std::vector<std::string> arrayString, arrayStringClone {};
-    void bubbleSort(std::vector<long>& array, bool ascending) {
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+    void bubbleSort(std::vector<long>& array, bool ascending) { // Metode untuk mengurutkan data integer menggunakan Bubble Sort
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         bool swapped;
         for (int i = 0; i < array.size() - 1; i++) {
@@ -53,7 +38,7 @@ private:
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
 
-    void bubbleSortString(std::vector<std::string>& arrayString, bool ascending) {
+    void bubbleSortString(std::vector<std::string>& arrayString, bool ascending) { // Metode untuk mengurutkan data string menggunakan Bubble Sort
         std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
         bool swapped;
         for (int i = 0; i < arrayString.size() - 1; i++) {
@@ -91,9 +76,9 @@ public:
 class SortFourTwo: public Program {
 private:
     std::string invalidIntInput;
-    std::vector<long> array, arrayClone {};
-    std::vector<std::string> arrayString, arrayStringClone {};
-    void insertionSort(std::vector<long>& array, bool ascending) {
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+    void insertionSort(std::vector<long>& array, bool ascending) { // Metode untuk mengurutkan data integer menggunakan Insertion Sort
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         for (int i = 1; i < array.size(); i++) {
             long k = array[i];
@@ -109,7 +94,7 @@ private:
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
 
-    void insertionSortString(std::vector<std::string>& arrayString, bool ascending) {
+    void insertionSortString(std::vector<std::string>& arrayString, bool ascending) { // Metode untuk mengurutkan data string menggunakan Insertion Sort
         std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
         for (int i = 1; i < arrayString.size(); i++) {
             std::string k = arrayString[i];
@@ -146,7 +131,7 @@ private:
     std::string invalidIntInput;
     std::vector<long> array, arrayClone {};
     std::vector<std::string> arrayString, arrayStringClone {};
-    void selectionSort(std::vector<long>& array, bool ascending) {
+    void selectionSort(std::vector<long>& array, bool ascending) { // Metode untuk mengurutkan data integer menggunakan Selection Sort
         std::cout << "Data sebelum diurutkan: " << array << std::endl;
         for (int i = 0; i < array.size(); i++) {
             int k = i;
@@ -163,9 +148,9 @@ private:
         std::cout << "Data setelah diurutkan: " << array << std::endl;
     }
 
-    void selectionSortString(std::vector<std::string>& arrayString, bool ascending) {
+    void selectionSortString(std::vector<std::string>& arrayString, bool ascending) { // Metode untuk mengurutkan data string menggunakan Selection Sort
         std::cout << "Data sebelum diurutkan: " << arrayString << std::endl;
-        for (int i = 0; i < arrayString.size(); i++) {
+        for (int i = 0; i < arrayString.size(); i++) { 
             int k = i;
             for (int j = i + 1; j < arrayString.size(); j++) {
                 if ((ascending && arrayString[k] > arrayString[j]) || (!ascending && arrayString[k] < arrayString[j])) {
@@ -199,32 +184,32 @@ public:
 class SortFourFour: public Program {
 private:
     std::string invalidIntInput;
-    class Node {
+    class Node { // Deklarasi kelas Node untuk Pohon Biner
     public:
         int data;
-        Node *left, *right;
-        Node(int input) : data(input), left(nullptr), right(nullptr) {}
+        Node *left, *right; // Pointer untuk menunjuk ke Node kiri dan kanan
+        Node(int input) : data(input), left(nullptr), right(nullptr) {} // Konstruktor untuk Node
     };
 
     class BST {
     private:
-        Node* root;
+        Node* root; // Pointer untuk menunjuk ke Node root
 
-        Node* insert(Node* node, int input) {
-            if (node == nullptr) {
+        Node* insert(Node* node, int input) { // Metode untuk memasukkan data ke dalam Pohon Biner
+            if (node == nullptr) { // Jika Node kosong, maka buat Node baru
                 return new Node(input);
             }
 
-            if (input < node->data) {
+            if (input < node->data) { // Jika data yang dimasukkan lebih kecil dari data Node saat ini, maka masukkan ke Node kiri
                 node->left = insert(node->left, input);
-            } else if (input > node->data) {
+            } else if (input > node->data) { // Jika data yang dimasukkan lebih besar dari data Node saat ini, maka masukkan ke Node kanan
                 node->right = insert(node->right, input);
             }
 
             return node;
         }
 
-        void preOrder(Node* node) {
+        void preOrder(Node* node) { // Metode untuk menampilkan data Pre-order pada Pohon Biner
             if (node != nullptr) {
                 std::cout << node->data << " ";
                 preOrder(node->left);
@@ -232,7 +217,7 @@ private:
             }
         }
 
-        void inOrder(Node* node) {
+        void inOrder(Node* node) { // Metode untuk menampilkan data In-order pada Pohon Biner
             if (node != nullptr) {
                 inOrder(node->left);
                 std::cout << node->data << " ";
@@ -240,7 +225,7 @@ private:
             }
         }
 
-        void postOrder(Node* node) {
+        void postOrder(Node* node) { // Metode untuk menampilkan data Post-order pada Pohon Biner
             if (node != nullptr) {
                 postOrder(node->left);
                 postOrder(node->right);
@@ -248,7 +233,7 @@ private:
             }
         }
 
-        void deleteTree(Node* node) {
+        void deleteTree(Node* node) { // Metode untuk menghapus seluruh Node pada Pohon Biner
             if (node == nullptr) {
                 return;
             }
@@ -257,14 +242,14 @@ private:
             delete node;
         }
 
-        void printTree(Node* node, int space, bool isRight) {
+        void printTree(Node* node, int space, bool isRight) { // Metode untuk menampilkan Pohon Biner secara visual
             if (node == nullptr) {
                 return;
             }
-            space += 1;
-            printTree(node->right, space, true);
+            space += 1; // Menambahkan spasi
+            printTree(node->right, space, true); // Menampilkan Node kanan
             std::cout << std::endl;
-            for (int i = 1; i < space; i++) {
+            for (int i = 1; i < space; i++) { // Menampilkan spasi
                 std::cout << "    ";
             }
             if (isRight) {
@@ -272,38 +257,38 @@ private:
             } else if (space > 1){
                 std::cout << "\\--";
             }
-            std::cout << node->data;
-            printTree(node->left, space, false);
+            std::cout << node->data; // Menampilkan data Node
+            printTree(node->left, space, false); // Menampilkan Node kiri
         }
 
     public:
-        BST() : root(nullptr) {}
+        BST() : root(nullptr) {} // Konstruktor untuk Pohon Biner
 
-        void insert(int input) {
+        void insert(int input) { // Metode untuk memasukkan data ke dalam Pohon Biner
             root = insert(root, input);
         }
 
-        void deleteAll() {
+        void deleteAll() { // Metode untuk menghapus seluruh Node pada Pohon Biner
             deleteTree(root);
             root = nullptr;
         }
 
-        void printLevelOrder() {
+        void printLevelOrder() { // Metode untuk menampilkan Pohon Biner secara visual
             printTree(root, 0, 0);
             std::cout << std::endl;
         }
 
-        void preOrder() {
+        void preOrder() { // Metode untuk menampilkan data Pre-order pada Pohon Biner
             preOrder(root);
             std::cout << std::endl;
         }
 
-        void inOrder() {
+        void inOrder() { // Metode untuk menampilkan data In-order pada Pohon Biner
             inOrder(root);
             std::cout << std::endl;
         }
 
-        void postOrder() {
+        void postOrder() { // Metode untuk menampilkan data Post-order pada Pohon Biner
             postOrder(root);
             std::cout << std::endl;
         }

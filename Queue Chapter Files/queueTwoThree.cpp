@@ -33,31 +33,31 @@ void QueueTwoThree::push() {
     if (theData.empty()) { // Data baru tidak valid jika input kosong
         std::cout << "<Tidak ada data baru yang dimasukan>";
     } else {
-        bool isLast {true};
+        bool isLast {true}; // Menandakan apakah data baru merupakan data terakhir di dalam antrian
 
-        for (size_t i = 0; i < array.size(); i++) {
+        for (size_t i = 0; i < array.size(); i++) { // Menyisipkan data baru ke dalam antrian sesuai urutan abjad
             if (theData.compare(array[i]) < 0) {
-                if (array.size() == 1) {
+                if (array.size() == 1) { // Jika hanya ada satu data di dalam antrian
                     array.push_back(array[i]);
                 } else {
                     array.push_back(array[array.size() - 1]);
 
-                    for (size_t j = array.size() - 1; j > i; j--) {
+                    for (size_t j = array.size() - 1; j > i; j--) { // Menggeser data ke posisi selanjutnya
                         array[j] = array[j - 1];
                     }
                 }
 
-                array[i] = theData;
-                isLast = false;
+                array[i] = theData; 
+                isLast = false; // Data baru bukan merupakan data terakhir di dalam antrian
                 break;
             }
         }
 
-        if (isLast) {
+        if (isLast) { // Jika data baru merupakan data terakhir di dalam antrian
             array.push_back(theData);
         }
 
-        filledNumber++;
+        filledNumber++; // Menambahkan jumlah data yang ada di dalam antrian
         std::cout << "<Data " << '"' << theData << '"' << " berhasil ditambahkan>";
     }
 }
@@ -74,16 +74,16 @@ void QueueTwoThree::pop() {
     if (array.size()) {
         std::cout << "Masukkan data yang ingin dikeluarkan => ";
         std::string theData {titleCase()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
-        bool theDataExisted {false};
-        bool isLast;
+        bool theDataExisted {false}; // Menandakan apakah data yang diminta ada di dalam antrian
+        bool isLast; // Menandakan apakah data yang diminta merupakan data terakhir di dalam antrian
 
-        for (size_t i = 0; i < array.size(); i++) {
-            if (theData == array[i]) {
-                isLast = (i == (array.size() - 1)) ? true : false;
+        for (size_t i = 0; i < array.size(); i++) { // Mengeluarkan data yang diminta dari antrian
+            if (theData == array[i]) { // Jika data yang diminta ditemukan
+                isLast = (i == (array.size() - 1)) ? true : false; // Menentukan apakah data yang diminta merupakan data terakhir di dalam antrian
 
-                if (isLast) {
+                if (isLast) { // Jika data yang diminta merupakan data terakhir di dalam antrian
                     array.pop_back();
-                } else {
+                } else { // Jika data yang diminta bukan merupakan data terakhir di dalam antrian
                     for (size_t j = i; j < array.size() - 1; j++) {
                         array[j] = array[j + 1];
                     }
@@ -91,8 +91,8 @@ void QueueTwoThree::pop() {
                     array.pop_back();
                 }
 
-                filledNumber--;
-                theDataExisted = true;
+                filledNumber--; // Mengurangi jumlah data yang ada di dalam antrian
+                theDataExisted = true; // Data yang diminta ada di dalam antrian
                 break;
             }
         }
@@ -101,14 +101,14 @@ void QueueTwoThree::pop() {
         PART 3.1: Umpan balik kepada pengguna apakah proses pengeluaran berhasil atau tidak yang disertai dengan berbagai skenario.
     ------------------------------------------------------------------------------------------------------------------------------------*/
 
-        if (theDataExisted) {
+        if (theDataExisted) { // Jika data yang diminta ada di dalam antrian
             std::cout << "<Data " << '"' << theData << '"' << " berhasil dikeluarkan dari antrian>";
-        } else if (theData.empty()) {
+        } else if (theData.empty()) { // Jika data yang diminta kosong
             std::cout << "<Data yang diminta tidak boleh kosong>";
-        } else {
+        } else { // Jika data yang diminta tidak ada di dalam antrian
             std::cout << "<Data " << '"' << theData << '"' << " tidak ada di dalam antrian>";
         }
-    } else {
+    } else { // Jika antrian kosong
         std::cout << "<Antrian tidak menyimpan data>";
     }
 
@@ -129,10 +129,10 @@ void QueueTwoThree::display() {
     if (array.size()) {
         std::cout << "\nIsi antrian:\n";
 
-        for (size_t i = 0; i < filledNumber; i++) {
+        for (size_t i = 0; i < filledNumber; i++) { // Menampilkan data yang ada di dalam antrian
             std::cout << array[i];
 
-            if (i != (filledNumber - 1)) {
+            if (i != (filledNumber - 1)) { // Jika data yang ditampilkan bukan merupakan data terakhir, maka tambahkan pemisah
                 std::cout << " - ";
             }
         }
@@ -159,11 +159,11 @@ void QueueTwoThree::start() {
 
         if (menuChosen >= 1 && menuChosen <= 4) {
             if (menuChosen == 1) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "queueTwoThree.cpp"
             } else if (menuChosen == 2) {
-                pop();
+                pop(); // Akses ke fungsi PART 3 dari "queueTwoThree.cpp"
             } else if (menuChosen == 3) {
-                display();
+                display(); // Akses ke fungsi PART 4 dari "queueTwoThree.cpp"
             } else {
                 break;
             }

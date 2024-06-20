@@ -11,7 +11,7 @@
 ----------------------------------------------------------------------------------------------------------------------------------------*/
 
 void SortFourFour::menuInterface() {
-    std::cout << "\nPilih menu untuk pengoperasian pada sort:\n"
+    std::cout << "\nPilih menu untuk pengoperasian pada binary search tree (BST):\n"
               << "  1. Masukkan data baru\n  2. Lihat Program-program lain\n\nMasukkan angka pilihan menu => ";
 }
 
@@ -27,26 +27,25 @@ void SortFourFour::push() {
     std::cout << "Masukkan data baru (gunakan spasi untuk menambah data selanjutnya) => \n";
     std::string theData {normalizeInput()}; // Akses ke fungsi PART 5 dari "customUtility.hpp"
 
-    std::string tempStr;
+    std::string tempStr; // Variabel sementara untuk menampung data yang akan dimasukkan ke dalam tree.
     if(!theData.empty()) {
-        for (char checkDigit : theData) {
-            if (std::isdigit(checkDigit)) {
+        for (char checkDigit : theData) { // Iterasi untuk mengecek setiap karakter yang dimasukkan oleh user.
+            if (std::isdigit(checkDigit)) { // Jika karakter yang dimasukkan adalah angka, maka tambahkan ke dalam variabel sementara.
                 tempStr += checkDigit;
-            } else if (!tempStr.empty()) {
+            } else if (!tempStr.empty()) { // Jika karakter yang dimasukkan bukan angka, maka masukkan data yang ada di variabel sementara ke dalam tree.
                 tree.insert(std::stol(tempStr));
                 tempStr.clear();
             }
         }
-        if (!tempStr.empty()) {
+        if (!tempStr.empty()) { // Jika masih ada data yang tersisa di variabel sementara, maka masukkan data tersebut ke dalam tree.
             tree.insert(std::stol(tempStr));
-            print();
-            std::cout << "\n";
-            pre();
-            in();
-            post();
-            del();
+            print(); // Akses ke fungsi PART 7 dari "sortFourFour.hpp"
+            pre(); // Akses ke fungsi PART 3 dari "sortFourFour.hpp"
+            in(); // Akses ke fungsi PART 4 dari "sortFourFour.hpp"
+            post(); // Akses ke fungsi PART 5 dari "sortFourFour.hpp"
+            del(); // Akses ke fungsi PART 6 dari "sortFourFour.hpp"
         }
-    } else {
+    } else { // Jika data yang dimasukkan kosong, maka tampilkan pesan kesalahan.
         std::cout << "<Data yang dimasukan tidak boleh kosong>";
     }
 }
@@ -130,7 +129,7 @@ void SortFourFour::start() {
 
         if (menuChosen >= 1 && menuChosen <= 2) {
             if (menuChosen == 1) {
-                push();
+                push(); // Akses ke fungsi PART 2 dari "sortFourFour.hpp"
             } else {
                 break;
             }
