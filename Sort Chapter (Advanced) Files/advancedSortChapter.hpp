@@ -208,10 +208,17 @@ private:
 
         std::vector<long> L(n1), R(n2);
 
-        for (int i = 0; i < n1; ++i)
+        std::cout << "Mengambil angka ";
+
+        for (int i = 0; i < n1; ++i) {
             L[i] = arr[left + i];
-        for (int j = 0; j < n2; ++j)
+            std::cout << std::to_string(L[i]) << ", ";
+        }
+            
+        for (int j = 0; j < n2; ++j) {
             R[j] = arr[mid + 1 + j];
+            std::cout << std::to_string(R[j]) << ", ";
+        }
 
         int i = 0, j = 0, k = left;
         while (i < n1 && j < n2) {
@@ -238,7 +245,7 @@ private:
         }
 
         // Tampilkan langkah-langkah penggabungan
-        std::cout << "Menggabungkan: ";
+        std::cout << "kemudian diurutkan menjadi: ";
         for (int x = left; x <= right; ++x) {
             std::cout << arr[x];
             if (x < right) std::cout << " - ";
@@ -263,10 +270,17 @@ private:
 
         std::vector<std::string> L(n1), R(n2);
 
-        for (int i = 0; i < n1; ++i)
+        std::cout << "Mengambil karakter/kata ";
+
+        for (int i = 0; i < n1; ++i) {
             L[i] = arr[left + i];
-        for (int j = 0; j < n2; ++j)
+            std::cout << "'" << L[i] << "'" << ", ";
+        }
+            
+        for (int j = 0; j < n2; ++j) {
             R[j] = arr[mid + 1 + j];
+            std::cout << "'" << R[j] << "'" << ", ";
+        }
 
         int i = 0, j = 0, k = left;
         while (i < n1 && j < n2) {
@@ -293,7 +307,7 @@ private:
         }
 
         // Tampilkan langkah-langkah penggabungan
-        std::cout << "Menggabungkan: ";
+        std::cout << "kemudian diurutkan menjadi: ";
         for (int x = left; x <= right; ++x) {
             std::cout << arr[x];
             if (x < right) std::cout << " - ";
@@ -336,6 +350,95 @@ private:
     void preview();
     void del();
     void push();
+    std::string invalidIntInput;
+    std::vector<long> array, arrayClone {}; // Inisialisasi vector untuk menyimpan data integer
+    std::vector<std::string> arrayString, arrayStringClone {}; // Inisialisasi vector untuk menyimpan data string
+
+    void quickSort(std::vector<long>& arr, int left, int right, bool isAscending) {
+        if (left >= right) {
+            return;
+        }
+        int pivot = arr[(left + right) / 2];
+        int i = left, j = right;
+
+        while (i <= j) {
+            if (isAscending) {
+                while (arr[i] < pivot) {
+                    i++;
+                }
+                while (arr[j] > pivot) {
+                    j--;
+                }
+            }
+            else {
+                while (arr[i] > pivot) {
+                    i++;
+                }
+                while (arr[j] < pivot) {
+                    j--;
+                }
+            }
+            
+
+            if (i <= j) {
+                std::swap(arr[i], arr[j]);
+                
+                for (int h = 0; h < arr.size(); h++) {
+                    std::cout << arr[h] << " ";
+                }
+                std::cout << "\n";
+
+                i++;
+                j--;
+            }
+        }
+
+        quickSort(arr, left, j, isAscending);
+        quickSort(arr, i, right, isAscending);
+    };
+
+    void quickSortString(std::vector<std::string>& arr, int left, int right, bool isAscending) {
+        if (left >= right) {
+            return;
+        }
+        std::string pivot = arr[(left + right) / 2];
+        int i = left, j = right;
+
+        while (i <= j) {
+            if (isAscending) {
+                while (arr[i].compare(pivot) < 0) {
+                    i++;
+                }
+                while (arr[j].compare(pivot) > 0) {
+                    j--;
+                }
+            }
+            else {
+                while (arr[i].compare(pivot) > 0) {
+                    i++;
+                }
+                while (arr[j].compare(pivot) < 0) {
+                    j--;
+                }
+            }
+            
+
+            if (i <= j) {
+                std::swap(arr[i], arr[j]);
+                
+                for (int h = 0; h < arr.size(); h++) {
+                    std::cout << arr[h] << " ";
+                }
+                std::cout << "\n";
+
+                i++;
+                j--;
+            }
+        }
+
+        quickSortString(arr, left, j, isAscending);
+        quickSortString(arr, i, right, isAscending);
+    };
 public:
     void start() override; // Metode polymorphism untuk menjalankan program
 };
