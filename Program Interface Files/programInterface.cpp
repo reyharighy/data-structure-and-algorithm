@@ -36,9 +36,14 @@ short Program::taskList(const short* chapterID) {
             {4, "Implementasi linked list untuk mencari data"}
         };
     } else if (*chapterID == 3) {
-        taskNameSelected = new std::map<short, std::string> { // Chapter Senarai Berantai (Linked List)
-            {0, "Senarai Berantai (Linked List):"}
-            // Future Notes: Belum terdefinisikan
+        taskNameSelected = new std::map<short, std::string> { // Chapter Antrian (Queue)
+            {0, "Senarai Berantai (Linked List):"},
+            {1, "Implementasi linked list untuk membalik string"},
+            {2, "Implementasi linked list untuk membuat stack"},
+            {3, "Implementasi linked list untuk membuat antrian"},
+            {4, "Implementasi linked list untuk membuat data terurut"},
+            {5, "Implementasi linked list ganda"},
+            {6, "Implementasi pemrosesan postfix"}
         };
     } else if (*chapterID == 4) {
         taskNameSelected = new std::map<short, std::string> { // Chapter Urutan (Sort)
@@ -55,6 +60,14 @@ short Program::taskList(const short* chapterID) {
             {2, "Mengurutkan Data Menggunakan Shell Sort"},
             {3, "Mengurutkan Data Menggunakan Merge Sort"},
             {4, "Mengurutkan Data Menggunakan Quick Sort"}
+        };
+    } else if (*chapterID == 6) {
+        taskNameSelected = new std::map<short, std::string> { // Chapter Hash
+            {0, "Hash:"},
+            {1, "Pencarian linier dan pencarian biner secara dinamis"},
+            {2, "Penanganan Tabrakan Hash dengan cara Pengalamatan Terbuka"},
+            {3, "Penanganan Tabrakan Hash dengan cara Pembentukan Rantai"},
+            {4, "Penanganan Tabrakan Hash dengan cara Pengalamatan Buket"}
         };
     }
 

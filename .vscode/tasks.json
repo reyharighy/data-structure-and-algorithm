@@ -8,14 +8,16 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${fileDirname}\\taskCompilation.cpp",
-                "${fileDirname}\\Custom Utility Files\\customUtility.cpp",
-                "${fileDirname}\\Program Interface Files\\programInterface.cpp",
+                "${fileDirname}\\Program Interface Files\\*.cpp",
+                "${fileDirname}\\Custom Utility Files\\*.cpp",
                 "${fileDirname}\\Stack Chapter Files\\*.cpp",
                 "${fileDirname}\\Queue Chapter Files\\*.cpp",
+                "${fileDirname}\\Linked List Chapter Files\\*.cpp",
                 "${fileDirname}\\Sort Chapter Files\\*.cpp",
+                "${fileDirname}\\Sort Chapter (Advanced) Files\\*.cpp",
+                "${fileDirname}\\Hash Chapter Files\\*.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-I/source/includes"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"

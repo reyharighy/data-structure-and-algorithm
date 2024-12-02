@@ -1,6 +1,6 @@
 /*
     File ini berisi implementasi dari berbagai fungsi yang dideklarasikan di dalam file "stackChapter.hpp" untuk tugas dengan nama
-    Konversi Bilangan Biner Bilangan Basis Lain.
+    Konversi Bilangan Biner ke Bilangan Basis Lain.
 */
 
 #include "stackChapter.hpp"

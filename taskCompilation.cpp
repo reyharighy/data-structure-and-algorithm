@@ -7,8 +7,10 @@
 #include "Custom Utility Files/customUtility.hpp"
 #include "Stack Chapter Files/stackChapter.hpp"
 #include "Queue Chapter Files/queueChapter.hpp"
+#include "Linked List Chapter Files/linkedListChapter.hpp"
 #include "Sort Chapter Files/sortChapter.hpp"
 #include "Sort Chapter (Advanced) Files/advancedSortChapter.hpp"
+#include "Hash Chapter Files/hashChapter.hpp"
 
 /*--------------------------------------------------------------------------------------------------------------------------------------
     PART 1: Objek "StackChapter" berperan sebagai derived class dari base "Program" dan menjalankan program khusus yang ada di Chapter 
@@ -90,7 +92,12 @@ private:
     const short chapterID {3};
     std::string invalidIntInput;
     std::map<const short, Program*> linkedListProgramDictionary { // Seluruh objek subProgram dari Chapter Senarai Berantai (Linked List)
-
+        {1, new linkedListThreeOne},
+        {2, new linkedListThreeTwo},
+        {3, new linkedListThreeThree},
+        {4, new linkedListThreeFour},
+        {5, new linkedListThreeFive},
+        {6, new linkedListThreeSix}
     };
 
 public:
@@ -159,6 +166,8 @@ private:
     std::map<const short, Program*> sortProgramDictionary { // Seluruh objek subProgram dari Chapter Pengurutan Data Tingkat Lanjut
         {1, new SortFiveOne},
         {2, new SortFiveTwo},
+        {3, new SortFiveThree},
+        {4, new SortFiveFour}
     };
 
 public:
@@ -181,7 +190,42 @@ public:
 --------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------------------------------------
-    PART 6: Fungsi "chapterSelection" menjadi gerbang untuk melihat seluruh subprogram yang ada di dalam tiap chapter.
+    PART 6: Objek "SortChapter(Advanced)" berperan sebagai derived class dari base "Program" dan menjalankan program khusus yang ada di 
+    Chapter Pengurutan Data Tingkat Lanjut.
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+class Hash: public Program {
+private:
+    const short chapterID {6};
+    std::string invalidIntInput;
+    std::map<const short, Program*> sortProgramDictionary { // Seluruh objek subProgram dari Chapter Pengurutan Data Tingkat Lanjut
+        {1, new hashSixOne},
+        {2, new hashSixTwo},
+        {3, new hashSixThree},
+        {4, new hashSixFour}
+    };
+
+public:
+    void start() override { // Menjalankan metode polymorphism dari kontrak virtual void start()
+        while (true) {
+            bool flag {subProgramSelection(&chapterID, &invalidIntInput, &sortProgramDictionary)}; // Akses ke fungsi PART 2 dari "programInterface.hpp"
+            if (flag) {break;}
+        }
+    }
+
+    ~Hash() { // Desctructor untuk mencegah memory leaks
+        for (std::pair<const short, Program*>& pair : sortProgramDictionary) { // Menghapus seluruh objek subProgram dari dictionary
+            delete pair.second;
+        }
+    }
+};
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+    END OF SCOPE FOR PART 6.
+--------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------------------------------------------------------------------
+    PART 7: Fungsi "chapterSelection" menjadi gerbang untuk melihat seluruh subprogram yang ada di dalam tiap chapter.
 --------------------------------------------------------------------------------------------------------------------------------------*/
 
 void chapterSelection(short menuChosen) {
@@ -197,17 +241,19 @@ void chapterSelection(short menuChosen) {
         chapter = new SortChapter(); // Membuat objek kelas SortChapter
     } else if (menuChosen == 5) {
         chapter = new SortChapterAdvanced(); // Membuat objek kelas SortChapterAdvanced
+    } else if (menuChosen == 6) {
+        chapter = new Hash(); // Membuat objek kelas Hash
     }
     chapter->start(); // Menjalankan metode polymorphism dari kontrak virtual void start()
     delete chapter; // Mencegah memory leaks
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE FOR PART 6.
+    END OF SCOPE FOR PART 7.
 --------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------------------------------------------------------------------------
-    PART 7: Eksekusi "taskCompilation.cpp".
+    PART 8: Eksekusi "taskCompilation.cpp".
 --------------------------------------------------------------------------------------------------------------------------------------*/
 
 int main() {
@@ -220,13 +266,14 @@ int main() {
                   << "\n  3. Senarai Berantai (Linked List)"
                   << "\n  4. Urutan (Sort)"
                   << "\n  5. Urutan Tingkat Lanjut (Advanced Sort)"
-                  << "\n  6. Selesai\n\nSilahkan masukkan angka pilihan menu => ";
+                  << "\n  6. Hash"
+                  << "\n  7. Selesai\n\nSilahkan masukkan angka pilihan menu => ";
         
         short menuChosen {short(inputIntValidator(&invalidIntInput))}; // Akses ke fungsi PART 2 dari "customUtility.hpp"
 
-        if (menuChosen >= 1 && menuChosen <= 5) { // Jika input di dalam jangkauan yang diminta
+        if (menuChosen >= 1 && menuChosen <= 6) { // Jika input di dalam jangkauan yang diminta
             chapterSelection(menuChosen);
-        } else if (menuChosen == 6) { // Mengakhiri program
+        } else if (menuChosen == 7) { // Mengakhiri program
             std::cout << "*** SELESAI ***";
             break;
         } else { // Jika input di luar jangkauan yang diminta
@@ -239,5 +286,5 @@ int main() {
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------------------
-    END OF SCOPE FOR PART 7.
+    END OF SCOPE FOR PART 8.
 --------------------------------------------------------------------------------------------------------------------------------------*/
