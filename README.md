@@ -487,9 +487,7 @@ This project streamlines the process of understanding and implementing complex d
 
 ## 🤝 Contributing
 
-- **💬 [Join the Discussions](https://github.com/reyharighy/struktur-data-dan-algoritma/discussions)**: Share your insights, provide feedback, or ask questions.
-- **🐛 [Report Issues](https://github.com/reyharighy/struktur-data-dan-algoritma/issues)**: Submit bugs found or log feature requests for the `struktur-data-dan-algoritma` project.
-- **💡 [Submit Pull Requests](https://github.com/reyharighy/struktur-data-dan-algoritma/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+**🐛 [Report Issues](https://github.com/reyharighy/struktur-data-dan-algoritma/issues)**: Submit bugs found or log feature requests for the `struktur-data-dan-algoritma` project.
 
 <details closed>
 <summary>Contributing Guidelines</summary>
@@ -514,16 +512,6 @@ This project streamlines the process of understanding and implementing complex d
    ```
 7. **Submit a Pull Request**: Create a PR against the original project repository. Clearly describe the changes and their motivations.
 8. **Review**: Once your PR is reviewed and approved, it will be merged into the main branch. Congratulations on your contribution!
-</details>
-
-<details closed>
-<summary>Contributor Graph</summary>
-<br>
-<p align="left">
-   <a href="https://github.com{/reyharighy/struktur-data-dan-algoritma/}graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=reyharighy/struktur-data-dan-algoritma">
-   </a>
-</p>
 </details>
 
 ---
