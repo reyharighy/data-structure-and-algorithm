@@ -1,7 +1,7 @@
 <div id="top">
 
 <!-- HEADER STYLE: CLASSIC -->
-<div align="left">
+<div align="center">
 
 <img src="struktur-data-dan-algoritma.png" width="30%" style="position: relative; top: 0; right: 0;" alt="Project Logo"/>
 
