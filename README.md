@@ -135,7 +135,7 @@ This project streamlines the process of understanding and implementing complex d
 
 ### 📑 Project Index
 
-<details open>
+<details closed>
 	<summary><b><code>STRUKTUR-DATA-DAN-ALGORITMA/</code></b></summary>
 	<!-- __root__ Submodule -->
 	<details>
